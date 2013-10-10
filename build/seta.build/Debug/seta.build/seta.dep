@@ -1,0 +1,9 @@
+000000004a5d274900000000000041e5 79780e0d7ad5dd27f901e89d9d264443 ffffffffffffffffffffffffffffffff 4728 /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/logger.o
+000000004a10b1b00000000000001a5c 4d34854ad1bd576b9ca6d66d28055045 ffffffffffffffffffffffffffffffff 13804 /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/processor.o
+00000000004c71760000000000006d15 9e36e7ba85d2c70e0ccd6d9b4a8cdeeb ffffffffffffffffffffffffffffffff 9832 /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/seta.o
+00000000521acab60000000000004f50 6ffc4a96ae50a6a53798d26984b5d9e6 ffffffffffffffffffffffffffffffff 22080 /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/scheduler.o
+000000004a106c9b0000000000003d72 a87edf8b10ee9f75e0c130585c3ab964 ffffffffffffffffffffffffffffffff 11016 /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/closure.o
+0000000018477d3e000000000000332b 50ba2c5ec1c31f4dbca47cac6fcb13c1 ffffffffffffffffffffffffffffffff 9816 /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/ready_queue.o
+000000005219e2380000000000002131 c427cdda60e6d7d0b4759bc768208093 ffffffffffffffffffffffffffffffff 11068 /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/dequeue.o
+00000000004c43a00000000000007a87 214831aac71a34972f1518202c6354fc ffffffffffffffffffffffffffffffff 13976 /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/main.o
+d82d29ceee54883799f74e110ca8413c b03ca755b259802f5e197fa32f53ed96 ffffffffffffffffffffffffffffffff 44504 /Users/fabiopricoco/Desktop/seta/build/Debug/seta

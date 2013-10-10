@@ -1,0 +1,547 @@
+-> try stealing from the processor 0...ok.
+
+-> closure remotely extracted: "fib(7)" from the level 1
+
+-> stall "sum(?,?)"
+
+----------processor 0------------
+stalled: sum(?,?) 
+closures_allocated: 114B
+---------------------------------
+
+-> spawn "fib_l" to level 2
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+fib_l(5) 
+-------------
+stalled: sum(?,?) 
+closures_allocated: 228B
+---------------------------------
+
+-> spawn "fib_r" to level 2
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+fib_r(6) 
+-------------
+stalled: sum(?,?) 
+closures_allocated: 228B
+---------------------------------
+
+-> closure extracted: "fib_r(6)" from the level 2
+
+-> stall "sum(?,?)"
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+stalled: sum(?,?) sum(?,?) 
+closures_allocated: 228B
+---------------------------------
+
+-> spawn "fib_l" to level 3
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+fib_l(4) 
+-------------
+stalled: sum(?,?) sum(?,?) 
+closures_allocated: 342B
+---------------------------------
+
+-> spawn "fib_r" to level 3
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+fib_r(5) fib_l(4) 
+-------------
+stalled: sum(?,?) sum(?,?) 
+closures_allocated: 456B
+---------------------------------
+
+-> closure extracted: "fib_r(5)" from the level 3
+
+-> stall "sum(?,?)"
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+fib_l(4) 
+-------------
+stalled: sum(?,?) sum(?,?) sum(?,?) 
+closures_allocated: 456B
+---------------------------------
+
+-> spawn "fib_l" to level 4
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+fib_l(4) 
+-------------
+---level 4---
+fib_l(3) 
+-------------
+stalled: sum(?,?) sum(?,?) sum(?,?) 
+closures_allocated: 570B
+---------------------------------
+
+-> spawn "fib_r" to level 4
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+fib_l(4) 
+-------------
+---level 4---
+fib_r(4) fib_l(3) 
+-------------
+stalled: sum(?,?) sum(?,?) sum(?,?) 
+closures_allocated: 684B
+---------------------------------
+
+-> closure extracted: "fib_r(4)" from the level 4
+
+-> stall "sum(?,?)"
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+fib_l(4) 
+-------------
+---level 4---
+fib_l(3) 
+-------------
+stalled: sum(?,?) sum(?,?) sum(?,?) sum(?,?) 
+closures_allocated: 684B
+---------------------------------
+
+-> spawn "fib_l" to level 5
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+fib_l(4) 
+-------------
+---level 4---
+fib_l(3) 
+-------------
+---level 5---
+fib_l(2) 
+-------------
+stalled: sum(?,?) sum(?,?) sum(?,?) sum(?,?) 
+closures_allocated: 798B
+---------------------------------
+
+-> spawn "fib_r" to level 5
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+fib_l(4) 
+-------------
+---level 4---
+fib_l(3) 
+-------------
+---level 5---
+fib_r(3) fib_l(2) 
+-------------
+stalled: sum(?,?) sum(?,?) sum(?,?) sum(?,?) 
+closures_allocated: 912B
+---------------------------------
+
+-> closure extracted: "fib_r(3)" from the level 5
+
+-> stall "sum(?,?)"
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+fib_l(4) 
+-------------
+---level 4---
+fib_l(3) 
+-------------
+---level 5---
+fib_l(2) 
+-------------
+stalled: sum(?,?) sum(?,?) sum(?,?) sum(?,?) sum(?,?) 
+closures_allocated: 912B
+---------------------------------
+
+-> spawn "fib_l" to level 6
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+
+-------------
+---level 4---
+fib_l(3) 
+-------------
+---level 5---
+fib_l(2) 
+-------------
+---level 6---
+fib_l(1) 
+-------------
+stalled: sum(?,?) sum(?,?) sum(?,?) sum(?,?) sum(5,?) 
+closures_allocated: 912B
+---------------------------------
+
+-> spawn "fib_r" to level 6
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+
+-------------
+---level 4---
+fib_l(3) 
+-------------
+---level 5---
+fib_l(2) 
+-------------
+---level 6---
+fib_r(2) fib_l(1) 
+-------------
+stalled: sum(?,?) sum(?,?) sum(?,?) sum(?,?) sum(5,?) 
+closures_allocated: 1026B
+---------------------------------
+
+-> closure extracted: "fib_r(2)" from the level 6
+
+-> closure extracted: "fib_l(1)" from the level 6
+
+-> enable local closure "sum" to level 5
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+
+-------------
+---level 4---
+fib_l(3) 
+-------------
+---level 5---
+sum(1,1) fib_l(2) 
+-------------
+---level 6---
+
+-------------
+stalled: sum(?,?) sum(?,?) sum(?,?) sum(5,?) 
+closures_allocated: 798B
+---------------------------------
+
+-> closure extracted: "sum(1,1)" from the level 5
+
+-> closure extracted: "fib_l(2)" from the level 5
+
+-> enable local closure "sum" to level 4
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+
+-------------
+---level 4---
+sum(1,2) fib_l(3) 
+-------------
+---level 5---
+
+-------------
+---level 6---
+
+-------------
+stalled: sum(?,?) sum(?,?) sum(5,?) 
+closures_allocated: 570B
+---------------------------------
+
+-> closure extracted: "sum(1,2)" from the level 4
+
+-> closure extracted: "fib_l(3)" from the level 4
+
+-> stall "sum(?,?)"
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+
+-------------
+---level 4---
+
+-------------
+---level 5---
+
+-------------
+---level 6---
+
+-------------
+stalled: sum(?,?) sum(?,3) sum(3,?) sum(5,?) 
+closures_allocated: 456B
+---------------------------------
+
+-> spawn "fib_l" to level 5
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+
+-------------
+---level 4---
+
+-------------
+---level 5---
+
+-------------
+---level 6---
+
+-------------
+stalled: sum(?,?) sum(?,3) sum(3,?) sum(5,?) 
+closures_allocated: 570B
+---------------------------------
+
+-> spawn "fib_r" to level 5
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+
+-------------
+---level 4---
+
+-------------
+---level 5---
+
+-------------
+---level 6---
+
+-------------
+stalled: sum(1,?) sum(?,3) sum(3,?) sum(5,?) 
+closures_allocated: 570B
+---------------------------------
+
+-> try stealing from the processor 0...ok.
+
+-> closure remotely extracted: "sum(1,1)" from the level 4
+
+-> enable local closure "sum" to level 3
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+
+-------------
+---level 4---
+
+-------------
+---level 5---
+
+-------------
+---level 6---
+
+-------------
+stalled: sum(3,?) sum(5,?) 
+closures_allocated: 342B
+---------------------------------
+
+-> try stealing from the processor 0...ok.
+
+-> closure remotely extracted: "sum(3,5)" from the level 2
+
+-> enable local closure "sum" to level 1
+
+----------processor 0------------
+---level 0---
+
+-------------
+---level 1---
+
+-------------
+---level 2---
+
+-------------
+---level 3---
+
+-------------
+---level 4---
+
+-------------
+---level 5---
+
+-------------
+---level 6---
+
+-------------
+stalled: 
+closures_allocated: 114B
+---------------------------------
+
+-> try stealing from the processor 0...ok.
+
+-> closure remotely extracted: "print(13)" from the level 0
+
+
+
+//-------------------------------------//
+total_space: 1026B
+
+stack_depth: 1340B
