@@ -3,7 +3,7 @@
  *  stealing-work scheduler
  *
  *  Created by Fabio Pricoco on 07/10/2013.
- *  Copyright 2013 __MyCompanyName__. All rights reserved.
+ *  Copyright 2013 Erlang Solutions Ltd. All rights reserved.
  *
  */
 
@@ -14,7 +14,7 @@
 
 typedef struct _processor {
 	int id;
-	ready_queue *rq;
+	ready_queue_t *rq;
 	dequeue_t *stalled;
 	int cur_space;
 	int total_space;

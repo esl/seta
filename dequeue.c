@@ -3,7 +3,7 @@
  *  stealing-work scheduler
  *
  *  Created by Fabio Pricoco on 09/09/2013.
- *  Copyright 2013 Erlang-Solutions. All rights reserved.
+ *  Copyright 2013 Erlang Solutions Ltd. All rights reserved.
  *
  */
 
@@ -33,7 +33,6 @@ void dequeue_foreach(void *fun, dequeue_t *d)
         ele = ele->next;
     }
 }
-
 
 void dequeue_fold(void *fun, void *acc, dequeue_t *d) {
 	void (*callback)(void *, void *, int) = fun;

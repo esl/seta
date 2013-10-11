@@ -1,0 +1,11 @@
+processor 0 memory usage: 884B
+processor 1 memory usage: 1140B
+
+stack depth(S1): 1340B
+
+all processors memory usage (SP): 2024B
+
+S1 * P: 2680B
+
+2024(SP) < 2680(S1 * P)
+

@@ -1,7 +1,7 @@
 Tseta
 v7
 r0
-t403111718.271547
+t403189449.629656
 cCheck dependencies
 cCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/main.o /Users/fabiopricoco/Desktop/seta/main.c normal x86_64 c com.apple.compilers.gcc.4_2
 cCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/dequeue.o /Users/fabiopricoco/Desktop/seta/dequeue.c normal x86_64 c com.apple.compilers.gcc.4_2
@@ -11,6 +11,7 @@ cCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/scheduler.o /U
 cCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/seta.o /Users/fabiopricoco/Desktop/seta/seta.c normal x86_64 c com.apple.compilers.gcc.4_2
 cCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/processor.o /Users/fabiopricoco/Desktop/seta/processor.c normal x86_64 c com.apple.compilers.gcc.4_2
 cCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/logger.o /Users/fabiopricoco/Desktop/seta/logger.c normal x86_64 c com.apple.compilers.gcc.4_2
+cCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/utils.o /Users/fabiopricoco/Desktop/seta/utils.c normal x86_64 c com.apple.compilers.gcc.4_2
 cLd /Users/fabiopricoco/Desktop/seta/build/Debug/seta normal x86_64
 
 N/Developer/SDKs/MacOSX10.6.sdk
@@ -38,159 +39,184 @@ c000000004A5C14A70000000000001731
 t1247548583
 s5937
 
+N/Developer/SDKs/MacOSX10.6.sdk/usr/lib/gcc/i686-apple-darwin10/4.2.1/include/stdarg.h
+c000000004A11EB2400000000000010DD
+t1242688292
+s4317
+
 N/Developer/SDKs/MacOSX10.6.sdk/usr/lib/gcc/i686-apple-darwin10/4.2.1/include/stdbool.h
 c000000004A11EB240000000000000644
 t1242688292
 s1604
 
 N/Users/fabiopricoco/Desktop/seta/build/Debug/seta
-t1381418913
-s44504
+t1381496644
+s45696
 
 N/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/closure.o
-t1381418913
-s11016
+t1381489943
+s11608
 
 N/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/dequeue.o
-t1381418913
+t1381487954
 s11068
 
 N/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/logger.o
-t1381418913
-s4728
+t1381487954
+s5720
 
 N/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/main.o
-t1381418913
-s13976
+t1381489930
+s13988
 
 N/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/processor.o
-t1381418913
+t1381489930
 s13804
 
 N/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/ready_queue.o
-t1381418913
-s9816
+t1381489630
+s10384
 
 N/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/scheduler.o
-t1381418913
-s22080
+t1381496644
+s22852
 
 N/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/seta.LinkFileList
-c000000005256C7A10000000000000319
-t1381418913
-s793
+c000000005257D552000000000000037A
+t1381487954
+s890
 
 N/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/seta.o
-t1381418913
-s9832
+t1381489930
+s9844
+
+N/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/utils.o
+t1381487954
+s4084
 
 N/Users/fabiopricoco/Desktop/seta/closure.c
-c000000005256BDBC0000000000000791
-t1381416380
-s1937
+c000000005257DD170000000000000899
+t1381489943
+s2201
 i"closure.h"
 i"string.h"
 
 N/Users/fabiopricoco/Desktop/seta/closure.h
-c000000005256ADF7000000000000031B
-t1381412343
-s795
+c000000005257DB1B00000000000002FA
+t1381489435
+s762
 i"dequeue.h"
 
 N/Users/fabiopricoco/Desktop/seta/dequeue.c
-c0000000052558A4F0000000000000FF8
-t1381337679
-s4088
+c000000005256D8520000000000000FFB
+t1381423186
+s4091
 i"dequeue.h"
 
 N/Users/fabiopricoco/Desktop/seta/dequeue.h
-c0000000052558A760000000000000435
-t1381337718
-s1077
+c000000005256D3A40000000000000438
+t1381421988
+s1080
 i"logger.h"
 i<stdio.h>
 i<stdlib.h>
 i<stdbool.h>
 
 N/Users/fabiopricoco/Desktop/seta/logger.c
-c0000000052552E6C00000000000001DC
-t1381314156
-s476
+c000000005257CA280000000000000292
+t1381485096
+s658
 i"logger.h"
 
 N/Users/fabiopricoco/Desktop/seta/logger.h
-c0000000052541D82000000000000014D
-t1381244290
-s333
+c000000005257C9C000000000000001BD
+t1381484992
+s445
 i<stdio.h>
+i<stdarg.h>
+i"utils.h"
 
 N/Users/fabiopricoco/Desktop/seta/main.c
-c000000005256BD800000000000001415
-t1381416320
-s5141
+c000000005257D567000000000000141A
+t1381487975
+s5146
 i"seta.h"
 
 N/Users/fabiopricoco/Desktop/seta/processor.c
-c0000000052566B1700000000000009C8
-t1381395223
-s2504
+c000000005256D3A400000000000009CB
+t1381421988
+s2507
 i"processor.h"
 
 N/Users/fabiopricoco/Desktop/seta/processor.h
-c0000000052542DEF000000000000041D
-t1381248495
-s1053
+c000000005256D95F0000000000000422
+t1381423455
+s1058
 i"ready_queue.h"
 i<pthread.h>
 i<string.h>
 
 N/Users/fabiopricoco/Desktop/seta/ready_queue.c
-c0000000052558A760000000000000B63
-t1381337718
-s2915
+c000000005257DBDE0000000000000948
+t1381489630
+s2376
 i"ready_queue.h"
 
 N/Users/fabiopricoco/Desktop/seta/ready_queue.h
-c000000005254266F00000000000002AB
-t1381246575
-s683
+c000000005256D97000000000000002C0
+t1381423472
+s704
 i"closure.h"
 i<string.h>
 
 N/Users/fabiopricoco/Desktop/seta/scheduler.c
-c000000005256BBCB0000000000002383
-t1381415883
-s9091
+c000000005257F743000000000000229F
+t1381496643
+s8863
 i"scheduler.h"
 
 N/Users/fabiopricoco/Desktop/seta/scheduler.h
-c000000005256BF7D00000000000004F7
-t1381416829
-s1271
+c000000005257D2F90000000000000504
+t1381487353
+s1284
 i<stdio.h>
 i<string.h>
 i<stdlib.h>
 i"processor.h"
 
 N/Users/fabiopricoco/Desktop/seta/seta.c
-c0000000052568F560000000000000387
-t1381404502
-s903
+c000000005257D50B0000000000000394
+t1381487883
+s916
 i"seta.h"
 
 N/Users/fabiopricoco/Desktop/seta/seta.h
-c0000000052568F5D0000000000000241
-t1381404509
-s577
+c000000005256D3A40000000000000244
+t1381421988
+s580
 i"scheduler.h"
+
+N/Users/fabiopricoco/Desktop/seta/utils.c
+c000000005257C7DE000000000000015E
+t1381484510
+s350
+i"utils.h"
+
+N/Users/fabiopricoco/Desktop/seta/utils.h
+c000000005257C7ED00000000000000F8
+t1381484525
+s248
+i<stdio.h>
+i<string.h>
+i<stdarg.h>
 
 CCheck dependencies
 r0
-lSLF07#2@18"Check dependencies403111718#403111718#0(0"0(0#1#0"8615650208#0"0#
+lSLF07#2@18"Check dependencies403189449#403189449#0(0"0(0#1#0"8616460160#0"0#
 
 CCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/closure.o /Users/fabiopricoco/Desktop/seta/closure.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403111713.803382
-e403111713.857459
+s403182743.307291
+e403182743.342597
 r1
 xCompileC
 xbuild/seta.build/Debug/seta.build/Objects-normal/x86_64/closure.o
@@ -199,11 +225,11 @@ xnormal
 xx86_64
 xc
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@50"Compile /Users/fabiopricoco/Desktop/seta/closure.c403111713#403111713#0(0"0(0#0#42"/Users/fabiopricoco/Desktop/seta/closure.c8618140224#1156"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/closure.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/closure.o0#
+lSLF07#2@50"Compile /Users/fabiopricoco/Desktop/seta/closure.c403182743#403182743#0(0"0(0#0#42"/Users/fabiopricoco/Desktop/seta/closure.c8616824320#1156"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/closure.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/closure.o0#
 
 CCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/dequeue.o /Users/fabiopricoco/Desktop/seta/dequeue.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403111713.801701
-e403111713.860427
+s403180754.407662
+e403180754.478976
 r1
 xCompileC
 xbuild/seta.build/Debug/seta.build/Objects-normal/x86_64/dequeue.o
@@ -212,11 +238,11 @@ xnormal
 xx86_64
 xc
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@50"Compile /Users/fabiopricoco/Desktop/seta/dequeue.c403111713#403111713#0(0"0(0#0#42"/Users/fabiopricoco/Desktop/seta/dequeue.c8619387456#1156"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/dequeue.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/dequeue.o0#
+lSLF07#2@50"Compile /Users/fabiopricoco/Desktop/seta/dequeue.c403180754#403180754#0(0"0(0#0#42"/Users/fabiopricoco/Desktop/seta/dequeue.c8612401184#1156"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/dequeue.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/dequeue.o0#
 
 CCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/logger.o /Users/fabiopricoco/Desktop/seta/logger.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403111713.869912
-e403111713.901420
+s403180754.483474
+e403180754.533104
 r1
 xCompileC
 xbuild/seta.build/Debug/seta.build/Objects-normal/x86_64/logger.o
@@ -225,11 +251,11 @@ xnormal
 xx86_64
 xc
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@49"Compile /Users/fabiopricoco/Desktop/seta/logger.c403111713#403111713#0(0"0(0#0#41"/Users/fabiopricoco/Desktop/seta/logger.c8617836096#1154"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/logger.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/logger.o0#
+lSLF07#2@49"Compile /Users/fabiopricoco/Desktop/seta/logger.c403180754#403180754#0(0"0(0#0#41"/Users/fabiopricoco/Desktop/seta/logger.c8615819936#1154"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/logger.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/logger.o0#
 
 CCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/main.o /Users/fabiopricoco/Desktop/seta/main.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403111713.800934
-e403111713.869790
+s403182730.897020
+e403182730.993691
 r1
 xCompileC
 xbuild/seta.build/Debug/seta.build/Objects-normal/x86_64/main.o
@@ -238,11 +264,11 @@ xnormal
 xx86_64
 xc
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@47"Compile /Users/fabiopricoco/Desktop/seta/main.c403111713#403111713#0(0"0(0#0#39"/Users/fabiopricoco/Desktop/seta/main.c8619466464#1150"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/main.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/main.o0#
+lSLF07#2@47"Compile /Users/fabiopricoco/Desktop/seta/main.c403182730#403182731#0(0"0(0#0#39"/Users/fabiopricoco/Desktop/seta/main.c8615428224#1150"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/main.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/main.o0#
 
 CCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/processor.o /Users/fabiopricoco/Desktop/seta/processor.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403111713.860540
-e403111713.913848
+s403182730.907933
+e403182730.993894
 r1
 xCompileC
 xbuild/seta.build/Debug/seta.build/Objects-normal/x86_64/processor.o
@@ -251,11 +277,11 @@ xnormal
 xx86_64
 xc
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@52"Compile /Users/fabiopricoco/Desktop/seta/processor.c403111713#403111713#0(0"0(0#0#44"/Users/fabiopricoco/Desktop/seta/processor.c8617925376#1160"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/processor.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/processor.o0#
+lSLF07#2@52"Compile /Users/fabiopricoco/Desktop/seta/processor.c403182730#403182731#0(0"0(0#0#44"/Users/fabiopricoco/Desktop/seta/processor.c8615610528#1160"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/processor.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/processor.o0#
 
 CCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/ready_queue.o /Users/fabiopricoco/Desktop/seta/ready_queue.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403111713.802526
-e403111713.854118
+s403182730.902772
+e403182730.904075
 r1
 xCompileC
 xbuild/seta.build/Debug/seta.build/Objects-normal/x86_64/ready_queue.o
@@ -264,11 +290,11 @@ xnormal
 xx86_64
 xc
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@54"Compile /Users/fabiopricoco/Desktop/seta/ready_queue.c403111713#403111713#0(0"0(0#0#46"/Users/fabiopricoco/Desktop/seta/ready_queue.c8618194432#1164"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/ready_queue.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/ready_queue.o0#
+lSLF07#2@54"Compile /Users/fabiopricoco/Desktop/seta/ready_queue.c403182730#403182731#0(0"0(0#0#46"/Users/fabiopricoco/Desktop/seta/ready_queue.c8616263104#1164"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/ready_queue.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/ready_queue.o0#
 
 CCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/scheduler.o /Users/fabiopricoco/Desktop/seta/scheduler.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403111713.854247
-e403111713.926545
+s403189444.331199
+e403189444.387388
 r1
 xCompileC
 xbuild/seta.build/Debug/seta.build/Objects-normal/x86_64/scheduler.o
@@ -277,11 +303,11 @@ xnormal
 xx86_64
 xc
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@52"Compile /Users/fabiopricoco/Desktop/seta/scheduler.c403111713#403111713#0(0"0(0#0#44"/Users/fabiopricoco/Desktop/seta/scheduler.c8618065120#1160"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/scheduler.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/scheduler.o0#
+lSLF07#2@52"Compile /Users/fabiopricoco/Desktop/seta/scheduler.c403189444#403189444#0(0"0(0#0#44"/Users/fabiopricoco/Desktop/seta/scheduler.c8610173280#1160"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/scheduler.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/scheduler.o0#
 
 CCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/seta.o /Users/fabiopricoco/Desktop/seta/seta.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403111713.857585
-e403111713.908706
+s403182730.906682
+e403182730.986667
 r1
 xCompileC
 xbuild/seta.build/Debug/seta.build/Objects-normal/x86_64/seta.o
@@ -290,15 +316,28 @@ xnormal
 xx86_64
 xc
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@47"Compile /Users/fabiopricoco/Desktop/seta/seta.c403111713#403111713#0(0"0(0#0#39"/Users/fabiopricoco/Desktop/seta/seta.c8618047616#1150"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/seta.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/seta.o0#
+lSLF07#2@47"Compile /Users/fabiopricoco/Desktop/seta/seta.c403182730#403182731#0(0"0(0#0#39"/Users/fabiopricoco/Desktop/seta/seta.c8616320288#1150"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/seta.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/seta.o0#
+
+CCompileC build/seta.build/Debug/seta.build/Objects-normal/x86_64/utils.o /Users/fabiopricoco/Desktop/seta/utils.c normal x86_64 c com.apple.compilers.gcc.4_2
+s403180754.533233
+e403180754.570953
+r1
+xCompileC
+xbuild/seta.build/Debug/seta.build/Objects-normal/x86_64/utils.o
+x/Users/fabiopricoco/Desktop/seta/utils.c
+xnormal
+xx86_64
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@48"Compile /Users/fabiopricoco/Desktop/seta/utils.c403180754#403180754#0(0"0(0#0#40"/Users/fabiopricoco/Desktop/seta/utils.c8612920608#1152"    cd /Users/fabiopricoco/Desktop/seta    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-generated-files.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-own-target-headers.hmap -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-all-target-headers.hmap -iquote /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/seta-project-headers.hmap -F/Users/fabiopricoco/Desktop/seta/build/Debug -I/Users/fabiopricoco/Desktop/seta/build/Debug/include -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources/x86_64 -I/Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/DerivedSources -c /Users/fabiopricoco/Desktop/seta/utils.c -o /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/utils.o0#
 
 CLd /Users/fabiopricoco/Desktop/seta/build/Debug/seta normal x86_64
-s403111713.926643
-e403111713.941452
+s403189444.387503
+e403189444.401617
 r1
 xLd
 x/Users/fabiopricoco/Desktop/seta/build/Debug/seta
 xnormal
 xx86_64
-lSLF07#2@54"Link /Users/fabiopricoco/Desktop/seta/build/Debug/seta403111713#403111713#0(0"0(0#0#0"8617777216#456"    cd /Users/fabiopricoco/Desktop/seta    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/fabiopricoco/Desktop/seta/build/Debug -F/Users/fabiopricoco/Desktop/seta/build/Debug -filelist /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/seta.LinkFileList -mmacosx-version-min=10.6 -o /Users/fabiopricoco/Desktop/seta/build/Debug/seta0#
+lSLF07#2@54"Link /Users/fabiopricoco/Desktop/seta/build/Debug/seta403189444#403189444#0(0"0(0#0#0"8614381664#456"    cd /Users/fabiopricoco/Desktop/seta    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/fabiopricoco/Desktop/seta/build/Debug -F/Users/fabiopricoco/Desktop/seta/build/Debug -filelist /Users/fabiopricoco/Desktop/seta/build/seta.build/Debug/seta.build/Objects-normal/x86_64/seta.LinkFileList -mmacosx-version-min=10.6 -o /Users/fabiopricoco/Desktop/seta/build/Debug/seta0#
 

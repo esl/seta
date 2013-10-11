@@ -3,7 +3,7 @@
  *  stealing-work scheduler
  *
  *  Created by Fabio Pricoco on 10/09/2013.
- *  Copyright 2013 __MyCompanyName__. All rights reserved.
+ *  Copyright 2013 Erlang Solutions Ltd. All rights reserved.
  *
  */
 
@@ -30,7 +30,16 @@ closure_t * closure_create(char *fun_name) {
 	return cl;
 }
 
+void closure_destroy_argument(char *arg) {
+	free(arg);
+}
+
 void closure_destroy(closure_t *cl) {
+	// TODO destroy cl->debug_list_arguments
+	if (cl->debug_list_arguments != NULL) {
+		dequeue_foreach(&closure_destroy_argument, cl->debug_list_arguments);
+		dequeue_destroy(cl->debug_list_arguments);
+	}
 	free(cl->name);
 	free(cl);
 }

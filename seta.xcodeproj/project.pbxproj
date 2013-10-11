@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3343BE0E17DDCDAF00265A7D /* dequeue.c in Sources */ = {isa = PBXBuildFile; fileRef = 3343BE0D17DDCDAF00265A7D /* dequeue.c */; };
 		336F908F17FDCDFB00894383 /* seta.c in Sources */ = {isa = PBXBuildFile; fileRef = 336F908E17FDCDFB00894383 /* seta.c */; };
+		337E56681807FB2200A0261F /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 337E56671807FB2200A0261F /* utils.c */; };
 		338D4C6F1804487E003003EA /* logger.c in Sources */ = {isa = PBXBuildFile; fileRef = 338D4C6E1804487E003003EA /* logger.c */; };
 		3394A05C17DF3ECE0045EEBC /* ready_queue.c in Sources */ = {isa = PBXBuildFile; fileRef = 3394A05B17DF3ECE0045EEBC /* ready_queue.c */; };
 		3394A09017DF87480045EEBC /* closure.c in Sources */ = {isa = PBXBuildFile; fileRef = 3394A08F17DF87480045EEBC /* closure.c */; };
@@ -38,6 +39,8 @@
 		336F903D17FD770000894383 /* notes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = notes; sourceTree = "<group>"; };
 		336F908D17FDCDFB00894383 /* seta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = seta.h; sourceTree = "<group>"; };
 		336F908E17FDCDFB00894383 /* seta.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = seta.c; sourceTree = "<group>"; };
+		337E56661807FB2200A0261F /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		337E56671807FB2200A0261F /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
 		338D4C6D1804487E003003EA /* logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = "<group>"; };
 		338D4C6E1804487E003003EA /* logger.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = logger.c; sourceTree = "<group>"; };
 		3394A05A17DF3ECE0045EEBC /* ready_queue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ready_queue.h; sourceTree = "<group>"; };
@@ -91,6 +94,8 @@
 				336F908E17FDCDFB00894383 /* seta.c */,
 				338D4C6D1804487E003003EA /* logger.h */,
 				338D4C6E1804487E003003EA /* logger.c */,
+				337E56661807FB2200A0261F /* utils.h */,
+				337E56671807FB2200A0261F /* utils.c */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -139,7 +144,7 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				ORGANIZATIONNAME = "Erlang Solutions";
+				ORGANIZATIONNAME = "Erlang Solutions Ltd";
 			};
 			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "seta" */;
 			compatibilityVersion = "Xcode 3.1";
@@ -173,6 +178,7 @@
 				336F908F17FDCDFB00894383 /* seta.c in Sources */,
 				33AD19E71803052300A817B6 /* processor.c in Sources */,
 				338D4C6F1804487E003003EA /* logger.c in Sources */,
+				337E56681807FB2200A0261F /* utils.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

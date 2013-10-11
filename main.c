@@ -194,7 +194,7 @@ int main(void) {
 	printf("sum closure: %dB\n", sum_closure_size);
 	printf("------------------------\n\n");
 	
-	start(&entry2);
+	seta_start(&entry2);
 	
 	return 0;
 }

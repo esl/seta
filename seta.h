@@ -3,7 +3,7 @@
  *  stealing-work scheduler
  *
  *  Created by Fabio Pricoco on 03/10/2013.
- *  Copyright 2013 __MyCompanyName__. All rights reserved.
+ *  Copyright 2013 Erlang Solutions Ltd. All rights reserved.
  *
  */
 

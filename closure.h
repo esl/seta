@@ -3,7 +3,7 @@
  *  stealing-work scheduler
  *
  *  Created by Fabio Pricoco on 10/09/2013.
- *  Copyright 2013 __MyCompanyName__. All rights reserved.
+ *  Copyright 2013 Erlang Solutions Ltd. All rights reserved.
  *
  */
 
@@ -32,8 +32,6 @@ void closure_destroy(closure_t *);
 void closure_set_fun(closure_t *, void *);
 
 void closure_set_args(closure_t *, void *);
-
-//void closure_print(void *, int);
 
 int closure_space(void *);
 

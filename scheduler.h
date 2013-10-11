@@ -3,7 +3,7 @@
  *  stealing-work scheduler
  *
  *  Created by Fabio Pricoco on 12/09/2013.
- *  Copyright 2013 __MyCompanyName__. All rights reserved.
+ *  Copyright 2013 Erlang Solutions Ltd. All rights reserved.
  *
  */
 
@@ -59,7 +59,7 @@ void send_argument(cont, void *, int, context_t *);
 
 void debug_send_argument(cont, char *);
 
-void start(void *);
+void scheduler_start(void *);
 
 void connect_cont(handle_spawn_next *, cont *);
 
