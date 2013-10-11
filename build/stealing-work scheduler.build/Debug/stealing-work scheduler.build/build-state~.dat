@@ -1,572 +1,0 @@
-Tstealing-work scheduler
-v7
-r0
-t403097260.249407
-cCheck dependencies
-cCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/main.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/main.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/dequeue.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/dequeue.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/ready_queue.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/ready_queue.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/closure.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/closure.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/scheduler.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/scheduler.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/seta.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/seta.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/processor.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/processor.c normal x86_64 c com.apple.compilers.gcc.4_2
-cCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/logger.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/logger.c normal x86_64 c com.apple.compilers.gcc.4_2
-cLd "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/stealing-work scheduler" normal x86_64
-
-N/Developer/SDKs/MacOSX10.6.sdk
-c000000004A769DAB00000000000000EE
-t1249287595
-s238
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/pthread.h
-c000000004A5C14A700000000000038F0
-t1247548583
-s14576
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/stdio.h
-c000000004A5C14A70000000000004174
-t1247548583
-s16756
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/stdlib.h
-c000000004A5C14A70000000000002DF5
-t1247548583
-s11765
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/include/string.h
-c000000004A5C14A70000000000001731
-t1247548583
-s5937
-
-N/Developer/SDKs/MacOSX10.6.sdk/usr/lib/gcc/i686-apple-darwin10/4.2.1/include/stdbool.h
-c000000004A11EB240000000000000644
-t1242688292
-s1604
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/stealing-work scheduler
-t2
-s0
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/closure.o
-t1381404460
-s7764
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/dequeue.o
-t1381404460
-s11108
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/linked_list.o
-t1380558814
-s9360
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/logger.o
-t1381404460
-s4768
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/main.o
-t1381404460
-s13136
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/processor.o
-t1381404460
-s13844
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/ready_queue.o
-t1381404460
-s9856
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/scheduler.o
-t1381404460
-s21084
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/sedano.o
-t1381327397
-s9868
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/seta.o
-t1381404460
-s9880
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/stealing-work scheduler.LinkFileList
-c0000000052568F2C00000000000004E9
-t1381404460
-s1257
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/ui.o
-t2
-s0
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/closure.c
-c000000005256817B0000000000000545
-t1381400955
-s1349
-i"closure.h"
-i"string.h"
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/closure.h
-c000000005256801000000000000002F1
-t1381400592
-s753
-i"dequeue.h"
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/dequeue.c
-c0000000052558A4F0000000000000FF8
-t1381337679
-s4088
-i"dequeue.h"
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/dequeue.h
-c0000000052558A760000000000000435
-t1381337718
-s1077
-i"logger.h"
-i<stdio.h>
-i<stdlib.h>
-i<stdbool.h>
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/linked_list.c
-c000000005249A7DE0000000000000DC1
-t1380558814
-s3521
-i"linked_list.h"
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/linked_list.h
-c0000000052499A1000000000000002E3
-t1380555280
-s739
-i<stdio.h>
-i<stdlib.h>
-i<stdbool.h>
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/logger.c
-c0000000052552E6C00000000000001DC
-t1381314156
-s476
-i"logger.h"
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/logger.h
-c0000000052541D82000000000000014D
-t1381244290
-s333
-i<stdio.h>
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/main.c
-c0000000052568F160000000000000F3B
-t1381404438
-s3899
-i"seta.h"
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/processor.c
-c0000000052566B1700000000000009C8
-t1381395223
-s2504
-i"processor.h"
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/processor.h
-c0000000052542DEF000000000000041D
-t1381248495
-s1053
-i"ready_queue.h"
-i<pthread.h>
-i<string.h>
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/ready_queue.c
-c0000000052558A760000000000000B63
-t1381337718
-s2915
-i"ready_queue.h"
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/ready_queue.h
-c000000005254266F00000000000002AB
-t1381246575
-s683
-i"closure.h"
-i<string.h>
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/scheduler.c
-c0000000052568E6B0000000000001F5E
-t1381404267
-s8030
-i"scheduler.h"
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/scheduler.h
-c0000000052568E7B00000000000004F7
-t1381404283
-s1271
-i<stdio.h>
-i<string.h>
-i<stdlib.h>
-i"processor.h"
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/sedano.c
-c000000005253EBA2000000000000039B
-t1381231522
-s923
-i"sedano.h"
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/sedano.h
-c000000005253EBA20000000000000254
-t1381231522
-s596
-i"scheduler.h"
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/seta.c
-c00000000525563B90000000000000385
-t1381327801
-s901
-i"seta.h"
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/seta.h
-c00000000525563DF0000000000000240
-t1381327839
-s576
-i"scheduler.h"
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c
-c00000000525278720000000000000B29
-t1381136498
-s2857
-i"ui.h"
-
-N/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.h
-c00000000524D99D70000000000000204
-t1380817367
-s516
-i"scheduler.h"
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug/stealing-work scheduler
-t1379519466
-s24192
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/closure.o
-t1379516919
-s5204
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/linked_list.o
-t1379516955
-s7896
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/main.o
-t1379519461
-s9364
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/ready_queue.o
-t1379517914
-s8180
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/scheduler.o
-t1379517856
-s9968
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/stealing-work scheduler.LinkFileList
-c000000005232DF500000000000000313
-t1379065680
-s787
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/closure.c
-c00000000523836F600000000000002E8
-t1379415798
-s744
-i"closure.h"
-i"string.h"
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/closure.h
-c00000000523836DD00000000000001D6
-t1379415773
-s470
-i"linked_list.h"
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/linked_list.c
-c000000005239C21B0000000000000A73
-t1379516955
-s2675
-i"linked_list.h"
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/linked_list.h
-c000000005239C1500000000000000292
-t1379516752
-s658
-i<stdio.h>
-i<stdlib.h>
-i<stdbool.h>
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/main.c
-c000000005239CBE50000000000000AE5
-t1379519461
-s2789
-i"scheduler.h"
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/ready_queue.c
-c000000005239C5DA0000000000000B4B
-t1379517914
-s2891
-i"ready_queue.h"
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/ready_queue.h
-c0000000052307D0600000000000001D3
-t1378909446
-s467
-i"closure.h"
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/scheduler.c
-c000000005239C59F0000000000000943
-t1379517855
-s2371
-i"scheduler.h"
-
-N/Users/fabiopricoco/Desktop/stealing-work scheduler/scheduler.h
-c0000000052383A3F0000000000000360
-t1379416639
-s864
-i<stdio.h>
-i<string.h>
-i"ready_queue.h"
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies403097260#403097260#0(0"0(0#1#0"8617385056#0"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/closure.o" "/Users/fabiopricoco/Desktop/stealing-work scheduler/closure.c" normal x86_64 c com.apple.compilers.gcc.4_2
-s401209719.308783
-e401209719.355413
-r1
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/closure.o
-x/Users/fabiopricoco/Desktop/stealing-work scheduler/closure.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@69"Compile /Users/fabiopricoco/Desktop/stealing-work scheduler/closure.c401209719#401209719#0(0"0(0#0#61"/Users/fabiopricoco/Desktop/stealing-work scheduler/closure.c4300882208#1729"    cd "/Users/fabiopricoco/Desktop/stealing-work scheduler"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" "-F/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug/include" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c "/Users/fabiopricoco/Desktop/stealing-work scheduler/closure.c" -o "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/closure.o"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/closure.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/closure.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403097260.110675
-e403097260.163441
-r1
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/closure.o
-x/Users/fabiopricoco/Desktop/cilk_like_implementation/closure.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@70"Compile /Users/fabiopricoco/Desktop/cilk_like_implementation/closure.c403097260#403097260#0(0"0(0#0#62"/Users/fabiopricoco/Desktop/cilk_like_implementation/closure.c8612546432#1732"    cd /Users/fabiopricoco/Desktop/cilk_like_implementation    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" -F/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug -I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/include "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c /Users/fabiopricoco/Desktop/cilk_like_implementation/closure.c -o "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/closure.o"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/dequeue.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/dequeue.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403097260.109067
-e403097260.166557
-r1
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/dequeue.o
-x/Users/fabiopricoco/Desktop/cilk_like_implementation/dequeue.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@70"Compile /Users/fabiopricoco/Desktop/cilk_like_implementation/dequeue.c403097260#403097260#0(0"0(0#0#62"/Users/fabiopricoco/Desktop/cilk_like_implementation/dequeue.c8613506016#1732"    cd /Users/fabiopricoco/Desktop/cilk_like_implementation    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" -F/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug -I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/include "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c /Users/fabiopricoco/Desktop/cilk_like_implementation/dequeue.c -o "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/dequeue.o"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/linked_list.o" "/Users/fabiopricoco/Desktop/stealing-work scheduler/linked_list.c" normal x86_64 c com.apple.compilers.gcc.4_2
-s401209755.057601
-e401209755.101556
-r1
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/linked_list.o
-x/Users/fabiopricoco/Desktop/stealing-work scheduler/linked_list.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@73"Compile /Users/fabiopricoco/Desktop/stealing-work scheduler/linked_list.c401209755#401209755#0(0"0(0#0#65"/Users/fabiopricoco/Desktop/stealing-work scheduler/linked_list.c4300882208#1737"    cd "/Users/fabiopricoco/Desktop/stealing-work scheduler"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" "-F/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug/include" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c "/Users/fabiopricoco/Desktop/stealing-work scheduler/linked_list.c" -o "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/linked_list.o"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/linked_list.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/linked_list.c normal x86_64 c com.apple.compilers.gcc.4_2
-s402251616.005006
-e402251616.005818
-r1
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/linked_list.o
-x/Users/fabiopricoco/Desktop/cilk_like_implementation/linked_list.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@74"Compile /Users/fabiopricoco/Desktop/cilk_like_implementation/linked_list.c402251616#402251616#0(0"0(0#0#66"/Users/fabiopricoco/Desktop/cilk_like_implementation/linked_list.c4300882208#1740"    cd /Users/fabiopricoco/Desktop/cilk_like_implementation    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" -F/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug -I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/include "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c /Users/fabiopricoco/Desktop/cilk_like_implementation/linked_list.c -o "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/linked_list.o"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/logger.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/logger.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403097260.169853
-e403097260.203905
-r1
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/logger.o
-x/Users/fabiopricoco/Desktop/cilk_like_implementation/logger.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@69"Compile /Users/fabiopricoco/Desktop/cilk_like_implementation/logger.c403097260#403097260#0(0"0(0#0#61"/Users/fabiopricoco/Desktop/cilk_like_implementation/logger.c8613836864#1730"    cd /Users/fabiopricoco/Desktop/cilk_like_implementation    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" -F/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug -I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/include "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c /Users/fabiopricoco/Desktop/cilk_like_implementation/logger.c -o "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/logger.o"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/main.o" "/Users/fabiopricoco/Desktop/stealing-work scheduler/main.c" normal x86_64 c com.apple.compilers.gcc.4_2
-s401212266.577431
-e401212266.578274
-r1
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/main.o
-x/Users/fabiopricoco/Desktop/stealing-work scheduler/main.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@66"Compile /Users/fabiopricoco/Desktop/stealing-work scheduler/main.c401212266#401212266#0(0"0(0#0#58"/Users/fabiopricoco/Desktop/stealing-work scheduler/main.c4300882208#1723"    cd "/Users/fabiopricoco/Desktop/stealing-work scheduler"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" "-F/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug/include" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c "/Users/fabiopricoco/Desktop/stealing-work scheduler/main.c" -o "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/main.o"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/main.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/main.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403097260.108044
-e403097260.169728
-r1
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/main.o
-x/Users/fabiopricoco/Desktop/cilk_like_implementation/main.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@67"Compile /Users/fabiopricoco/Desktop/cilk_like_implementation/main.c403097260#403097260#0(0"0(0#0#59"/Users/fabiopricoco/Desktop/cilk_like_implementation/main.c8613906112#1726"    cd /Users/fabiopricoco/Desktop/cilk_like_implementation    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" -F/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug -I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/include "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c /Users/fabiopricoco/Desktop/cilk_like_implementation/main.c -o "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/main.o"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/processor.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/processor.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403097260.166670
-e403097260.223365
-r1
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/processor.o
-x/Users/fabiopricoco/Desktop/cilk_like_implementation/processor.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@72"Compile /Users/fabiopricoco/Desktop/cilk_like_implementation/processor.c403097260#403097260#0(0"0(0#0#64"/Users/fabiopricoco/Desktop/cilk_like_implementation/processor.c8614499872#1736"    cd /Users/fabiopricoco/Desktop/cilk_like_implementation    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" -F/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug -I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/include "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c /Users/fabiopricoco/Desktop/cilk_like_implementation/processor.c -o "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/processor.o"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/ready_queue.o" "/Users/fabiopricoco/Desktop/stealing-work scheduler/ready_queue.c" normal x86_64 c com.apple.compilers.gcc.4_2
-s401210714.936158
-e401210714.995477
-r1
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/ready_queue.o
-x/Users/fabiopricoco/Desktop/stealing-work scheduler/ready_queue.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@73"Compile /Users/fabiopricoco/Desktop/stealing-work scheduler/ready_queue.c401210714#401210714#0(0"0(0#0#65"/Users/fabiopricoco/Desktop/stealing-work scheduler/ready_queue.c4300882208#1737"    cd "/Users/fabiopricoco/Desktop/stealing-work scheduler"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" "-F/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug/include" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c "/Users/fabiopricoco/Desktop/stealing-work scheduler/ready_queue.c" -o "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/ready_queue.o"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/ready_queue.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/ready_queue.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403097260.109746
-e403097260.161761
-r1
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/ready_queue.o
-x/Users/fabiopricoco/Desktop/cilk_like_implementation/ready_queue.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@74"Compile /Users/fabiopricoco/Desktop/cilk_like_implementation/ready_queue.c403097260#403097260#0(0"0(0#0#66"/Users/fabiopricoco/Desktop/cilk_like_implementation/ready_queue.c8612871840#1740"    cd /Users/fabiopricoco/Desktop/cilk_like_implementation    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" -F/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug -I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/include "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c /Users/fabiopricoco/Desktop/cilk_like_implementation/ready_queue.c -o "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/ready_queue.o"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/scheduler.o" "/Users/fabiopricoco/Desktop/stealing-work scheduler/scheduler.c" normal x86_64 c com.apple.compilers.gcc.4_2
-s401210656.334061
-e401210656.368130
-r1
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/scheduler.o
-x/Users/fabiopricoco/Desktop/stealing-work scheduler/scheduler.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@71"Compile /Users/fabiopricoco/Desktop/stealing-work scheduler/scheduler.c401210656#401210656#0(0"0(0#0#63"/Users/fabiopricoco/Desktop/stealing-work scheduler/scheduler.c4300882208#1733"    cd "/Users/fabiopricoco/Desktop/stealing-work scheduler"    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" "-F/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug/include" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c "/Users/fabiopricoco/Desktop/stealing-work scheduler/scheduler.c" -o "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/scheduler.o"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/scheduler.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/scheduler.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403097260.161904
-e403097260.233192
-r1
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/scheduler.o
-x/Users/fabiopricoco/Desktop/cilk_like_implementation/scheduler.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@72"Compile /Users/fabiopricoco/Desktop/cilk_like_implementation/scheduler.c403097260#403097260#0(0"0(0#0#64"/Users/fabiopricoco/Desktop/cilk_like_implementation/scheduler.c8603280416#1736"    cd /Users/fabiopricoco/Desktop/cilk_like_implementation    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" -F/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug -I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/include "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c /Users/fabiopricoco/Desktop/cilk_like_implementation/scheduler.c -o "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/scheduler.o"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/sedano.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/sedano.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403020197.324507
-e403020197.359546
-r1
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/sedano.o
-x/Users/fabiopricoco/Desktop/cilk_like_implementation/sedano.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@69"Compile /Users/fabiopricoco/Desktop/cilk_like_implementation/sedano.c403020197#403020197#0(0"0(0#0#61"/Users/fabiopricoco/Desktop/cilk_like_implementation/sedano.c8610176704#1730"    cd /Users/fabiopricoco/Desktop/cilk_like_implementation    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" -F/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug -I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/include "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c /Users/fabiopricoco/Desktop/cilk_like_implementation/sedano.c -o "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/sedano.o"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/seta.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/seta.c normal x86_64 c com.apple.compilers.gcc.4_2
-s403097260.163541
-e403097260.221565
-r1
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/seta.o
-x/Users/fabiopricoco/Desktop/cilk_like_implementation/seta.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-o/Users/fabiopricoco/Desktop/cilk_like_implementation/seta.c: In function 'seta_send_message':
-o/Users/fabiopricoco/Desktop/cilk_like_implementation/seta.c:29: warning: implicit declaration of function 'send_message'
-lSLF07#2@67"Compile /Users/fabiopricoco/Desktop/cilk_like_implementation/seta.c403097260#403097260#0(215"/Users/fabiopricoco/Desktop/cilk_like_implementation/seta.c: In function 'seta_send_message':/Users/fabiopricoco/Desktop/cilk_like_implementation/seta.c:29: warning: implicit declaration of function 'send_message'1(22@47"Implicit declaration of function 'send_message'403097260#94#121#0(6@59"/Users/fabiopricoco/Desktop/cilk_like_implementation/seta.c403020601#29#0#29#0#36"implicit declaration of function '*'0(0#0#59"/Users/fabiopricoco/Desktop/cilk_like_implementation/seta.c8615271968#1726"    cd /Users/fabiopricoco/Desktop/cilk_like_implementation    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" -F/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug -I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/include "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c /Users/fabiopricoco/Desktop/cilk_like_implementation/seta.c -o "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/seta.o"0#
-
-CCompileC "build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/ui.o" /Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c normal x86_64 c com.apple.compilers.gcc.4_2
-s402829300.148397
-e402829300.190064
-r0
-xCompileC
-xbuild/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/ui.o
-x/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c
-xnormal
-xx86_64
-xc
-xcom.apple.compilers.gcc.4_2
-o/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c: In function 'start':
-o/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c:92: warning: implicit declaration of function 'init_processor'
-o/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c:92: error: incompatible types in assignment
-o/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c:93: error: incompatible types in assignment
-o/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c:94: error: incompatible types in assignment
-o/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c:95: error: incompatible types in assignment
-o/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c:106: warning: implicit declaration of function 'scheaduling_loop'
-o/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c:111: warning: implicit declaration of function 'destroy_processor'
-lSLF07#2@65"Compile /Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c402829300#402829300#0(858"/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c: In function 'start':/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c:92: warning: implicit declaration of function 'init_processor'/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c:92: error: incompatible types in assignment/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c:93: error: incompatible types in assignment/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c:94: error: incompatible types in assignment/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c:95: error: incompatible types in assignment/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c:106: warning: implicit declaration of function 'scheaduling_loop'/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c:111: warning: implicit declaration of function 'destroy_processor'7(22@49"Implicit declaration of function 'init_processor'402829300#80#121#0(6@57"/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c402829298#92#0#92#0#36"implicit declaration of function '*'0(4@32"Incompatible types in assignment402829300#201#102#0(6@57"/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c402829298#92#0#92#0#0"0(4@32"Incompatible types in assignment402829300#303#102#0(6@57"/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c402829298#93#0#93#0#0"0(4@32"Incompatible types in assignment402829300#405#102#0(6@57"/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c402829298#94#0#94#0#0"0(4@32"Incompatible types in assignment402829300#507#102#0(6@57"/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c402829298#95#0#95#0#0"0(22@51"Implicit declaration of function 'scheaduling_loop'402829300#609#124#0(6@57"/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c402829298#106#0#106#0#36"implicit declaration of function '*'0(22@52"Implicit declaration of function 'destroy_processor'402829300#733#125#0(6@57"/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c402829298#111#0#111#0#36"implicit declaration of function '*'0(0#0#57"/Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c4300882208#1722"    cd /Users/fabiopricoco/Desktop/cilk_like_implementation    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c -arch x86_64 -fmessage-length=0 -pipe -std=gnu99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mfix-and-continue -mmacosx-version-min=10.6 -gdwarf-2 -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-generated-files.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-own-target-headers.hmap" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-all-target-headers.hmap" -iquote "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/stealing-work scheduler-project-headers.hmap" -F/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug -I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/include "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources/x86_64" "-I/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/DerivedSources" -c /Users/fabiopricoco/Desktop/cilk_like_implementation/ui.c -o "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/ui.o"1#
-
-CLd "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/stealing-work scheduler" normal x86_64
-s403097260.233275
-e403097260.249363
-r0
-xLd
-x/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/stealing-work scheduler
-xnormal
-xx86_64
-oUndefined symbols:
-o  "_send_message", referenced from:
-o      _seta_send_message in seta.o
-o     (maybe you meant: _seta_send_message)
-old: symbol(s) not found
-ocollect2: ld returned 1 exit status
-lSLF07#2@93"Link /Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/stealing-work scheduler403097260#403097260#0(193"Undefined symbols:  "_send_message", referenced from:      _seta_send_message in seta.o     (maybe you meant: _seta_send_message)ld: symbol(s) not foundcollect2: ld returned 1 exit status5(4@33""_send_message", referenced from:403097260#19#36#0(6@0"403097260#0#0#0#0#0"0(13@28"_seta_send_message in seta.o403097260#55#35#0(6@0"403097260#0#0#0#0#0"0(13@37"(maybe you meant: _seta_send_message)403097260#90#43#0(6@0"403097260#0#0#0#0#0"0(13@19"Symbol(s) not found403097260#133#24#0(6@0"403097260#0#0#0#0#0"0(13@35"Collect2: ld returned 1 exit status403097260#157#36#0(6@0"403097260#0#0#0#0#0"0(0#0#0"8615218528#636"    cd /Users/fabiopricoco/Desktop/cilk_like_implementation    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.6.sdk -L/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug -F/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug -filelist "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/stealing-work scheduler.LinkFileList" -mmacosx-version-min=10.6 -o "/Users/fabiopricoco/Desktop/cilk_like_implementation/build/Debug/stealing-work scheduler"1#
-
-CLd "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug/stealing-work scheduler" normal x86_64
-s401212266.578588
-e401212266.590957
-r1
-xLd
-x/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug/stealing-work scheduler
-xnormal
-xx86_64
-lSLF07#2@92"Link /Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug/stealing-work scheduler401212266#401212266#0(0"0(0#0#0"4300882208#637"    cd "/Users/fabiopricoco/Desktop/stealing-work scheduler"    setenv MACOSX_DEPLOYMENT_TARGET 10.6    /Developer/usr/bin/gcc-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.6.sdk "-L/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug" "-F/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug" -filelist "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/stealing-work scheduler.build/Debug/stealing-work scheduler.build/Objects-normal/x86_64/stealing-work scheduler.LinkFileList" -mmacosx-version-min=10.6 -o "/Users/fabiopricoco/Desktop/stealing-work scheduler/build/Debug/stealing-work scheduler"0#
-
