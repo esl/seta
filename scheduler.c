@@ -10,6 +10,15 @@
 #include "scheduler.h"
 
 
+void stats_and_print(processor_t *local_proc) {
+	processor_lock_ready_queue(local_proc);
+	processor_lock_stalled(local_proc);
+	processor_evaluate_stats(local_proc);
+	processor_print(local_proc);
+	processor_unlock_stalled(local_proc);
+	processor_unlock_ready_queue(local_proc);
+}
+
 void stack_depth_computation(processor_t *p, closure_t *cl, context_t *context) {
 	int c1 = closure_space(cl);
 	int c2 = context->allocated_ancients;
@@ -43,14 +52,16 @@ void *scheduling_loop(void *ptr) {
 	logger_t local_logger = local_proc->logger;
 	while (1) {
 		processor_lock_ready_queue(local_proc);
-		closure_t *cl = extract_head_from_deepest_level(local_proc->rq);
+		closure_t *cl = ready_queue_extract_head_from_deepest_level(local_proc->rq);
 		processor_unlock_ready_queue(local_proc);
 		if (cl != NULL) {
 			//-- print to file
-			char msg[80] = "-> closure extracted: \"";
-			closure_print(cl, msg);
-			strcatformat(msg, "\" from the level %d\n\n", cl->level);
+			msg_t msg = msg_new();
+			istrcat(&msg, "-> closure extracted: \"");
+			closure_str(&msg, cl);
+			istrcatf(&msg, "\" from the level %d\n\n", cl->level);
 			logger_write(local_logger, msg);
+			msg_destroy(msg);
 			//--
 			
 			scheduler_execute_closure(local_proc, cl);
@@ -73,7 +84,7 @@ void *scheduling_loop(void *ptr) {
 			
 			processor_t *remote_proc = processors[n_rand_proc];
 			processor_lock_ready_queue(remote_proc);
-			closure_t *rcl = extract_tail_from_shallowest_level(remote_proc->rq);
+			closure_t *rcl = ready_queue_extract_tail_from_shallowest_level(remote_proc->rq);
 			processor_unlock_ready_queue(remote_proc);
 			
 			if (rcl == NULL) {
@@ -83,10 +94,12 @@ void *scheduling_loop(void *ptr) {
 				logger_write(local_logger, "ok.\n\n");
 				
 				//-- print to file
-				char msg[80] = "-> closure remotely extracted: \"";
-				closure_print(rcl, msg);
-				strcatformat(msg, "\" from the level %d\n\n", rcl->level);
+				msg_t msg = msg_new();
+				istrcat(&msg, "-> closure remotely extracted: \"");
+				closure_str(&msg, rcl);
+				istrcatf(&msg, "\" from the level %d\n\n", rcl->level);
 				logger_write(local_logger, msg);
+				msg_destroy(msg);
 				//--
 
 				scheduler_execute_closure(local_proc, rcl);
@@ -156,7 +169,8 @@ handle_spawn_next prepare_spawn_next(void *fun, void *args, context_t *context) 
 	stack_depth_computation(processors[0], cl, context);
 	cl->is_last_thread = context->is_last_thread;
 	if (context->debug_list_arguments != NULL) {
-		cl->debug_list_arguments = context->debug_list_arguments;
+		closure_set_list_arguments(cl, context->debug_list_arguments);
+		//cl->debug_list_arguments = context->debug_list_arguments;
 		context->debug_list_arguments = NULL;
 	}
 	context->is_last_thread = false;
@@ -169,30 +183,34 @@ void spawn_next(handle_spawn_next hsn) {
 	if (hsn.cl->join_counter == 0) {
 		
 		//-- print to file
-		char msg[80] = "-> spawn next \"";
-		closure_print(hsn.cl, msg);
-		strcatformat(msg, "\" to level %d\n\n", hsn.cl->level);
+		msg_t msg = msg_new();
+		istrcat(&msg, "-> spawn next \"");
+		closure_str(&msg, hsn.cl);
+		istrcatf(&msg, "\" to level %d\n\n", hsn.cl->level);
 		logger_write(local_proc->logger, msg);
+		msg_destroy(msg);
 		//--
 		
 		processor_lock_ready_queue(local_proc);
-		post_closure_to_level(local_proc->rq, hsn.cl, hsn.cl->level);
+		ready_queue_post_closure_to_level(local_proc->rq, hsn.cl, hsn.cl->level);
 		processor_unlock_ready_queue(local_proc);
 	}
 	else {
 		//-- print to file
-		char msg[80] = "-> stall \"";
-		closure_print(hsn.cl, msg);
-		strcat(msg, "\"\n\n");
+		msg_t msg = msg_new();
+		istrcat(&msg, "-> stall \"");
+		closure_str(&msg, hsn.cl);
+		istrcat(&msg, "\"\n\n");
 		logger_write(local_proc->logger, msg);
+		msg_destroy(msg);
 		//--
 		
 		processor_lock_stalled(local_proc);
 		add_to_stalled(local_proc, hsn.cl);
 		processor_unlock_stalled(local_proc);
 	}
-	processor_evaluate_stats(local_proc);
-	processor_print(local_proc);
+	
+	stats_and_print(local_proc);
 }
 
 void spawn(void *fun, void *args, context_t *context) {
@@ -203,27 +221,29 @@ void spawn(void *fun, void *args, context_t *context) {
 	cl->args_size = context->args_size;
 	
 	if (context->debug_list_arguments != NULL) {
-		cl->debug_list_arguments = context->debug_list_arguments;
+		//cl->debug_list_arguments = context->debug_list_arguments;
+		closure_set_list_arguments(cl, context->debug_list_arguments);
 		context->debug_list_arguments = NULL;
 	}
 	
 	processor_t *local_proc = processors[context->n_local_proc];
 	stack_depth_computation(local_proc, cl, context);
 	
-	//-- print to file		
-	char msg[80] = "-> spawn \"";
-	closure_print(cl, msg);
-	strcatformat(msg, "\" to level %d\n\n", cl->level);
+	//-- print to file
+	msg_t msg = msg_new();
+	istrcat(&msg, "-> spawn \"");
+	closure_str(&msg, cl);
+	istrcatf(&msg, "\" to level %d\n\n", cl->level);
 	logger_write(local_proc->logger, msg);
+	msg_destroy(msg);
 	//--
 	
 	processor_lock_ready_queue(local_proc);
-	post_closure_to_level(local_proc->rq, cl, cl->level);
+	ready_queue_post_closure_to_level(local_proc->rq, cl, cl->level);
 	processor_unlock_ready_queue(local_proc);
 	
 	
-	processor_evaluate_stats(local_proc);
-	processor_print(local_proc);
+	stats_and_print(local_proc);
 }
 
 void send_argument(cont c, void *src, int size, context_t *context) {
@@ -237,22 +257,25 @@ void send_argument(cont c, void *src, int size, context_t *context) {
 		processor_t *local_proc = processors[context->n_local_proc];
 		processor_t *target_proc = processors[cl->proc];
 		
-		char msg[80] = "";
 		if (local_proc == target_proc) {
-			//-- print to file		
-			strcat(msg, "-> enable local closure \"");
-			closure_print(cl, msg);
-			strcatformat(msg, "\" to level %d\n\n", cl->level);
-			logger_write(local_proc->logger, msg);			
+			//-- print to file
+			msg_t msg = msg_new();
+			istrcat(&msg, "-> enable local closure \"");
+			closure_str(&msg, cl);
+			istrcatf(&msg, "\" to level %d\n\n", cl->level);
+			logger_write(local_proc->logger, msg);
+			msg_destroy(msg);		
 			//--
 		}
 		else {
-			//-- print to file		
-			strcat(msg, "-> enable remote closure \"");
-			closure_print(cl, msg);
-			strcatformat(msg, "\" on processor %d to level %d\n\n", 
-						 target_proc->id, cl->level);
-			logger_write(local_proc->logger, msg);			
+			//-- print to file
+			msg_t msg = msg_new();
+			istrcat(&msg, "-> enable remote closure \"");
+			closure_str(&msg, cl);
+			istrcatf(&msg, "\" on processor %d to level %d\n\n",
+					 target_proc->id, cl->level);
+			logger_write(local_proc->logger, msg);
+			msg_destroy(msg);
 			//--
 		}		
 		
@@ -261,32 +284,28 @@ void send_argument(cont c, void *src, int size, context_t *context) {
 		processor_unlock_stalled(target_proc);
 		
 		processor_lock_ready_queue(local_proc);
-		post_closure_to_level(local_proc->rq, cl, cl->level);
+		ready_queue_post_closure_to_level(local_proc->rq, cl, cl->level);
 		processor_unlock_ready_queue(local_proc);
-
-		processor_evaluate_stats(local_proc);
-		processor_print(local_proc);
+		
+		stats_and_print(local_proc);
 	}
 }
 
 void debug_send_argument(cont c, char *arg) {
 	closure_t *cl = c.cl;
-	if (cl->debug_list_arguments == NULL) {
+	if (cl->list_arguments == NULL) {
 		return;
 	}
-	char *str = (char *)dequeue_get_element(*(cl->debug_list_arguments), c.debug_n_arg);
+	char *str = (char *)dequeue_get_element(*(cl->list_arguments), c.debug_n_arg);
 	strcpy(str, arg);
 }
 
 debug_list_arguments_t *debug_list_arguments_new() {
-	debug_list_arguments_t *debug_list_arguments = dequeue_create();
-	return debug_list_arguments;
+	return closure_create_list_arguments();
 }
 
 void debug_list_arguments_add(debug_list_arguments_t *debug_list_arguments, char *str) {
-	char *new_str = (char *)malloc(sizeof(char) * (strlen(str) + 1));
-	strcpy(new_str, str);
-	dequeue_add_tail(debug_list_arguments, new_str);
+	closure_list_arguments_add(debug_list_arguments, str);
 }
 
 
@@ -307,11 +326,10 @@ void scheduler_start(void *fun)
 	closure_set_fun(cl, fun);
 	
 	processor_lock_ready_queue(processors[0]);
-	post_closure_to_level(processors[0]->rq, cl, 0);
+	ready_queue_post_closure_to_level(processors[0]->rq, cl, 0);
 	processor_lock_ready_queue(processors[0]);
 	
-	processor_evaluate_stats(processors[0]);
-	processor_print(processors[0]);
+	stats_and_print(processors[0]);
 	
 	for (int i=0; i<NPROC; i++) {
 		processor_start(processors[i]);

@@ -36,7 +36,6 @@ void dequeue_foreach(void *fun, dequeue_t *d)
 
 void dequeue_fold(void *fun, void *acc, dequeue_t *d) {
 	void (*callback)(void *, void *, int) = fun;
-
 	element_t *ele = d->head;
 	int i = 0;
     while(ele != NULL) {
@@ -200,17 +199,6 @@ void * dequeue_get_last(dequeue_t l) {
 		return l.tail->val;
 	}
 }
-
-/*void * dequeue_get_first_not_empty(dequeue_t l) {
-	element_t *ele = l.head;
-	while (ele != NULL) {
-		if (ele.val != NULL) {
-			return ele.val;
-		}
-		ele = ele->next;
-	}
-	return NULL;
-}*/
 
 int dequeue_size(dequeue_t l) {
 	return l.size;

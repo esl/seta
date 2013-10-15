@@ -22,8 +22,10 @@ typedef struct _closure {
 	int args_size;
 	int allocated_ancients;
 	bool is_last_thread;
-	dequeue_t *debug_list_arguments;
+	dequeue_t *list_arguments;
 } closure_t;
+
+
 
 closure_t * closure_create(char *);
 
@@ -35,8 +37,16 @@ void closure_set_args(closure_t *, void *);
 
 int closure_space(void *);
 
-void closure_space_callback(void *, void *, int);
+void closure_space_cb(void *, void *, int);
 
-void closure_print_callback(void *, void *, int);
+//void closure_print(closure_t *, char *);
 
-void closure_print(closure_t *, char *);
+void closure_set_list_arguments(closure_t *, dequeue_t *);
+
+dequeue_t *closure_create_list_arguments();
+
+void closure_list_arguments_add(dequeue_t *, char *);
+
+void closure_str(char **, closure_t *);
+
+void closure_str_cb(void *, void **, int);

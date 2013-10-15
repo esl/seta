@@ -11,4 +11,14 @@
 #include <string.h>
 #include <stdarg.h>
 
-char * strcatformat(char *, const char *, ...);
+typedef char *msg_t;
+
+msg_t msg_new();
+
+void msg_destroy(msg_t);
+
+void istrcat(msg_t *, char *);
+
+void istrncat(msg_t *, char *, int);
+
+void istrcatf(msg_t *, const char *, ...);

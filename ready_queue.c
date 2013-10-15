@@ -25,13 +25,13 @@ void ready_queue_destroy(dequeue_t *rq) {
 }
 
 
-bool ready_queue_level_not_empty_callback(void *ptr) {
+bool ready_queue_is_level_not_empty(void *ptr) {
 	dequeue_t *d = (dequeue_t *)ptr;
 	return dequeue_is_not_empty(d);
 }
 
-closure_t * extract_head_from_deepest_level(ready_queue_t *rq) {
-	dequeue_t *level = dequeue_get_last_matching_fun(&ready_queue_level_not_empty_callback, 
+closure_t * ready_queue_extract_head_from_deepest_level(ready_queue_t *rq) {
+	dequeue_t *level = dequeue_get_last_matching_fun(&ready_queue_is_level_not_empty, 
 													 rq);
 	if (level != NULL) {
 		return (closure_t *)dequeue_extract_head(level);
@@ -40,8 +40,8 @@ closure_t * extract_head_from_deepest_level(ready_queue_t *rq) {
 }
 
 
-closure_t * extract_tail_from_shallowest_level(ready_queue_t *rq) {
-	dequeue_t *level = dequeue_get_first_matching_fun(&ready_queue_level_not_empty_callback,
+closure_t * ready_queue_extract_tail_from_shallowest_level(ready_queue_t *rq) {
+	dequeue_t *level = dequeue_get_first_matching_fun(&ready_queue_is_level_not_empty,
 													  rq);
 	if (level != NULL) {
 		return (closure_t *)dequeue_extract_tail(level);
@@ -49,7 +49,7 @@ closure_t * extract_tail_from_shallowest_level(ready_queue_t *rq) {
 	return NULL;
 }
 
-void post_closure_to_level(ready_queue_t *rq, closure_t *cl, int level) {
+void ready_queue_post_closure_to_level(ready_queue_t *rq, closure_t *cl, int level) {
 	//printf("post closure to level %d\n", level);
 	int missing_levels = level - dequeue_size(*rq) + 1;
 	if (missing_levels > 0) {
@@ -65,25 +65,27 @@ void post_closure_to_level(ready_queue_t *rq, closure_t *cl, int level) {
 	
 }
 
-void level_print_callback(void *level, void *acc_in, int index) {
-	char *str = (char *)acc_in;
-	char s1[30] = "";
-	sprintf(s1, "---level %d---\n", index);
-	strcat(str, s1);
-	dequeue_fold(&closure_print_callback, acc_in, (dequeue_t *)level);
-	strcat(str, "\n-------------\n");
+void level_space_cb(void *level, void *acc_in) {
+	dequeue_fold(&closure_space_cb, acc_in, (dequeue_t *)level);
 }
 
-void ready_queue_str(ready_queue_t *rq, char *str) {
-	dequeue_fold(&level_print_callback, str, rq);
-}
 
-void level_space_callback(void *level, void *acc_in) {
-	dequeue_fold(&closure_space_callback, acc_in, (dequeue_t *)level);
-}
 
 int ready_queue_space(ready_queue_t *rq) {
 	int space = 0;
-	dequeue_fold(&level_space_callback, &space, rq);
+	dequeue_fold(&level_space_cb, &space, rq);
 	return space;
 }
+
+
+void level_str_cb(void *level, void **acc, int index) {
+	char **str = (char **)acc;
+	istrcatf(str, "---level %d---\n", index);
+	dequeue_fold(&closure_str_cb, str, (dequeue_t *)level);
+	istrcat(str, "\n-------------\n");
+}
+
+void ready_queue_str(char **acc, ready_queue_t *rq) {
+	dequeue_fold(&level_str_cb, acc, rq);
+}
+

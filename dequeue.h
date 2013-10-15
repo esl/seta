@@ -55,3 +55,4 @@ bool dequeue_is_not_empty(dequeue_t *);
 void * dequeue_get_first_matching_fun(void *, dequeue_t *);
 
 void * dequeue_get_last_matching_fun(void *, dequeue_t *);
+

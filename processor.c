@@ -31,31 +31,28 @@ void processor_destroy(processor_t *p) {
 }
 
 void processor_print(processor_t *p) {
-	char str[1000] = "";
-	strcat(str, "----------processor 0------------\n");
-	ready_queue_str(p->rq, str);
-	strcat(str, "stalled: ");
-	dequeue_fold(&closure_print_callback, str, p->stalled);
-	char s1[30] = "";
-	sprintf(s1, "\nclosures_allocated: %dB", p->cur_space);
-	strcat(str, s1);
-	strcat(str, "\n---------------------------------\n\n");
+	msg_t msg = msg_new();
+	istrcatf(&msg, "----------processor %d------------\n", p->id);
+	ready_queue_str(&msg, p->rq);
+	istrcat(&msg, "stalled: ");
 	
-	logger_write(p->logger, str);
+	dequeue_fold(&closure_str_cb, &msg, p->stalled);
 	
 	
-	/*printf("----------processor 0------------\n");
-	ready_queue_print(p->rq);
-	printf("stalled: ");
-	dequeue_foreach(&closure_print, p->stalled);
-	printf("\nclosures_allocated: %dB", p->cur_space);
-	printf("\n---------------------------------\n\n");*/
+	istrcatf(&msg, "\nclosures_allocated: %dB", p->cur_space);
+	
+	istrcat(&msg, "\n---------------------------------\n\n");
+	
+	logger_write(p->logger, msg);
+	
+	msg_destroy(msg);
+
 }
 
 int processor_space(processor_t *p) {
 	int c1 = ready_queue_space(p->rq);
 	int c2 = 0;
-	dequeue_fold(&closure_space_callback, &c2, p->stalled);
+	dequeue_fold(&closure_space_cb, &c2, p->stalled);
 	return c1 + c2;
 }
 

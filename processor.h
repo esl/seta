@@ -22,7 +22,7 @@ typedef struct _processor {
 	pthread_t thread;
 	pthread_mutex_t rq_mutex;
 	pthread_mutex_t stalled_mutex;
-	logger_t logger;  
+	logger_t logger;
 } processor_t;
 
 
@@ -33,8 +33,6 @@ typedef struct _processor {
 processor_t * processor_create(int);
 
 void processor_destroy(processor_t *);
-
-void processor_print(processor_t *);
 
 void processor_evaluate_stats(processor_t *);
 
@@ -55,3 +53,5 @@ void processor_unlock_ready_queue(processor_t *);
 void processor_lock_stalled(processor_t *);
 
 void processor_unlock_stalled(processor_t *);
+
+void processor_print(processor_t *);
