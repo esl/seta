@@ -80,9 +80,9 @@ int ready_queue_space(ready_queue_t *rq) {
 
 void level_str_cb(void *level, void **acc, int index) {
 	char **str = (char **)acc;
-	istrcatf(str, "---level %d---\n", index);
+	msg_catf(str, "---level %d---\n", index);
 	dequeue_fold(&closure_str_cb, str, (dequeue_t *)level);
-	istrcat(str, "\n-------------\n");
+	msg_cat(str, "\n-------------\n");
 }
 
 void ready_queue_str(char **acc, ready_queue_t *rq) {

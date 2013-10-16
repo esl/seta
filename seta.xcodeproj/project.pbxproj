@@ -10,7 +10,7 @@
 		3343BE0E17DDCDAF00265A7D /* dequeue.c in Sources */ = {isa = PBXBuildFile; fileRef = 3343BE0D17DDCDAF00265A7D /* dequeue.c */; };
 		336F908F17FDCDFB00894383 /* seta.c in Sources */ = {isa = PBXBuildFile; fileRef = 336F908E17FDCDFB00894383 /* seta.c */; };
 		33868307180C0A1400DA96A1 /* test_main.c in Sources */ = {isa = PBXBuildFile; fileRef = 33868306180C0A1400DA96A1 /* test_main.c */; };
-		33868351180C12BB00DA96A1 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = E57D41751809725D00596DA3 /* utils.c */; };
+		33868351180C12BB00DA96A1 /* msg.c in Sources */ = {isa = PBXBuildFile; fileRef = E57D41751809725D00596DA3 /* msg.c */; };
 		33868352180C12C900DA96A1 /* logger.c in Sources */ = {isa = PBXBuildFile; fileRef = 338D4C6E1804487E003003EA /* logger.c */; };
 		33868353180C12CC00DA96A1 /* processor.c in Sources */ = {isa = PBXBuildFile; fileRef = 33AD19E61803052300A817B6 /* processor.c */; };
 		33868354180C12D500DA96A1 /* closure.c in Sources */ = {isa = PBXBuildFile; fileRef = 3394A08F17DF87480045EEBC /* closure.c */; };
@@ -23,7 +23,7 @@
 		33AD19E71803052300A817B6 /* processor.c in Sources */ = {isa = PBXBuildFile; fileRef = 33AD19E61803052300A817B6 /* processor.c */; };
 		33F5D85417E206AD00370461 /* scheduler.c in Sources */ = {isa = PBXBuildFile; fileRef = 33F5D85317E206AD00370461 /* scheduler.c */; };
 		8DD76FAC0486AB0100D96B5E /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.c */; settings = {ATTRIBUTES = (); }; };
-		E57D41771809725D00596DA3 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = E57D41751809725D00596DA3 /* utils.c */; };
+		E57D41771809725D00596DA3 /* msg.c in Sources */ = {isa = PBXBuildFile; fileRef = E57D41751809725D00596DA3 /* msg.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,8 +60,8 @@
 		33F5D85317E206AD00370461 /* scheduler.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = scheduler.c; sourceTree = "<group>"; };
 		8DD76FB20486AB0100D96B5E /* seta */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = seta; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57D41741809725D00596DA3 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		E57D41751809725D00596DA3 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
-		E57D41761809725D00596DA3 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		E57D41751809725D00596DA3 /* msg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = msg.c; sourceTree = "<group>"; };
+		E57D41761809725D00596DA3 /* msg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msg.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,8 +96,8 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				E57D41761809725D00596DA3 /* utils.h */,
-				E57D41751809725D00596DA3 /* utils.c */,
+				E57D41761809725D00596DA3 /* msg.h */,
+				E57D41751809725D00596DA3 /* msg.c */,
 				33AD19E51803052300A817B6 /* processor.h */,
 				33AD19E61803052300A817B6 /* processor.c */,
 				3394A05A17DF3ECE0045EEBC /* ready_queue.h */,
@@ -221,7 +221,7 @@
 				33868354180C12D500DA96A1 /* closure.c in Sources */,
 				33868353180C12CC00DA96A1 /* processor.c in Sources */,
 				33868352180C12C900DA96A1 /* logger.c in Sources */,
-				33868351180C12BB00DA96A1 /* utils.c in Sources */,
+				33868351180C12BB00DA96A1 /* msg.c in Sources */,
 				33868307180C0A1400DA96A1 /* test_main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,7 +233,7 @@
 				8DD76FAC0486AB0100D96B5E /* main.c in Sources */,
 				3343BE0E17DDCDAF00265A7D /* dequeue.c in Sources */,
 				3394A05C17DF3ECE0045EEBC /* ready_queue.c in Sources */,
-				E57D41771809725D00596DA3 /* utils.c in Sources */,
+				E57D41771809725D00596DA3 /* msg.c in Sources */,
 				3394A09017DF87480045EEBC /* closure.c in Sources */,
 				33F5D85417E206AD00370461 /* scheduler.c in Sources */,
 				336F908F17FDCDFB00894383 /* seta.c in Sources */,

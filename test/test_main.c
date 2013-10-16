@@ -10,20 +10,28 @@
 #include "test_main.h"
 
 
-/*
-ready_queue_t * ready_queue_create();
+void test_string() {
+	msg_t msg = msg_new();
+	msg_cat(&msg, "ciao");
+	msg_cat(&msg, " come");
+	msg_cat(&msg, " stai?");
+	msg_catf(&msg, " %d", 123);
+	printf("%s\n", msg);
+	printf("%li %d\n", sizeof(msg), (int)strlen(msg));
+	msg_destroy(msg);
+	
+}
 
-void ready_queue_destroy(ready_queue_t *);
-
-closure_t * ready_queue_extract_head_from_deepest_level(ready_queue_t *);
-
-closure_t * ready_queue_extract_tail_from_shallowest_level(ready_queue_t *);
-
-void ready_queue_post_closure_to_level(ready_queue_t *, closure_t *, int);
-
-int ready_queue_space(ready_queue_t *);
-
-void ready_queue_str(ready_queue_t *, char *);*/
+void processor_test() {
+	processor_t *p = processor_create(0);
+	closure_t *cl = closure_create("fabio");
+	ready_queue_post_closure_to_level(p->rq, cl, 0);
+	processor_print(p);
+	ready_queue_extract_head_from_deepest_level(p->rq);
+	processor_print(p);
+	ready_queue_extract_head_from_deepest_level(p->rq);
+	processor_print(p);
+}
 
 void ready_queue_test() {
 	
@@ -52,7 +60,8 @@ void ready_queue_test() {
 	msg_t msg = msg_new();
 	ready_queue_str(&msg, rq);
 	closure_str(&msg, cl_rem);
-	printf("%s", msg);
+	
+	printf("%s\n", msg);
 	msg_destroy(msg);
 	
 	closure_t *cl_rem2 = ready_queue_extract_tail_from_shallowest_level(rq);
@@ -70,5 +79,7 @@ void ready_queue_test() {
 
 int main() {
 	printf("_________________test_________________\n\n");
-	ready_queue_test();
+	//ready_queue_test();
+	//processor_test();
+	test_string();
 }

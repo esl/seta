@@ -8,6 +8,7 @@
  */
 
 #include "dequeue.h"
+#include <pthread.h>
 
 #define NAMELEN 10
 
@@ -23,6 +24,7 @@ typedef struct _closure {
 	int allocated_ancients;
 	bool is_last_thread;
 	dequeue_t *list_arguments;
+	pthread_mutex_t mutex;
 } closure_t;
 
 
@@ -50,3 +52,7 @@ void closure_list_arguments_add(dequeue_t *, char *);
 void closure_str(char **, closure_t *);
 
 void closure_str_cb(void *, void **, int);
+
+void closure_lock(closure_t *);
+
+void closure_unlock(closure_t *);

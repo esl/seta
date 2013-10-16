@@ -9,11 +9,12 @@
 
 #include "scheduler.h"
 
+pthread_mutex_t scheduler_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void stats_and_print(processor_t *local_proc) {
 	processor_lock_ready_queue(local_proc);
 	processor_lock_stalled(local_proc);
-	processor_evaluate_stats(local_proc);
+	//processor_evaluate_stats(local_proc);
 	processor_print(local_proc);
 	processor_unlock_stalled(local_proc);
 	processor_unlock_ready_queue(local_proc);
@@ -57,9 +58,9 @@ void *scheduling_loop(void *ptr) {
 		if (cl != NULL) {
 			//-- print to file
 			msg_t msg = msg_new();
-			istrcat(&msg, "-> closure extracted: \"");
+			msg_cat(&msg, "-> closure extracted: \"");
 			closure_str(&msg, cl);
-			istrcatf(&msg, "\" from the level %d\n\n", cl->level);
+			msg_catf(&msg, "\" from the level %d\n\n", cl->level);
 			logger_write(local_logger, msg);
 			msg_destroy(msg);
 			//--
@@ -83,6 +84,7 @@ void *scheduling_loop(void *ptr) {
 								n_rand_proc);
 			
 			processor_t *remote_proc = processors[n_rand_proc];
+			
 			processor_lock_ready_queue(remote_proc);
 			closure_t *rcl = ready_queue_extract_tail_from_shallowest_level(remote_proc->rq);
 			processor_unlock_ready_queue(remote_proc);
@@ -95,9 +97,9 @@ void *scheduling_loop(void *ptr) {
 				
 				//-- print to file
 				msg_t msg = msg_new();
-				istrcat(&msg, "-> closure remotely extracted: \"");
+				msg_cat(&msg, "-> closure remotely extracted: \"");
 				closure_str(&msg, rcl);
-				istrcatf(&msg, "\" from the level %d\n\n", rcl->level);
+				msg_catf(&msg, "\" from the level %d\n\n", rcl->level);
 				logger_write(local_logger, msg);
 				msg_destroy(msg);
 				//--
@@ -166,7 +168,9 @@ handle_spawn_next prepare_spawn_next(void *fun, void *args, context_t *context) 
 	cl->proc = context->n_local_proc;
 	cl->level = context->level;
 	cl->args_size = context->args_size;
-	stack_depth_computation(processors[0], cl, context);
+	
+	//stack_depth_computation(processors[0], cl, context);
+	
 	cl->is_last_thread = context->is_last_thread;
 	if (context->debug_list_arguments != NULL) {
 		closure_set_list_arguments(cl, context->debug_list_arguments);
@@ -180,27 +184,30 @@ handle_spawn_next prepare_spawn_next(void *fun, void *args, context_t *context) 
 
 void spawn_next(handle_spawn_next hsn) {
 	processor_t *local_proc = processors[hsn.cl->proc];
+	
 	if (hsn.cl->join_counter == 0) {
+		// does it really make sense doing a spawn next of a ready closure?
 		
-		//-- print to file
+		/*//-- print to file
 		msg_t msg = msg_new();
 		istrcat(&msg, "-> spawn next \"");
 		closure_str(&msg, hsn.cl);
 		istrcatf(&msg, "\" to level %d\n\n", hsn.cl->level);
 		logger_write(local_proc->logger, msg);
 		msg_destroy(msg);
-		//--
+		//--*/
 		
 		processor_lock_ready_queue(local_proc);
 		ready_queue_post_closure_to_level(local_proc->rq, hsn.cl, hsn.cl->level);
 		processor_unlock_ready_queue(local_proc);
+		
 	}
 	else {
 		//-- print to file
 		msg_t msg = msg_new();
-		istrcat(&msg, "-> stall \"");
+		msg_cat(&msg, "-> stall \"");
 		closure_str(&msg, hsn.cl);
-		istrcat(&msg, "\"\n\n");
+		msg_cat(&msg, "\"\n\n");
 		logger_write(local_proc->logger, msg);
 		msg_destroy(msg);
 		//--
@@ -211,6 +218,8 @@ void spawn_next(handle_spawn_next hsn) {
 	}
 	
 	stats_and_print(local_proc);
+	
+	
 }
 
 void spawn(void *fun, void *args, context_t *context) {
@@ -227,13 +236,14 @@ void spawn(void *fun, void *args, context_t *context) {
 	}
 	
 	processor_t *local_proc = processors[context->n_local_proc];
-	stack_depth_computation(local_proc, cl, context);
+	
+	//stack_depth_computation(local_proc, cl, context);
 	
 	//-- print to file
 	msg_t msg = msg_new();
-	istrcat(&msg, "-> spawn \"");
+	msg_cat(&msg, "-> spawn \"");
 	closure_str(&msg, cl);
-	istrcatf(&msg, "\" to level %d\n\n", cl->level);
+	msg_catf(&msg, "\" to level %d\n\n", cl->level);
 	logger_write(local_proc->logger, msg);
 	msg_destroy(msg);
 	//--
@@ -242,27 +252,37 @@ void spawn(void *fun, void *args, context_t *context) {
 	ready_queue_post_closure_to_level(local_proc->rq, cl, cl->level);
 	processor_unlock_ready_queue(local_proc);
 	
-	
 	stats_and_print(local_proc);
 }
 
 void send_argument(cont c, void *src, int size, context_t *context) {
+	closure_t *cl = c.cl;
+	processor_t *local_proc = processors[context->n_local_proc];
+	processor_t *target_proc = processors[cl->proc];
+	
+	closure_lock(cl);
+	//-- print to file
+	msg_t msg = msg_new();
+	msg_ncat(&msg, "-> send attribute %d to the closure \"", *(int *)src);
+	closure_str(&msg, cl);
+	msg_catf(&msg, "\"\n\n");
+	logger_write_format(local_proc->logger, msg);
+	msg_destroy(msg);
+	//--
+	
 	void *dst = c.arg;
 	memcpy(dst, src, size);
 	
-	closure_t *cl = c.cl;
-	cl->join_counter -= 1;
 	
+	cl->join_counter -= 1;
 	if (cl->join_counter == 0) {
-		processor_t *local_proc = processors[context->n_local_proc];
-		processor_t *target_proc = processors[cl->proc];
 		
 		if (local_proc == target_proc) {
 			//-- print to file
 			msg_t msg = msg_new();
-			istrcat(&msg, "-> enable local closure \"");
+			msg_cat(&msg, "-> enable local closure \"");
 			closure_str(&msg, cl);
-			istrcatf(&msg, "\" to level %d\n\n", cl->level);
+			msg_catf(&msg, "\" to level %d\n\n", cl->level);
 			logger_write(local_proc->logger, msg);
 			msg_destroy(msg);		
 			//--
@@ -270,14 +290,15 @@ void send_argument(cont c, void *src, int size, context_t *context) {
 		else {
 			//-- print to file
 			msg_t msg = msg_new();
-			istrcat(&msg, "-> enable remote closure \"");
+			msg_cat(&msg, "-> enable remote closure \"");
 			closure_str(&msg, cl);
-			istrcatf(&msg, "\" on processor %d to level %d\n\n",
+			msg_catf(&msg, "\" on processor %d to level %d\n\n",
 					 target_proc->id, cl->level);
 			logger_write(local_proc->logger, msg);
 			msg_destroy(msg);
 			//--
 		}		
+		
 		
 		processor_lock_stalled(target_proc);
 		remove_from_stalled(target_proc, cl);
@@ -289,6 +310,8 @@ void send_argument(cont c, void *src, int size, context_t *context) {
 		
 		stats_and_print(local_proc);
 	}
+	closure_unlock(cl);
+	
 }
 
 void debug_send_argument(cont c, char *arg) {
@@ -327,9 +350,10 @@ void scheduler_start(void *fun)
 	
 	processor_lock_ready_queue(processors[0]);
 	ready_queue_post_closure_to_level(processors[0]->rq, cl, 0);
-	processor_lock_ready_queue(processors[0]);
+	processor_unlock_ready_queue(processors[0]);
 	
-	stats_and_print(processors[0]);
+	processor_print(processors[0]);
+	//stats_and_print(processors[0]);
 	
 	for (int i=0; i<NPROC; i++) {
 		processor_start(processors[i]);

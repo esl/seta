@@ -55,6 +55,7 @@ void sum(void *ptr, context_t context) {
 	debug_send_argument(args->k, arg1);
 	//
 	
+	//printf("sum-> %d + %d = %d\n", x, y, z);
 	send_argument(args->k, &z, sizeof(z), &context);
 	free(args);
 }
@@ -78,6 +79,7 @@ void fib(void *ptr, context_t context) {
 		debug_send_argument(c, arg1);
 		//
 		
+		//printf("cb1or2-> %d\n", r);
 		send_argument(c, &r, sizeof(r), &context);
 	}
 	else {		
@@ -94,7 +96,7 @@ void fib(void *ptr, context_t context) {
 		context.debug_list_arguments = debug_list_arguments3;
 		c1.debug_n_arg = 0;
 		c2.debug_n_arg = 1;
-		//---		
+		//---
 		handle_spawn_next s = prepare_spawn_next(&sum, args2, &context);
 		connect_cont(&s, &c1);
 		connect_cont(&s, &c2);

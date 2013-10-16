@@ -21,7 +21,6 @@ void logger_destroy(logger_t logger) {
 
 void logger_write(logger_t logger, char *str) {
 	fprintf(logger.fp, "%s", str);
-	//printf("%s", str);
 	fflush(logger.fp);
 }
 

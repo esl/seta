@@ -7,7 +7,7 @@
  *
  */
 
-#include "utils.h"
+#include "msg.h"
 #include <stdlib.h>
 
 /*
@@ -42,7 +42,7 @@ void msg_destroy(msg_t msg) {
 	free(msg);
 }
 
-void istrcat(msg_t *dest, char *src) {
+void msg_cat(msg_t *dest, char *src) {
 	char *res = malloc(strlen(src) + strlen(*dest) + 1);
 	memset(res, '\0', sizeof(res));
 	strcat(res, *dest);
@@ -51,7 +51,7 @@ void istrcat(msg_t *dest, char *src) {
 	*dest = res;
 }
 
-void istrncat(msg_t *dest, char *src, int n) {
+void msg_ncat(msg_t *dest, char *src, int n) {
 	int dim_res = strlen(src) + strlen(*dest) + 1;
 	char *res = malloc(dim_res);
 	memset(res, '\0', dim_res);
@@ -61,11 +61,11 @@ void istrncat(msg_t *dest, char *src, int n) {
 	*dest = res;
 }
 
-void istrcatf(msg_t *dest, const char *format, ...) {
+void msg_catf(msg_t *dest, const char *format, ...) {
 	va_list arglist;
 	va_start(arglist, format);
 	char str[200];
 	vsprintf(str, format, arglist);
-	istrcat(dest, str);	
+	msg_cat(dest, str);	
 }
 

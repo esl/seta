@@ -17,8 +17,8 @@ msg_t msg_new();
 
 void msg_destroy(msg_t);
 
-void istrcat(msg_t *, char *);
+void msg_cat(msg_t *, char *);
 
-void istrncat(msg_t *, char *, int);
+void msg_ncat(msg_t *, char *, int);
 
-void istrcatf(msg_t *, const char *, ...);
+void msg_catf(msg_t *, const char *, ...);

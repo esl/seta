@@ -12,6 +12,7 @@
 #include <string.h>
 
 
+
 typedef struct _processor {
 	int id;
 	ready_queue_t *rq;
@@ -55,3 +56,4 @@ void processor_lock_stalled(processor_t *);
 void processor_unlock_stalled(processor_t *);
 
 void processor_print(processor_t *);
+

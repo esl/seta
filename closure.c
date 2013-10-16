@@ -27,6 +27,8 @@ closure_t * closure_create(char *fun_name) {
 	cl->allocated_ancients = 0;
 	cl->is_last_thread = false;
 	cl->list_arguments = NULL;
+	pthread_mutex_init(&cl->mutex, NULL);
+	pthread_mutex_init(&cl->mutex, NULL);
 	return cl;
 }
 
@@ -41,6 +43,8 @@ void closure_destroy(closure_t *cl) {
 		dequeue_destroy(cl->list_arguments);
 	}
 	free(cl->name);
+	pthread_mutex_destroy(&cl->mutex);
+	pthread_mutex_destroy(&cl->mutex);
 	free(cl);
 }
 
@@ -78,16 +82,6 @@ void debug_list_arguments_callback(void *ptr, void *acc_in, int index) {
 	strcat(res, ",");
 }
 
-/*void closure_print(closure_t *cl, char *acc) {
-	strcat(acc, cl->name);
-	if (cl->list_arguments != NULL) {
-		char str[100] = "(";
-		dequeue_fold(&debug_list_arguments_callback, str, cl->list_arguments);
-		strncat(acc, str, strlen(str) - 1);
-		strcat(acc, ")");
-	}
-}*/
-
 int closure_space(void *cl) {
 	return sizeof(closure_t) + sizeof(char) * NAMELEN + ((closure_t *)cl)->args_size;
 }
@@ -100,21 +94,21 @@ void closure_space_cb(void *cl, void *acc_in, int index) {
 void list_arguments_str(void *ptr, void **acc, int index) {
 	char *str = (char *)ptr;
 	char **res = (char **)acc;
-	istrcat(res, str);
-	istrcat(res, ",");
+	msg_cat(res, str);
+	msg_cat(res, ",");
 }
 
 
 void closure_str(char **acc, closure_t *cl) {
-	istrcat(acc, cl->name);
+	msg_cat(acc, cl->name);
 	if (cl->list_arguments != NULL) {
 		char *str = (char *)malloc(2 * sizeof(char));
 		sprintf(str, "(");
 		dequeue_fold(&list_arguments_str, &str, cl->list_arguments);
-		istrncat(acc, str, strlen(str) - 1);
-		istrcat(acc, ")");
+		msg_ncat(acc, str, strlen(str) - 1);
+		msg_cat(acc, ")");
 	}
-	istrcat(acc, " ");	
+	msg_cat(acc, " ");	
 }
 
 
@@ -125,5 +119,11 @@ void closure_str_cb(void *ptr, void **acc, int index) {
 	closure_str(accstr, cl);
 }
 
+void closure_lock(closure_t *cl) {
+	pthread_mutex_lock(&cl->mutex);
+}
 
+void closure_unlock(closure_t *cl) {
+	pthread_mutex_unlock(&cl->mutex);
+}
 

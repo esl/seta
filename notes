@@ -11,4 +11,4 @@
 
 albero delle dipendenze	
 main.h -> ui.h -> scheduler.h -> processor.h -> ready_queue.h -> closure.h -> 
--> dequeue.h -> logger.h
+-> dequeue.h -> logger.h -> string.h

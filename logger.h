@@ -10,7 +10,7 @@
 
 #include <stdio.h>
 #include <stdarg.h>
-#include "utils.h"
+#include "msg.h"
 
 typedef struct _logger {
 	FILE *fp;

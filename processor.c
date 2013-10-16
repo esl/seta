@@ -16,7 +16,8 @@ processor_t * processor_create(int id) {
 	proc->stalled = dequeue_create();
 	proc->cur_space = 0;
 	proc->total_space = 0;
-	proc->rq_mutex; //= PTHREAD_MUTEX_INITIALIZER;
+	pthread_mutex_init(&proc->rq_mutex, NULL);
+	pthread_mutex_init(&proc->stalled_mutex, NULL);
 	char filename[15];
 	sprintf(filename, "proc_%d.txt", id);
 	proc->logger = logger_create(filename);
@@ -27,21 +28,23 @@ void processor_destroy(processor_t *p) {
 	ready_queue_destroy(p->rq);
 	dequeue_destroy(p->stalled);
 	logger_destroy(p->logger);
+	pthread_mutex_destroy(&p->rq_mutex);
+	pthread_mutex_destroy(&p->stalled_mutex);
 	free(p);
 }
 
 void processor_print(processor_t *p) {
 	msg_t msg = msg_new();
-	istrcatf(&msg, "----------processor %d------------\n", p->id);
+	msg_catf(&msg, "----------processor %d------------\n", p->id);
 	ready_queue_str(&msg, p->rq);
-	istrcat(&msg, "stalled: ");
+	msg_cat(&msg, "stalled: ");
 	
 	dequeue_fold(&closure_str_cb, &msg, p->stalled);
 	
 	
-	istrcatf(&msg, "\nclosures_allocated: %dB", p->cur_space);
+	msg_catf(&msg, "\nclosures_allocated: %dB", p->cur_space);
 	
-	istrcat(&msg, "\n---------------------------------\n\n");
+	msg_cat(&msg, "\n---------------------------------\n\n");
 	
 	logger_write(p->logger, msg);
 	
