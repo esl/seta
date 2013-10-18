@@ -3,7 +3,7 @@
 #include <string.h>
 #include "dequeue.h"
 
-#define NPROC 2
+#define NPROC 4
 
 bool stop_computation = false;
 
@@ -64,7 +64,6 @@ typedef struct _context_t {
 	bool is_last_thread;
 } context_t;
 
-void (*user_fun)(void *, context_t);
 
 typedef struct _closure {
 	char *name;
@@ -174,11 +173,11 @@ void scheduler_execute_closure(processor_t *local_proc, closure_t *cl) {
 	if (cl->is_last_thread) {
 		stop_computation = true;
 	}
-	user_fun = cl->fun;
 	context_t context;
 	context.is_last_thread = false;
 	context.n_local_proc = local_proc->id;
 	context.level = cl->level;
+	void (*user_fun)(void *, context_t) = cl->fun;
 	void *ptr = cl->args;
 	closure_destroy(cl);
 	user_fun(ptr, context);
@@ -348,7 +347,7 @@ void entry(void *ptr, context_t context) {
 	
 	args_fib_t *args_fib = (args_fib_t *)malloc(sizeof(args_fib_t));
 	args_fib->k = cont;
-	args_fib->n = 10;	
+	args_fib->n = 35;	
 	spawn(&fib, args_fib, &context);
 }
 
