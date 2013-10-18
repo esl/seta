@@ -19,6 +19,13 @@ dequeue_t * dequeue_create() {
 }
 
 void dequeue_destroy(dequeue_t *l) {
+	element_t *ele = l->head;
+	element_t *aux = NULL;
+    while(ele != NULL) {
+		aux = ele;
+        ele = ele->next;
+		free(aux);
+    }
 	free(l);
 }
 
@@ -47,28 +54,30 @@ void dequeue_fold(void *fun, void *acc, dequeue_t *d) {
 bool dequeue_is_not_empty(dequeue_t *d) {
 	return d->head != NULL;
 }
-
 int dequeue_add_head(dequeue_t *l, void *val) {
-	element_t *new = (element_t *)malloc(sizeof(element_t));
-	new->val = val;
-	new->next = l->head;
-	if (l->head == NULL) {
-		l->tail = new;
+	element_t *element = (element_t *)malloc(sizeof(element_t));
+	element->val = val;
+	element->next = l->head;
+	l->head = element;
+	if (l->tail == NULL) {
+		l->tail = element;
 	}
-	l->head = new;
 	l->size++;
 	return 0;
 }
 
 int dequeue_add_tail(dequeue_t *l, void *val) {
+	element_t *element = (element_t *)malloc(sizeof(element_t));
+	element->val = val;
+	element->next = NULL;
 	if (l->head == NULL) {
-		return dequeue_add_head(l, val);
+		l->head = element;
+		l->tail = element;
 	}
-	element_t *new = (element_t*)malloc(sizeof(element_t));
-	new->val = val;
-	new->next = NULL;
-	l->tail->next = new;
-	l->tail = new;
+	else {
+		l->tail->next = element;
+		l->tail = element;
+	}
 	l->size++;
 	return 0;
 }

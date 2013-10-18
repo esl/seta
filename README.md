@@ -1,4 +1,0 @@
-seta
-====
-
-Work-stealing scheduler
