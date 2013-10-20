@@ -34,7 +34,7 @@ void dequeue_foreach(void *fun, dequeue_t *d)
 	void (*callback)(void *, int) = fun;
     element_t *ele = d->head;
 	
-	int i;
+	int i = 0;
     while(ele != NULL) {
 		callback(ele->val, i++);
         ele = ele->next;
