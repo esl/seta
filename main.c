@@ -136,7 +136,7 @@ void entry(void *ptr, seta_context_t context) {
 	}
 	args_fib_t *args_fib = (args_fib_t *)malloc(sizeof(args_fib_t));
 	args_fib->k = cont;
-	args_fib->n = 15;	
+	args_fib->n = 6;	
 	seta_spawn(&fib, args_fib, &context);
 }
 

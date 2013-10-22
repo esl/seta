@@ -31,6 +31,7 @@ typedef struct _seta_context_t {
 	int args_size;
 	void *arg_name_list;
 	int allocated_ancients;
+	int closure_id;
 } seta_context_t;
 
 typedef void *seta_arg_name_list_t;

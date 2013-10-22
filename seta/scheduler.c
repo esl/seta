@@ -16,6 +16,7 @@ processor_t *processors[NPROC];
 
 bool info = false;
 
+
 void seta_enable_info() {
 	info = true;
 }
@@ -68,6 +69,7 @@ seta_handle_spawn_next_t seta_prepare_spawn_next(void *fun, void *args, seta_con
 		}
 		processor_t *local_proc = processors[context->n_local_proc];
 		stack_depth_computation(local_proc, closure, context);
+		graph_spawn_next(closure, context);
 	}
 	hsn.closure = (void *)closure;
 	return hsn;
@@ -80,7 +82,9 @@ void seta_spawn_next(seta_handle_spawn_next_t hsn) {
 		processor_add_to_stalled(local_proc, hsn.closure);
 		processor_unlock_stalled(local_proc);
 		
-		scheduler_computate_processor_space(local_proc);
+		if (info) {
+			scheduler_computate_processor_space(local_proc);
+		}
 	}
 }
 
@@ -100,48 +104,44 @@ void seta_spawn(void *fun, void *args, seta_context_t *context) {
 			context->arg_name_list = NULL;
 		}
 		stack_depth_computation(local_proc, closure, context);
+		graph_spawn(closure, context);
+		scheduler_computate_processor_space(local_proc);
 	}
 	
 	processor_lock_ready_queue(local_proc);
 	ready_queue_post_closure_to_level(local_proc->rq, closure, closure->level);
 	processor_unlock_ready_queue(local_proc);
-	
-	if (info) {
-		scheduler_computate_processor_space(local_proc);
-	}
 }
 
 void seta_send_argument(seta_cont_t cont, void *src, int size, seta_context_t *context) {
 	closure_t *closure = (closure_t *)cont.closure;
 	processor_t *local_proc = processors[context->n_local_proc];
-	processor_t *target_proc = processors[closure->proc];
 	
+	bool to_post = false;
 	closure_lock(closure);
 	void *dst = cont.arg;
 	memcpy(dst, src, size);
 	
 	closure->join_counter -= 1;
 	if (closure->join_counter == 0) {
-		processor_lock_ready_queue(local_proc);
-		ready_queue_post_closure_to_level(local_proc->rq, closure, closure->level);
-		processor_unlock_ready_queue(local_proc);
-		
+		to_post = true;
+	}
+	closure_unlock(closure);
+	
+	if (to_post) {
 		if (info) {
+			processor_t *target_proc = processors[closure->proc];
 			processor_lock_stalled(target_proc);
 			processor_remove_from_stalled(target_proc, closure);
 			processor_unlock_stalled(target_proc);
 			
 			scheduler_computate_processor_space(local_proc);
+			graph_send_argument(closure, context);
 		}
+		processor_lock_ready_queue(local_proc);
+		ready_queue_post_closure_to_level(local_proc->rq, closure, closure->level);
+		processor_unlock_ready_queue(local_proc);
 	}
-	closure_unlock(closure);
-	
-}
-
-void set_string(char **dest, char *src) {
-	free(*dest);
-	*dest = (char *)malloc(sizeof(char) * (strlen(src) + 1));
-	strcpy(*dest, src);
 }
 
 void seta_send_arg_name(seta_cont_t cont, char *arg_name) {
@@ -151,7 +151,8 @@ void seta_send_arg_name(seta_cont_t cont, char *arg_name) {
 		return;
 	}
 	char **arg_name_ptr = (char **)dequeue_get_element(*(closure->arg_name_list), cont.n_arg);
-	set_string(arg_name_ptr, arg_name);
+	msg_destroy(*arg_name_ptr);
+	*arg_name_ptr = msg_new_from(arg_name);
 }
 
 seta_arg_name_list_t seta_arg_name_list_new() {
@@ -163,8 +164,7 @@ seta_arg_name_list_t seta_arg_name_list_new() {
 void seta_arg_name_list_add(seta_arg_name_list_t ptr, char *str) {	
 	dequeue_t *arg_name_list = (dequeue_t *)ptr;
 	char **str_ptr = (char **)malloc(sizeof(char *));
-	char *new_str = (char *)malloc(sizeof(char) * (strlen(str) + 1));
-	strcpy(new_str, str);
+	msg_t new_str = msg_new_from(str);
 	*str_ptr = new_str;
 	dequeue_add_tail(arg_name_list, str_ptr);
 }
@@ -177,6 +177,7 @@ void scheduler_execute_closure(processor_t *local_proc, closure_t *closure) {
 	if (info) {
 		context.arg_name_list = NULL;
 		context.allocated_ancients = closure->allocated_ancients;
+		context.closure_id = closure->id;
 	}
 	context.is_last_thread = false;
 	context.n_local_proc = local_proc->id;
@@ -248,6 +249,10 @@ void seta_start(void *fun)
 	time_t t;
 	srand((unsigned)time(&t));
 	
+	if (info) {
+		graph_start();
+	}
+	
 	for (int i=0; i<NPROC; i++) {
 		processors[i] = processor_create(i);
 		if (info) {
@@ -265,7 +270,9 @@ void seta_start(void *fun)
 	ready_queue_post_closure_to_level(processors[0]->rq, closure, 0);
 	processor_unlock_ready_queue(processors[0]);
 	
-	scheduler_computate_processor_space(processors[0]);
+	if (info) {
+		scheduler_computate_processor_space(processors[0]);
+	}
 	
 	for (int i=0; i<NPROC; i++) {
 		processor_start(processors[i]);
@@ -274,12 +281,18 @@ void seta_start(void *fun)
 		processor_wait_4_me(processors[i]);
 	}
 	
-	scheduler_print_results();
+	if (info) {
+		scheduler_print_results();
+	}
 	
 	for (int i=0; i<NPROC; i++) {
 		if (info) {
 			processor_destroy_info(processors[i]);
 		}		
 		processor_destroy(processors[i]);
+	}
+	
+	if (info) {
+		graph_finish();
 	}
 }

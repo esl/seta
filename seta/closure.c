@@ -3,6 +3,8 @@
 #include <pthread.h>
 #include <stdbool.h>
 
+int closure_id = 0;
+
 closure_t * closure_create() {
 	closure_t *closure = (closure_t *)malloc(sizeof(closure_t));
 	closure->fun = NULL;
@@ -18,9 +20,9 @@ closure_t * closure_create_info(closure_t *closure, char *fun_name) {
 	closure->args_size = 0;
 	closure->allocated_ancients = 0;
 	closure->arg_name_list = NULL;
-	char *name = (char *)malloc(sizeof(char) * (strlen(fun_name) + 1));
-	strcpy(name, fun_name);
+	msg_t name = msg_new_from(fun_name);
 	closure->name = name;
+	closure->id = closure_id++;
 	return closure;
 }
 
@@ -65,4 +67,23 @@ int closure_space(closure_t *closure) {
 
 void closure_space_cb(void *ptr, void *acc_in, int index) {
 	*(int *)acc_in += closure_space((closure_t *)ptr);
+}
+
+void list_arguments_str(void *ptr, void **acc, int index) {
+	char **str = (char **)ptr;
+	char **res = (char **)acc;
+	msg_cat(res, *str);
+	msg_cat(res, ",");
+}
+
+void closure_str(char **acc, closure_t *closure) {
+	msg_cat(acc, closure->name);
+	
+	if (closure->arg_name_list != NULL) {
+		msg_t args_str = msg_new_from("(");
+		dequeue_fold(&list_arguments_str, &args_str, closure->arg_name_list);
+		msg_ncat(acc, args_str, strlen(args_str) - 1);
+		msg_destroy(args_str);
+		msg_cat(acc, ")");
+	}
 }
