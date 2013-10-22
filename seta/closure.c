@@ -24,8 +24,9 @@ closure_t * closure_create_info(closure_t *closure, char *fun_name) {
 	return closure;
 }
 
-void closure_destroy_arg_name(char *arg) {
-	free(arg);
+void closure_destroy_arg_name(char **arg_ptr) {
+	free(*arg_ptr);
+	free(arg_ptr);
 }
 
 void closure_destroy_info(closure_t *closure) {

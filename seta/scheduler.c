@@ -138,14 +138,20 @@ void seta_send_argument(seta_cont_t cont, void *src, int size, seta_context_t *c
 	
 }
 
+void set_string(char **dest, char *src) {
+	free(*dest);
+	*dest = (char *)malloc(sizeof(char) * (strlen(src) + 1));
+	strcpy(*dest, src);
+}
+
 void seta_send_arg_name(seta_cont_t cont, char *arg_name) {
 	closure_t *closure = cont.closure;
 	if (closure->arg_name_list == NULL) {
 		printf("error: arg sent to no existing closure");
 		return;
 	}
-	char *str = (char *)dequeue_get_element(*(closure->arg_name_list), cont.n_arg);
-	strcpy(str, arg_name);
+	char **arg_name_ptr = (char **)dequeue_get_element(*(closure->arg_name_list), cont.n_arg);
+	set_string(arg_name_ptr, arg_name);
 }
 
 seta_arg_name_list_t seta_arg_name_list_new() {
@@ -154,11 +160,13 @@ seta_arg_name_list_t seta_arg_name_list_new() {
 	return ptr;
 }
 
-void seta_arg_name_list_add(seta_arg_name_list_t ptr, char *str) {
+void seta_arg_name_list_add(seta_arg_name_list_t ptr, char *str) {	
 	dequeue_t *arg_name_list = (dequeue_t *)ptr;
+	char **str_ptr = (char **)malloc(sizeof(char *));
 	char *new_str = (char *)malloc(sizeof(char) * (strlen(str) + 1));
 	strcpy(new_str, str);
-	dequeue_add_tail(arg_name_list, new_str);
+	*str_ptr = new_str;
+	dequeue_add_tail(arg_name_list, str_ptr);
 }
 
 void scheduler_execute_closure(processor_t *local_proc, closure_t *closure) {
@@ -266,12 +274,12 @@ void seta_start(void *fun)
 		processor_wait_4_me(processors[i]);
 	}
 	
+	scheduler_print_results();
+	
 	for (int i=0; i<NPROC; i++) {
 		if (info) {
 			processor_destroy_info(processors[i]);
 		}		
 		processor_destroy(processors[i]);
 	}
-	
-	scheduler_print_results();
 }
