@@ -117,17 +117,21 @@ void seta_send_argument(seta_cont_t cont, void *src, int size, seta_context_t *c
 	closure_t *closure = (closure_t *)cont.closure;
 	processor_t *local_proc = processors[context->n_local_proc];
 	
-	bool to_post = false;
-	closure_lock(closure);
 	void *dst = cont.arg;
 	memcpy(dst, src, size);
 	
+    bool to_post = false;
+	closure_lock(closure);
 	closure->join_counter -= 1;
 	if (closure->join_counter == 0) {
 		to_post = true;
 	}
 	closure_unlock(closure);
 	
+    if (info) {
+        graph_send_argument(closure, context);
+    }
+    
 	if (to_post) {
 		if (info) {
 			processor_t *target_proc = processors[closure->proc];
@@ -136,7 +140,7 @@ void seta_send_argument(seta_cont_t cont, void *src, int size, seta_context_t *c
 			processor_unlock_stalled(target_proc);
 			
 			scheduler_computate_processor_space(local_proc);
-			graph_send_argument(closure, context);
+			graph_send_argument_enable(closure, context);
 		}
 		processor_lock_ready_queue(local_proc);
 		ready_queue_post_closure_to_level(local_proc->rq, closure, closure->level);

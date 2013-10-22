@@ -61,7 +61,7 @@ void closure_unlock(closure_t *cl) {
 }
 
 int closure_space(closure_t *closure) {
-	return sizeof(closure_t) + sizeof(char) * (strlen(closure->name) + 1) + 
+	return sizeof(closure_t) + sizeof(char) * ((int)strlen(closure->name) + 1) +
 		closure->args_size;
 }
 
@@ -82,7 +82,7 @@ void closure_str(char **acc, closure_t *closure) {
 	if (closure->arg_name_list != NULL) {
 		msg_t args_str = msg_new_from("(");
 		dequeue_fold(&list_arguments_str, &args_str, closure->arg_name_list);
-		msg_ncat(acc, args_str, strlen(args_str) - 1);
+		msg_ncat(acc, args_str, (int)strlen(args_str) - 1);
 		msg_destroy(args_str);
 		msg_cat(acc, ")");
 	}

@@ -16,7 +16,7 @@ msg_t msg_new() {
 }
 
 msg_t msg_new_from(char *str) {
-	int dim_new = sizeof(char) * (strlen(str) + 1);
+	int dim_new = sizeof(char) * ((int)strlen(str) + 1);
 	char *new_str = (char *)malloc(dim_new);
 	memset(new_str, '\0', dim_new);
 	strncpy(new_str, str, dim_new - 1);
@@ -28,7 +28,7 @@ void msg_destroy(msg_t msg) {
 }
 
 void msg_ncat(msg_t *dest, char *src, int n) {
-	int dim_res = strlen(src) + strlen(*dest) + 1;
+	int dim_res = (int)strlen(src) + (int)strlen(*dest) + 1;
 	char *res = malloc(dim_res);
 	memset(res, '\0', dim_res);
 	strcat(res, *dest);
@@ -43,7 +43,7 @@ void msg_cat(msg_t *dest, const char *format, ...) {
 	char src[500];
 	vsprintf(src, format, arglist);
 	//printf("%s\n", format);
-	int dim_res = strlen(src) + strlen(*dest) + 1;
+	int dim_res = (int)strlen(src) + (int)strlen(*dest) + 1;
 	char *res = malloc(dim_res);
 	memset(res, '\0', dim_res);
 	strcpy(res, *dest);

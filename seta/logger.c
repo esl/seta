@@ -13,6 +13,10 @@
 logger_t logger_create(char *filename) {
 	logger_t logger;
 	logger.fp = fopen(filename, "w");
+    if (logger.fp == NULL) {
+        printf("error opening the file\n");
+        exit(-1);
+    }
 	return logger;
 }
 

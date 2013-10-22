@@ -98,3 +98,5 @@ void graph_finish();
 void graph_spawn_next(closure_t *, seta_context_t *);
 void graph_spawn(closure_t *, seta_context_t *);
 void graph_send_argument(closure_t *, seta_context_t *);
+void graph_send_argument_enable(closure_t *, seta_context_t *);
+

@@ -131,12 +131,12 @@ void entry(void *ptr, seta_context_t context) {
 		context.spawned = "fib";
 		context.args_size = sizeof(args_fib_t);
 		seta_arg_name_list_t *arg_name_list = seta_arg_name_list_new();
-		seta_arg_name_list_add(arg_name_list, "7");
+		seta_arg_name_list_add(arg_name_list, "10");
 		context.arg_name_list = arg_name_list;		
 	}
 	args_fib_t *args_fib = (args_fib_t *)malloc(sizeof(args_fib_t));
 	args_fib->k = cont;
-	args_fib->n = 6;	
+	args_fib->n = 10;
 	seta_spawn(&fib, args_fib, &context);
 }
 
