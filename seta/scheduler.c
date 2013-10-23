@@ -16,6 +16,9 @@ processor_t *processors[NPROC];
 
 bool info = false;
 
+//TODO handle race condition on S1
+int S1 = 0;
+dequeue_t *S1_list = NULL;
 
 void seta_enable_info() {
 	info = true;
@@ -38,15 +41,44 @@ seta_cont_t seta_cont_create(void *arg, seta_handle_spawn_next_t hsn) {
 	return cont;
 }
 
+void * allocated_ancient_copy(void *allocated_ancient) {
+	return (void *)msg_new_from((char *)allocated_ancient);
+}
+
+dequeue_t * allocated_ancient_list_copy(dequeue_t *allocated_ancient_list) {
+	return dequeue_copy(&allocated_ancient_copy, allocated_ancient_list);
+}
+
+void allocated_ancient_destroy(char *allocated_ancient) {
+	free(allocated_ancient);
+}
+
+void allocated_ancient_list_destroy(dequeue_t *allocated_ancient_list) {
+	if (allocated_ancient_list != NULL) {
+		dequeue_foreach(&allocated_ancient_destroy, allocated_ancient_list);
+		dequeue_destroy(allocated_ancient_list);
+	}
+}
+
 void stack_depth_computation(processor_t *proc, closure_t *closure, seta_context_t *context) {
+	dequeue_t *allocated_ancient_list = (dequeue_t *)context->allocated_ancient_list;
+	closure->allocated_ancient_list = allocated_ancient_list_copy(allocated_ancient_list);
+	msg_t new_ancient = msg_new();
+	msg_cat(&new_ancient, "%d", closure->id);
+	dequeue_add_tail(allocated_ancient_list, new_ancient);
+	closure->allocated_ancients = context->allocated_ancients;
 	int c1 = closure_space(closure);
 	int c2 = context->allocated_ancients;
 	int S1_candidate = c1 + c2;
-	if (S1_candidate > proc->stack_depth) {
-		proc->stack_depth = S1_candidate;
+	if (S1_candidate > S1) {
+		S1 = S1_candidate;
+		if (S1_list != NULL) {
+			allocated_ancient_list_destroy(S1_list);
+		}
+		S1_list = allocated_ancient_list_copy(allocated_ancient_list);
 	}
-	closure->allocated_ancients = context->allocated_ancients;
 	context->allocated_ancients += c1;
+	
 }
 
 seta_handle_spawn_next_t seta_prepare_spawn_next(void *fun, void *args, seta_context_t *context) {
@@ -181,18 +213,24 @@ void scheduler_execute_closure(processor_t *local_proc, closure_t *closure) {
 	if (info) {
 		context.arg_name_list = NULL;
 		context.allocated_ancients = closure->allocated_ancients;
+		context.allocated_ancient_list = (void *)allocated_ancient_list_copy(
+														closure->allocated_ancient_list);
 		context.closure_id = closure->id;
+		graph_execute(closure, local_proc->id);
 	}
 	context.is_last_thread = false;
 	context.n_local_proc = local_proc->id;
 	context.level = closure->level;
 	void (*user_fun)(void *, seta_context_t) = closure->fun;
 	void *ptr = closure->args;
-	if (info) {	
+	if (info) {
 		closure_destroy_info(closure);
 	}
 	closure_destroy(closure);
 	user_fun(ptr, context);
+	if (info) {
+		allocated_ancient_list_destroy((dequeue_t *)context.allocated_ancient_list);
+	}
 }
 
 void *scheduler_scheduling_loop(void *ptr) {
@@ -232,21 +270,16 @@ void *scheduler_scheduling_loop(void *ptr) {
 	return NULL;
 }
 
-void scheduler_print_results() {
-	int stack_depth = 0, total_space = 0;
+void scheduler_print_results() { 
+	int total_space = 0;
 	for (int i=0; i<NPROC; i++) {
 		printf("processor %d memory usage: %dB\n", i, processors[i]->total_space);
 		total_space += processors[i]->total_space;
-		if (processors[i]->stack_depth > stack_depth) {
-			stack_depth = processors[i]->stack_depth;
-		}
 	}
-	printf("\nstack depth(S1): %dB\n\n", stack_depth);
+	printf("\nS1: %dB\n\n", S1);
 	printf("all processors memory usage (SP): %dB\n\n", total_space);
-	printf("S1 * P: %dB\n\n", stack_depth * NPROC);
-	printf("%d(SP) <= %d(S1 * P)\n\n", total_space, stack_depth * NPROC);
+	printf("%d(SP) <= %d(S1 * P)\n\n", total_space, S1 * NPROC);
 }
-
 
 void seta_start(void *fun)
 {
@@ -267,6 +300,7 @@ void seta_start(void *fun)
 	closure_t *closure = closure_create();
 	if (info) {
 		closure_create_info(closure, "entry");
+		closure->allocated_ancient_list = dequeue_create();
 	}
 	closure_set_fun(closure, fun);
 	
@@ -297,6 +331,8 @@ void seta_start(void *fun)
 	}
 	
 	if (info) {
+		dequeue_foreach(&graph_color_S1_element, S1_list);
+		allocated_ancient_list_destroy(S1_list);
 		graph_finish();
 	}
 }

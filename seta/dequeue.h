@@ -26,6 +26,8 @@ typedef struct _list {
 
 dequeue_t * dequeue_create();
 
+dequeue_t * dequeue_copy(void *, dequeue_t *);
+
 void dequeue_destroy(dequeue_t *);
 
 int dequeue_add_head(dequeue_t *, void *);

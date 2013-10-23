@@ -20,7 +20,6 @@ void processor_create_info(processor_t *proc) {
 	proc->stalled = dequeue_create();
 	proc->cur_space = 0;
 	proc->total_space = 0;
-	proc->stack_depth = 0;
 	pthread_mutex_init(&proc->stalled_mutex, NULL);
 }
 

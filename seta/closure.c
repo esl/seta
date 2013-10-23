@@ -19,6 +19,7 @@ closure_t * closure_create() {
 closure_t * closure_create_info(closure_t *closure, char *fun_name) {
 	closure->args_size = 0;
 	closure->allocated_ancients = 0;
+	closure->allocated_ancient_list = NULL;
 	closure->arg_name_list = NULL;
 	msg_t name = msg_new_from(fun_name);
 	closure->name = name;
@@ -26,7 +27,7 @@ closure_t * closure_create_info(closure_t *closure, char *fun_name) {
 	return closure;
 }
 
-void closure_destroy_arg_name(char **arg_ptr) {
+void closure_arg_name_destroy(char **arg_ptr) {
 	free(*arg_ptr);
 	free(arg_ptr);
 }
@@ -34,9 +35,10 @@ void closure_destroy_arg_name(char **arg_ptr) {
 void closure_destroy_info(closure_t *closure) {
 	free(closure->name);
 	if (closure->arg_name_list != NULL) {
-		dequeue_foreach(&closure_destroy_arg_name, closure->arg_name_list);
+		dequeue_foreach(&closure_arg_name_destroy, closure->arg_name_list);
 		dequeue_destroy(closure->arg_name_list);
 	}
+	allocated_ancient_list_destroy(closure->allocated_ancient_list);
 }
 
 void closure_destroy(closure_t *closure) {

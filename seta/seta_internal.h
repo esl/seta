@@ -24,6 +24,7 @@ typedef struct _closure {
 	int args_size;
 	dequeue_t *arg_name_list;
 	int allocated_ancients;
+	dequeue_t *allocated_ancient_list;
 	int proc;
 	int id;
 } closure_t;
@@ -51,7 +52,6 @@ typedef struct _processor {
 	pthread_mutex_t stalled_mutex;
 	int cur_space;
 	int total_space;
-	int stack_depth;	
 } processor_t;
 processor_t * processor_create(int);
 void processor_create_info(processor_t *);
@@ -95,8 +95,12 @@ void logger_write(logger_t logger, const char *format, ...);
 
 void graph_start();
 void graph_finish();
+void graph_execute(closure_t *closure, int n_local_proc);
 void graph_spawn_next(closure_t *, seta_context_t *);
 void graph_spawn(closure_t *, seta_context_t *);
 void graph_send_argument(closure_t *, seta_context_t *);
 void graph_send_argument_enable(closure_t *, seta_context_t *);
+void graph_color_S1_element(void *, int);
 
+
+void allocated_ancient_list_destroy(dequeue_t *);

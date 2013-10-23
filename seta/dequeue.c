@@ -18,6 +18,19 @@ dequeue_t * dequeue_create() {
 	return l;
 }
 
+dequeue_t * dequeue_copy(void *fun, dequeue_t *d) {
+	dequeue_t *copy = dequeue_create();
+	
+	void * (*callback)(void *) = fun;
+    element_t *ele = d->head;
+	
+    while(ele != NULL) {
+		dequeue_add_tail(copy, callback(ele->val));
+        ele = ele->next;
+    }
+	return copy;
+}
+
 void dequeue_destroy(dequeue_t *l) {
 	element_t *ele = l->head;
 	element_t *aux = NULL;
