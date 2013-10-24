@@ -213,6 +213,23 @@ void * dequeue_get_element(dequeue_t l, int n) {
 	}
 }
 
+int dequeue_set_element(dequeue_t *d, int n, void *new_val) {
+	if (d->head == NULL) {
+		return -1;
+	}
+	else {
+		element_t *aux = d->head;
+		for (int i=0; i<n; i++) {
+			if (aux->next == NULL) {
+				return -1;
+			}
+			aux = aux->next;
+		}
+		aux->val = new_val;
+		return 0;
+	}
+}
+
 void * dequeue_get_last(dequeue_t l) {
 	if (l.head == NULL) {
 		return NULL;

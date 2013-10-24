@@ -15,11 +15,21 @@ msg_t msg_new() {
 	return empty_string;
 }
 
-msg_t msg_new_from(char *str) {
+msg_t msg_new_from_str(char *str) {
 	int dim_new = sizeof(char) * ((int)strlen(str) + 1);
 	char *new_str = (char *)malloc(dim_new);
 	memset(new_str, '\0', dim_new);
 	strncpy(new_str, str, dim_new - 1);
+	return new_str;
+}
+
+msg_t msg_new_from_int(int i) {
+	char aux[30];
+	sprintf(aux, "%d", i);
+	int dim_new = sizeof(char) * (strlen(aux) + 1);
+	char *new_str = (char *)malloc(dim_new);
+	memset(new_str, '\0', dim_new);
+	strncpy(new_str, aux, dim_new - 1);
 	return new_str;
 }
 

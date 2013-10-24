@@ -18,10 +18,21 @@ bool info = false;
 
 //TODO handle race condition on S1
 int S1 = 0;
-dequeue_t *S1_list = NULL;
+pthread_mutex_t S1_list_mutex = PTHREAD_MUTEX_INITIALIZER;
+msg_list_t *S1_list = NULL;
 
 void seta_enable_info() {
 	info = true;
+}
+
+
+seta_arg_name_list_t seta_arg_name_list_new() {
+	return (void *)msg_list_create();
+}
+
+void seta_arg_name_list_add(seta_arg_name_list_t ptr, char *str) {	
+	msg_list_t *arg_name_list = (msg_list_t *)ptr;
+	msg_list_append(arg_name_list, str);
 }
 
 void scheduler_computate_processor_space(processor_t *local_proc) {
@@ -41,44 +52,24 @@ seta_cont_t seta_cont_create(void *arg, seta_handle_spawn_next_t hsn) {
 	return cont;
 }
 
-void * allocated_ancient_copy(void *allocated_ancient) {
-	return (void *)msg_new_from((char *)allocated_ancient);
-}
 
-dequeue_t * allocated_ancient_list_copy(dequeue_t *allocated_ancient_list) {
-	return dequeue_copy(&allocated_ancient_copy, allocated_ancient_list);
-}
-
-void allocated_ancient_destroy(char *allocated_ancient) {
-	free(allocated_ancient);
-}
-
-void allocated_ancient_list_destroy(dequeue_t *allocated_ancient_list) {
-	if (allocated_ancient_list != NULL) {
-		dequeue_foreach(&allocated_ancient_destroy, allocated_ancient_list);
-		dequeue_destroy(allocated_ancient_list);
-	}
-}
 
 void stack_depth_computation(processor_t *proc, closure_t *closure, seta_context_t *context) {
-	dequeue_t *allocated_ancient_list = (dequeue_t *)context->allocated_ancient_list;
-	closure->allocated_ancient_list = allocated_ancient_list_copy(allocated_ancient_list);
-	msg_t new_ancient = msg_new();
-	msg_cat(&new_ancient, "%d", closure->id);
-	dequeue_add_tail(allocated_ancient_list, new_ancient);
+	msg_list_t *allocated_ancient_list = (msg_list_t *)context->allocated_ancient_list;
+	closure->allocated_ancient_list = msg_list_copy(allocated_ancient_list);
 	closure->allocated_ancients = context->allocated_ancients;
+	msg_list_append_int(allocated_ancient_list, closure->id);
 	int c1 = closure_space(closure);
 	int c2 = context->allocated_ancients;
 	int S1_candidate = c1 + c2;
 	if (S1_candidate > S1) {
 		S1 = S1_candidate;
-		if (S1_list != NULL) {
-			allocated_ancient_list_destroy(S1_list);
-		}
-		S1_list = allocated_ancient_list_copy(allocated_ancient_list);
+		pthread_mutex_lock(&S1_list_mutex);
+		msg_list_destroy(S1_list);
+		S1_list = msg_list_copy(allocated_ancient_list);
+		pthread_mutex_unlock(&S1_list_mutex);
 	}
 	context->allocated_ancients += c1;
-	
 }
 
 seta_handle_spawn_next_t seta_prepare_spawn_next(void *fun, void *args, seta_context_t *context) {
@@ -95,10 +86,8 @@ seta_handle_spawn_next_t seta_prepare_spawn_next(void *fun, void *args, seta_con
 	if (info) {
 		closure->args_size = context->args_size;
 		closure->proc = context->n_local_proc;
-		if (context->arg_name_list != NULL) {
-			closure->arg_name_list = (dequeue_t *)context->arg_name_list;
-			context->arg_name_list = NULL;
-		}
+		closure->arg_name_list = (msg_list_t *)context->arg_name_list;
+		context->arg_name_list = NULL;
 		processor_t *local_proc = processors[context->n_local_proc];
 		stack_depth_computation(local_proc, closure, context);
 		graph_spawn_next(closure, context);
@@ -131,12 +120,11 @@ void seta_spawn(void *fun, void *args, seta_context_t *context) {
 	closure->level = context->level + 1;
 	if (info) {
 		closure->args_size = context->args_size;
-		if (context->arg_name_list!= NULL) {
-			closure->arg_name_list = (dequeue_t *)context->arg_name_list;
-			context->arg_name_list = NULL;
-		}
+		closure->arg_name_list = (msg_list_t *)context->arg_name_list;
+		context->arg_name_list = NULL;
 		stack_depth_computation(local_proc, closure, context);
 		graph_spawn(closure, context);
+		msg_list_append_int_reverse((msg_list_t *)context->rearrange_list, closure->id);
 		scheduler_computate_processor_space(local_proc);
 	}
 	
@@ -183,26 +171,10 @@ void seta_send_argument(seta_cont_t cont, void *src, int size, seta_context_t *c
 void seta_send_arg_name(seta_cont_t cont, char *arg_name) {
 	closure_t *closure = cont.closure;
 	if (closure->arg_name_list == NULL) {
-		printf("error: arg sent to no existing closure");
+		printf("error: arg sent to no existing arg_name_list");
 		return;
 	}
-	char **arg_name_ptr = (char **)dequeue_get_element(*(closure->arg_name_list), cont.n_arg);
-	msg_destroy(*arg_name_ptr);
-	*arg_name_ptr = msg_new_from(arg_name);
-}
-
-seta_arg_name_list_t seta_arg_name_list_new() {
-	dequeue_t *arg_name_list = dequeue_create();
-	seta_arg_name_list_t ptr = (void *)arg_name_list;
-	return ptr;
-}
-
-void seta_arg_name_list_add(seta_arg_name_list_t ptr, char *str) {	
-	dequeue_t *arg_name_list = (dequeue_t *)ptr;
-	char **str_ptr = (char **)malloc(sizeof(char *));
-	msg_t new_str = msg_new_from(str);
-	*str_ptr = new_str;
-	dequeue_add_tail(arg_name_list, str_ptr);
+	msg_list_set(closure->arg_name_list, cont.n_arg, arg_name);
 }
 
 void scheduler_execute_closure(processor_t *local_proc, closure_t *closure) {
@@ -213,9 +185,9 @@ void scheduler_execute_closure(processor_t *local_proc, closure_t *closure) {
 	if (info) {
 		context.arg_name_list = NULL;
 		context.allocated_ancients = closure->allocated_ancients;
-		context.allocated_ancient_list = (void *)allocated_ancient_list_copy(
-														closure->allocated_ancient_list);
+		context.allocated_ancient_list = (void *)msg_list_copy(closure->allocated_ancient_list);
 		context.closure_id = closure->id;
+		context.rearrange_list = msg_list_create();
 		graph_execute(closure, local_proc->id);
 	}
 	context.is_last_thread = false;
@@ -229,7 +201,12 @@ void scheduler_execute_closure(processor_t *local_proc, closure_t *closure) {
 	closure_destroy(closure);
 	user_fun(ptr, context);
 	if (info) {
-		allocated_ancient_list_destroy((dequeue_t *)context.allocated_ancient_list);
+		msg_list_destroy((msg_list_t *)context.allocated_ancient_list);
+		//printf("figli:\n");
+		//msg_list_print((msg_list_t *)context.rearrange_list);
+		//printf("-----\n");
+		graph_rearrange_spawns((msg_list_t *)context.rearrange_list);
+		msg_list_destroy((dequeue_t *)context.rearrange_list);
 	}
 }
 
@@ -300,7 +277,7 @@ void seta_start(void *fun)
 	closure_t *closure = closure_create();
 	if (info) {
 		closure_create_info(closure, "entry");
-		closure->allocated_ancient_list = dequeue_create();
+		closure->allocated_ancient_list = msg_list_create();
 	}
 	closure_set_fun(closure, fun);
 	
@@ -331,8 +308,8 @@ void seta_start(void *fun)
 	}
 	
 	if (info) {
-		dequeue_foreach(&graph_color_S1_element, S1_list);
-		allocated_ancient_list_destroy(S1_list);
+		msg_list_foreach(&graph_color_S1_element, S1_list);
+		msg_list_destroy(S1_list);
 		graph_finish();
 	}
 }

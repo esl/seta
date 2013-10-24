@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33D4C04B1819391200B12FA3 /* lists.c in Sources */ = {isa = PBXBuildFile; fileRef = 33D4C04A1819391200B12FA3 /* lists.c */; };
 		33FD3F35181696E100D23A11 /* msg.c in Sources */ = {isa = PBXBuildFile; fileRef = 33FD3F34181696E100D23A11 /* msg.c */; };
 		33FD3F5718169A8B00D23A11 /* logger.c in Sources */ = {isa = PBXBuildFile; fileRef = 33FD3F5618169A8B00D23A11 /* logger.c */; };
 		33FD41941816E80600D23A11 /* graph_dot.c in Sources */ = {isa = PBXBuildFile; fileRef = 33FD41931816E80600D23A11 /* graph_dot.c */; };
@@ -31,6 +32,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		33D4C04A1819391200B12FA3 /* lists.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lists.c; sourceTree = "<group>"; };
 		33FD3E6818167A2F00D23A11 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		33FD3F1E1816920300D23A11 /* notes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = notes; sourceTree = "<group>"; };
 		33FD3F34181696E100D23A11 /* msg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = msg.c; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				33FD3F34181696E100D23A11 /* msg.c */,
 				33FD3F5618169A8B00D23A11 /* logger.c */,
 				33FD41931816E80600D23A11 /* graph_dot.c */,
+				33D4C04A1819391200B12FA3 /* lists.c */,
 			);
 			path = seta;
 			sourceTree = "<group>";
@@ -164,6 +167,7 @@
 				33FD3F35181696E100D23A11 /* msg.c in Sources */,
 				33FD3F5718169A8B00D23A11 /* logger.c in Sources */,
 				33FD41941816E80600D23A11 /* graph_dot.c in Sources */,
+				33D4C04B1819391200B12FA3 /* lists.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

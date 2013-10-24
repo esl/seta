@@ -42,6 +42,20 @@ void graph_spawn(closure_t *closure, seta_context_t *context) {
 	msg_destroy(msg);
 }
 
+void write_node(void *cl, msg_t *acc, int g) {
+	msg_cat(acc, "\"cl%s\";", (char *)cl);
+}
+
+void graph_rearrange_spawns(msg_list_t *spawn_id_list) {
+	msg_t msg = msg_new();
+	msg_cat(&msg, "\t{rank=same; ");
+	dequeue_fold(&write_node, &msg, spawn_id_list);
+	//msg_list_foreach(&write_node, spawn_id_list);
+	msg_cat(&msg, "}\n");
+	logger_write(logger, msg);
+	msg_destroy(msg);
+}
+
 void graph_send_argument(closure_t *closure, seta_context_t *context) {
 	logger_write(logger, "\t\"cl%d\" -> \"cl%d\"[constraint=false, style=dashed];\n",
                  context->closure_id, closure->id);
@@ -57,10 +71,7 @@ void graph_send_argument_enable(closure_t *closure, seta_context_t *context) {
 }
 
 void graph_color_S1_element(void *cl, int g) {
-	msg_t msg = msg_new();
-	msg_cat(&msg, "\t\"cl%s\"[fillcolor=yellow];\n", (char *)cl);
-	logger_write(logger, msg);
-	msg_destroy(msg);
+	logger_write(logger, "\t\"cl%s\"[fillcolor=yellow];\n", (char *)cl);
 }
 
 void graph_finish() {

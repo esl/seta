@@ -12,6 +12,29 @@
 #include <string.h>
 #include <stdarg.h>
 
+typedef char *msg_t;
+msg_t msg_new();
+msg_t msg_new_from_str(char *);
+msg_t msg_new_from_int(int);
+void msg_destroy(msg_t);
+void msg_cat(msg_t *, const char *, ...);
+void msg_ncat(msg_t *, char *, int);
+
+
+typedef dequeue_t msg_list_t;
+msg_list_t * msg_list_create();
+void msg_list_append(msg_list_t *, char *);
+void msg_list_append_reverse(msg_list_t *, char *);
+void msg_list_append_int(msg_list_t *, int);
+void msg_list_append_int_reverse(msg_list_t *, int);
+void msg_list_set(msg_list_t *, int, char *);
+void msg_list_str(msg_t *, msg_list_t *);
+msg_list_t * msg_list_copy(msg_list_t *);
+void msg_list_foreach(void *, msg_list_t *);
+void msg_list_destroy(msg_list_t *);
+void msg_list_print(msg_list_t *);
+
+
 typedef struct _closure {
 	int level;
 	int join_counter;
@@ -22,9 +45,9 @@ typedef struct _closure {
 	// info
 	char *name;
 	int args_size;
-	dequeue_t *arg_name_list;
+	msg_list_t *arg_name_list;
 	int allocated_ancients;
-	dequeue_t *allocated_ancient_list;
+	msg_list_t *allocated_ancient_list;
 	int proc;
 	int id;
 } closure_t;
@@ -77,14 +100,6 @@ int ready_queue_space(ready_queue_t *);
 void *scheduler_scheduling_loop(void *);
 
 
-typedef char *msg_t;
-msg_t msg_new();
-msg_t msg_new_from(char *);
-void msg_destroy(msg_t);
-void msg_cat(msg_t *, const char *, ...);
-void msg_ncat(msg_t *, char *, int);
-
-
 typedef struct _logger {
 	FILE *fp;
 } logger_t;
@@ -101,6 +116,6 @@ void graph_spawn(closure_t *, seta_context_t *);
 void graph_send_argument(closure_t *, seta_context_t *);
 void graph_send_argument_enable(closure_t *, seta_context_t *);
 void graph_color_S1_element(void *, int);
+void graph_rearrange_spawns(msg_list_t *);
 
 
-void allocated_ancient_list_destroy(dequeue_t *);

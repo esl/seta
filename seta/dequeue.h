@@ -42,6 +42,8 @@ int dequeue_remove_element_by_value(dequeue_t *, void *);
 
 void * dequeue_get_element(dequeue_t, int);
 
+int dequeue_set_element(dequeue_t *d, int n, void *new_val);
+
 void * dequeue_get_last(dequeue_t);
 
 int dequeue_size(dequeue_t);
