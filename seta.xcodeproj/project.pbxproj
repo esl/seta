@@ -92,8 +92,8 @@
 			isa = PBXGroup;
 			children = (
 				E51EF9601812E5520064D7AD /* closure.c */,
-				E51EF9611812E5520064D7AD /* dequeue.c */,
 				E51EF9621812E5520064D7AD /* dequeue.h */,
+				E51EF9611812E5520064D7AD /* dequeue.c */,
 				E51EF96D1812FA340064D7AD /* processor.c */,
 				E51EF9641812E5520064D7AD /* seta_internal.h */,
 				E51EF9691812F6D50064D7AD /* scheduler.c */,

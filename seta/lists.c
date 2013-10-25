@@ -75,3 +75,32 @@ void msg_list_print(msg_list_t *msg_list) {
 	dequeue_foreach(&msg_print, (dequeue_t *)msg_list);
 }
 
+
+
+
+
+
+spawn_list_t * spawn_list_create() {
+	return (msg_list_t *)dequeue_create();
+}
+
+void spawn_element_destroy(void *ptr) {
+	spawn_element_t *spawn_element = (spawn_element_t *)ptr;
+	free(spawn_element->label);
+	free(spawn_element);
+}
+
+void spawn_list_destroy(spawn_list_t *spawn_list) {
+	dequeue_t *dequeue = (dequeue_t *)spawn_list;
+	dequeue_foreach(&spawn_element_destroy, dequeue);
+	dequeue_destroy(dequeue);
+}
+
+
+void spawn_list_append(spawn_list_t *spawn_list, int id, char *label) {
+	spawn_element_t *spawn_element = (spawn_element_t *)malloc(sizeof(spawn_element_t));
+	spawn_element->id = id;
+	spawn_element->label = msg_new_from_str(label);
+	dequeue_add_head((dequeue_t *)spawn_list, (void *)spawn_element);
+}
+

@@ -90,7 +90,7 @@ seta_handle_spawn_next_t seta_prepare_spawn_next(void *fun, void *args, seta_con
 		context->arg_name_list = NULL;
 		processor_t *local_proc = processors[context->n_local_proc];
 		stack_depth_computation(local_proc, closure, context);
-		graph_spawn_next(closure, context);
+		graph_spawn_next(context->closure_id, closure->id);
 	}
 	hsn.closure = (void *)closure;
 	return hsn;
@@ -123,9 +123,13 @@ void seta_spawn(void *fun, void *args, seta_context_t *context) {
 		closure->arg_name_list = (msg_list_t *)context->arg_name_list;
 		context->arg_name_list = NULL;
 		stack_depth_computation(local_proc, closure, context);
-		graph_spawn(closure, context);
-		msg_list_append_int_reverse((msg_list_t *)context->rearrange_list, closure->id);
 		scheduler_computate_processor_space(local_proc);
+		// for the graph
+		spawn_list_t *spawn_list = (spawn_list_t *)context->spawn_list;
+		msg_t msg = msg_new();
+		closure_str(&msg, closure);
+		spawn_list_append(spawn_list, closure->id, msg);
+		msg_destroy(msg);
 	}
 	
 	processor_lock_ready_queue(local_proc);
@@ -187,8 +191,8 @@ void scheduler_execute_closure(processor_t *local_proc, closure_t *closure) {
 		context.allocated_ancients = closure->allocated_ancients;
 		context.allocated_ancient_list = (void *)msg_list_copy(closure->allocated_ancient_list);
 		context.closure_id = closure->id;
-		context.rearrange_list = msg_list_create();
-		graph_execute(closure, local_proc->id);
+		context.spawn_list = (void *)spawn_list_create();
+		graph_set_color(closure->id, local_proc->id);
 	}
 	context.is_last_thread = false;
 	context.n_local_proc = local_proc->id;
@@ -202,11 +206,9 @@ void scheduler_execute_closure(processor_t *local_proc, closure_t *closure) {
 	user_fun(ptr, context);
 	if (info) {
 		msg_list_destroy((msg_list_t *)context.allocated_ancient_list);
-		//printf("figli:\n");
-		//msg_list_print((msg_list_t *)context.rearrange_list);
-		//printf("-----\n");
-		graph_rearrange_spawns((msg_list_t *)context.rearrange_list);
-		msg_list_destroy((dequeue_t *)context.rearrange_list);
+		spawn_list_t *spawn_list = (spawn_list_t *)context.spawn_list;
+		graph_spawns(context.closure_id, spawn_list);
+		spawn_list_destroy(spawn_list);
 	}
 }
 

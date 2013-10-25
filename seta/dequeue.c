@@ -270,3 +270,20 @@ void * dequeue_get_last_matching_fun(void *fun, dequeue_t *d) {
 }
 
 
+dequeue_iterator_t dequeue_get_iterator(dequeue_t *dequeue) {
+	dequeue_iterator_t iterator;
+	iterator.cur_element = dequeue->head;
+	return iterator;
+}
+
+bool dequeue_iterator_has_more(dequeue_iterator_t *iterator) {
+	return iterator->cur_element != NULL;
+}
+
+void * dequeue_iterator_get_next(dequeue_iterator_t *iterator) {
+	element_t *current_element = (element_t *)iterator->cur_element;
+	iterator->cur_element = current_element->next;
+	return current_element->val;
+}
+
+

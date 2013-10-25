@@ -12,6 +12,17 @@
 #include <string.h>
 #include <stdarg.h>
 
+typedef struct _spawn_element {
+	int id;
+	char *label;
+} spawn_element_t;
+
+typedef dequeue_t spawn_list_t;
+spawn_list_t * spawn_list_create();
+void spawn_list_append(spawn_list_t *, int, char *);
+void spawn_list_destroy(spawn_list_t *);
+
+
 typedef char *msg_t;
 msg_t msg_new();
 msg_t msg_new_from_str(char *);
@@ -110,12 +121,11 @@ void logger_write(logger_t logger, const char *format, ...);
 
 void graph_start();
 void graph_finish();
-void graph_execute(closure_t *closure, int n_local_proc);
-void graph_spawn_next(closure_t *, seta_context_t *);
-void graph_spawn(closure_t *, seta_context_t *);
+void graph_set_color(int, int);
+void graph_spawn_next(int, int);
+void graph_spawns(int, spawn_list_t *);
 void graph_send_argument(closure_t *, seta_context_t *);
 void graph_send_argument_enable(closure_t *, seta_context_t *);
 void graph_color_S1_element(void *, int);
-void graph_rearrange_spawns(msg_list_t *);
 
 

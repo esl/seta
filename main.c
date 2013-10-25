@@ -63,22 +63,7 @@ void fib(void *ptr, seta_context_t context) {
 			cont_r.n_arg = 1;
 		}
 		seta_spawn_next(hsn);
-		
-		//------ spawn_fib ------
-		if (INFO) {
-			context.spawned = "fib_l";
-			context.args_size = sizeof(args_fib_t);
-			seta_arg_name_list_t *arg_name_list = seta_arg_name_list_new();
-			char str[20] = "";
-			sprintf(str, "%d", n - 2);
-			seta_arg_name_list_add(arg_name_list, str);
-			context.arg_name_list = arg_name_list;
-		}
-		args_fib_t *args_fib_l = (args_fib_t *)malloc(sizeof(args_fib_t));
-		args_fib_l->k = cont_l;
-		args_fib_l->n = n - 2;
-		seta_spawn(&fib, args_fib_l, &context);
-		
+				
 		//------ spawn_fib ------
 		if (INFO) {
 			context.spawned = "fib_r";
@@ -93,6 +78,21 @@ void fib(void *ptr, seta_context_t context) {
 		args_fib_r->k = cont_r;
 		args_fib_r->n = n - 1;
 		seta_spawn(&fib, args_fib_r, &context);
+		
+		//------ spawn_fib ------
+		if (INFO) {
+			context.spawned = "fib_l";
+			context.args_size = sizeof(args_fib_t);
+			seta_arg_name_list_t *arg_name_list = seta_arg_name_list_new();
+			char str[20] = "";
+			sprintf(str, "%d", n - 2);
+			seta_arg_name_list_add(arg_name_list, str);
+			context.arg_name_list = arg_name_list;
+		}
+		args_fib_t *args_fib_l = (args_fib_t *)malloc(sizeof(args_fib_t));
+		args_fib_l->k = cont_l;
+		args_fib_l->n = n - 2;
+		seta_spawn(&fib, args_fib_l, &context);		
 	}
 	
 }

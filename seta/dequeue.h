@@ -17,11 +17,15 @@ typedef struct _element
     struct _element *next;
 } element_t;
 
-typedef struct _list {
+typedef struct _dequeue {
 	element_t *head;
 	element_t *tail;
 	int size;
 } dequeue_t;
+
+typedef struct _dequeue_iterator {
+	element_t *cur_element;
+} dequeue_iterator_t;
 
 
 dequeue_t * dequeue_create();
@@ -57,4 +61,12 @@ bool dequeue_is_not_empty(dequeue_t *);
 void * dequeue_get_first_matching_fun(void *, dequeue_t *);
 
 void * dequeue_get_last_matching_fun(void *, dequeue_t *);
+
+
+dequeue_iterator_t dequeue_get_iterator(dequeue_t *);
+
+bool dequeue_iterator_has_more(dequeue_iterator_t *);
+
+void * dequeue_iterator_get_next(dequeue_iterator_t *);
+
 
