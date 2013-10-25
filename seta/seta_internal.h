@@ -125,7 +125,7 @@ void graph_set_color(int, int);
 void graph_spawn_next(int, int);
 void graph_spawns(int, spawn_list_t *);
 void graph_send_argument(closure_t *, seta_context_t *);
-void graph_send_argument_enable(closure_t *, seta_context_t *);
+void graph_send_argument_enable(int, char *);
 void graph_color_S1_element(void *, int);
 
 

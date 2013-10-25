@@ -123,18 +123,21 @@ void seta_spawn(void *fun, void *args, seta_context_t *context) {
 		closure->arg_name_list = (msg_list_t *)context->arg_name_list;
 		context->arg_name_list = NULL;
 		stack_depth_computation(local_proc, closure, context);
-		scheduler_computate_processor_space(local_proc);
 		// for the graph
 		spawn_list_t *spawn_list = (spawn_list_t *)context->spawn_list;
-		msg_t msg = msg_new();
-		closure_str(&msg, closure);
-		spawn_list_append(spawn_list, closure->id, msg);
-		msg_destroy(msg);
+		msg_t label = msg_new();
+		closure_str(&label, closure);
+		//msg_cat(&label, "\n[%d]", closure_space(closure)); //
+		spawn_list_append(spawn_list, closure->id, label);
+		msg_destroy(label);
 	}
 	
 	processor_lock_ready_queue(local_proc);
 	ready_queue_post_closure_to_level(local_proc->rq, closure, closure->level);
 	processor_unlock_ready_queue(local_proc);
+	if (info) {
+		scheduler_computate_processor_space(local_proc);
+	}
 }
 
 void seta_send_argument(seta_cont_t cont, void *src, int size, seta_context_t *context) {
@@ -163,12 +166,19 @@ void seta_send_argument(seta_cont_t cont, void *src, int size, seta_context_t *c
 			processor_remove_from_stalled(target_proc, closure);
 			processor_unlock_stalled(target_proc);
 			
-			scheduler_computate_processor_space(local_proc);
-			graph_send_argument_enable(closure, context);
+			// for the graph
+			msg_t label = msg_new();
+			closure_str(&label, closure);
+			//msg_cat(&label, "\n[%d]", closure_space(closure)); //
+			graph_send_argument_enable(closure->id, label);
+			msg_destroy(label);
 		}
 		processor_lock_ready_queue(local_proc);
 		ready_queue_post_closure_to_level(local_proc->rq, closure, closure->level);
 		processor_unlock_ready_queue(local_proc);
+		if (info) {
+			scheduler_computate_processor_space(local_proc);
+		}
 	}
 }
 

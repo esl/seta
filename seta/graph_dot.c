@@ -51,13 +51,8 @@ void graph_send_argument(closure_t *closure, seta_context_t *context) {
                  context->closure_id, closure->id);
 }
 
-void graph_send_argument_enable(closure_t *closure, seta_context_t *context) {
-	msg_t msg = msg_new();
-	msg_cat(&msg, "\t\"cl%d\"[label=\"", closure->id);
-	closure_str(&msg, closure);
-	msg_cat(&msg, "\"];\n");
-	logger_write(logger, msg);
-	msg_destroy(msg);
+void graph_send_argument_enable(int enabled, char *label) {
+	logger_write(logger, "\t\"cl%d\"[label=\"%s\"];\n", enabled, label);
 }
 
 void graph_color_S1_element(void *cl, int g) {

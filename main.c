@@ -1,5 +1,5 @@
 #include "seta.h"
-#include <stdlib.h>
+//#include <stdlib.h>
 #include <stdio.h>
 
 #define INFO true

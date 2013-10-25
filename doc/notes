@@ -1,6 +1,5 @@
 - un thread puo' fare al massimo una spawn_next
 - prima di fare spawn e spawn_next, deallocare lo spazio dei parametri
-- le spawn devono essere concatenate
 - la spawn_next se c'e' deve essere la prima spawn
 - il programma finisce quando uno dei processori finisce di eseguire l'ultimo
 	thread della procedura root del dag e ogni altro processore non ha lavoro
