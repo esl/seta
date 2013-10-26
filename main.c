@@ -1,5 +1,4 @@
 #include "seta.h"
-//#include <stdlib.h>
 #include <stdio.h>
 
 #define INFO true
@@ -8,12 +7,12 @@ typedef struct _args_sum {
 	seta_cont_t k;
 	int x, y;
 } args_sum_t;
-void sum(void *ptr, seta_context_t context) {
-	args_sum_t *local_args = (args_sum_t *)ptr;
+void sum(seta_context_t context) {
+	args_sum_t *local_args = (args_sum_t *)context.args;
 	seta_cont_t cont = local_args->k;
 	int x = local_args->x;
 	int y = local_args->y;
-	free(local_args);
+	seta_free_args(&context);
 	//---
 	//------ send_argument ------
 	int res = x + y;
@@ -29,11 +28,11 @@ typedef struct _args_fib {
 	seta_cont_t k;
 	int n;
 } args_fib_t;
-void fib(void *ptr, seta_context_t context) {
-	args_fib_t *local_args = (args_fib_t *)ptr;
+void fib(seta_context_t context) {
+	args_fib_t *local_args = (args_fib_t *)context.args;
 	seta_cont_t cont = local_args->k;
 	int n = local_args->n;
-	free(local_args);
+	seta_free_args(&context);
 	//---
 	if (n <= 2) { 
 		//------ send_argument ------
@@ -45,7 +44,7 @@ void fib(void *ptr, seta_context_t context) {
 	}
 	else {
 		//------ spawn_next_sum ------
-		args_sum_t *args_sum = (args_sum_t *)malloc(sizeof(args_sum_t));
+        args_sum_t *args_sum = (args_sum_t *)seta_alloc_args(sizeof(args_sum_t));
 		args_sum->k = cont;
 		if (INFO) {
 			context.spawned = "sum";
@@ -74,7 +73,7 @@ void fib(void *ptr, seta_context_t context) {
 			seta_arg_name_list_add(arg_name_list, str);
 			context.arg_name_list = arg_name_list;
 		}
-		args_fib_t *args_fib_r = (args_fib_t *)malloc(sizeof(args_fib_t));
+		args_fib_t *args_fib_r = (args_fib_t *)seta_alloc_args(sizeof(args_fib_t));
 		args_fib_r->k = cont_r;
 		args_fib_r->n = n - 1;
 		seta_spawn(&fib, args_fib_r, &context);
@@ -89,7 +88,7 @@ void fib(void *ptr, seta_context_t context) {
 			seta_arg_name_list_add(arg_name_list, str);
 			context.arg_name_list = arg_name_list;
 		}
-		args_fib_t *args_fib_l = (args_fib_t *)malloc(sizeof(args_fib_t));
+		args_fib_t *args_fib_l = (args_fib_t *)seta_alloc_args(sizeof(args_fib_t));
 		args_fib_l->k = cont_l;
 		args_fib_l->n = n - 2;
 		seta_spawn(&fib, args_fib_l, &context);		
@@ -100,18 +99,18 @@ void fib(void *ptr, seta_context_t context) {
 typedef struct _args_print {
 	int n;
 } args_print_t;
-void print(void *ptr, seta_context_t context) {
-	args_print_t *local_args = (args_print_t *)ptr;
+void print(seta_context_t context) {
+	args_print_t *local_args = (args_print_t *)context.args;
 	int res = local_args->n;
-	free(local_args);
+	seta_free_args(&context);
 	//---
 	printf("\nresult: %d\n\n", res);
 }
 
-void entry(void *ptr, seta_context_t context) {
+void entry(seta_context_t context) {
 	//------ spawn_next_print ------
 	context.is_last_thread = true;
-	args_print_t *args_print = (args_print_t *)malloc(sizeof(args_print_t));
+	args_print_t *args_print = (args_print_t *)seta_alloc_args(sizeof(args_print_t));
 	if (INFO) {
 		context.spawned = "print";
 		context.args_size = sizeof(args_print_t);
@@ -134,7 +133,7 @@ void entry(void *ptr, seta_context_t context) {
 		seta_arg_name_list_add(arg_name_list, "10");
 		context.arg_name_list = arg_name_list;		
 	}
-	args_fib_t *args_fib = (args_fib_t *)malloc(sizeof(args_fib_t));
+	args_fib_t *args_fib = (args_fib_t *)seta_alloc_args(sizeof(args_fib_t));
 	args_fib->k = cont;
 	args_fib->n = 10;
 	seta_spawn(&fib, args_fib, &context);

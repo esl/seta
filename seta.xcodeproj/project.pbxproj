@@ -245,6 +245,9 @@
 		E51EF95E1812E4FA0064D7AD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				OTHER_CFLAGS = "-O";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;

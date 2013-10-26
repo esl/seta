@@ -14,7 +14,7 @@ logger_t logger;
 char *color[] = {"green", "red", "blue", "orange", "gray"};
 
 void graph_start() {
-	logger = logger_create("spawn_tree.dot");
+	logger = logger_create("/Users/fabio/Desktop/seta/spawn_tree.dot");
 	msg_t msg = msg_new();
 	msg_cat(&msg, "digraph G {\n"
 			"\tnode [style=filled, fillcolor=white];\n"
@@ -36,8 +36,6 @@ void graph_spawns(int spawning, spawn_list_t *spawn_list) {
 	dequeue_iterator_t iterator = dequeue_get_iterator(spawn_list);
 	while (dequeue_iterator_has_more(&iterator)) {
 		spawn_element_t *spawn_element = (spawn_element_t *)dequeue_iterator_get_next(&iterator);
-		spawn_element->id;
-		spawn_element->label;
 		msg_cat(&msg, "\t\"cl%d\" -> \"cl%d\";\n", spawning, spawn_element->id);
 		msg_cat(&msg, "\t\"cl%d\"[label=\"%s\"];\n", spawn_element->id, spawn_element->label);
 	}

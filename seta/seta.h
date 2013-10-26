@@ -34,12 +34,17 @@ typedef struct _seta_context_t {
 	int closure_id;
 	void *allocated_ancient_list;
 	void *spawn_list;
+	void *args;
 } seta_context_t;
 
 typedef void *seta_arg_name_list_t;
 
 
 void seta_start(void *);
+
+void * seta_alloc_args(long);
+
+void seta_free_args(seta_context_t *);
 
 seta_handle_spawn_next_t seta_prepare_spawn_next(void *, void *, seta_context_t *);
 

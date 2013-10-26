@@ -48,6 +48,7 @@ seta_cont_t seta_cont_create(void *arg, seta_handle_spawn_next_t hsn) {
 	seta_cont_t cont;
 	cont.closure = hsn.closure;
 	cont.arg = arg;
+	cont.n_arg = -1;
 	((closure_t *)hsn.closure)->join_counter += 1;
 	return cont;
 }
@@ -70,6 +71,15 @@ void stack_depth_computation(processor_t *proc, closure_t *closure, seta_context
 		pthread_mutex_unlock(&S1_list_mutex);
 	}
 	context->allocated_ancients += c1;
+}
+
+void * seta_alloc_args(long size) {
+    return malloc(size);
+}
+
+void seta_free_args(seta_context_t *context) {
+	//context->step_free_args = true;
+    free(context->args);
 }
 
 seta_handle_spawn_next_t seta_prepare_spawn_next(void *fun, void *args, seta_context_t *context) {
@@ -196,6 +206,9 @@ void scheduler_execute_closure(processor_t *local_proc, closure_t *closure) {
 		stop_computation = true;
 	}
 	seta_context_t context;
+	context.closure_id = -1;
+	context.allocated_ancient_list = NULL;
+	context.spawn_list = NULL;
 	if (info) {
 		context.arg_name_list = NULL;
 		context.allocated_ancients = closure->allocated_ancients;
@@ -207,13 +220,13 @@ void scheduler_execute_closure(processor_t *local_proc, closure_t *closure) {
 	context.is_last_thread = false;
 	context.n_local_proc = local_proc->id;
 	context.level = closure->level;
-	void (*user_fun)(void *, seta_context_t) = closure->fun;
-	void *ptr = closure->args;
+	void (*user_fun)(seta_context_t) = closure->fun;
+	context.args = closure->args;
 	if (info) {
 		closure_destroy_info(closure);
 	}
 	closure_destroy(closure);
-	user_fun(ptr, context);
+	user_fun(context);
 	if (info) {
 		msg_list_destroy((msg_list_t *)context.allocated_ancient_list);
 		spawn_list_t *spawn_list = (spawn_list_t *)context.spawn_list;
