@@ -13,8 +13,8 @@ logger_t logger;
 
 char *color[] = {"green", "red", "blue", "orange", "gray"};
 
-void graph_start() {
-	logger = logger_create("/Users/fabio/Desktop/seta/spawn_tree.dot");
+void graph_start(char *filename) {
+	logger = logger_create(filename);
 	msg_t msg = msg_new();
 	msg_cat(&msg, "digraph G {\n"
 			"\tnode [style=filled, fillcolor=white];\n"
@@ -49,7 +49,7 @@ void graph_send_argument(closure_t *closure, seta_context_t *context) {
                  context->closure_id, closure->id);
 }
 
-void graph_send_argument_enable(int enabled, char *label) {
+void graph_enable(int enabled, char *label) {
 	logger_write(logger, "\t\"cl%d\"[label=\"%s\"];\n", enabled, label);
 }
 

@@ -1,5 +1,22 @@
+Seta is
+
+principi teorici di base
+-come succede dietro le quinte
+-bound sulla memoria rispettati da cilk
+
+
+interaccia di seta
+
+contraints dell'interaccia di programmazione:
 - un thread puo' fare al massimo una spawn_next
-- prima di fare spawn e spawn_next, deallocare lo spazio dei parametri
-- la spawn_next se c'e' deve essere la prima spawn
+- prima di fare qualunque spawn e spawn_next, deallocare lo spazio dei parametri con 
+ seta_free_args per garantire i vincoli teorici
+
+info e grafico
+
+
+
+
+//- la spawn_next se c'e' deve essere la prima spawn
 - il programma finisce quando uno dei processori finisce di eseguire l'ultimo
 	thread della procedura root del dag e ogni altro processore non ha lavoro

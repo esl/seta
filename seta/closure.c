@@ -16,9 +16,13 @@ closure_t * closure_create() {
 	return closure;
 }
 
-closure_t * closure_create_info(closure_t *closure, char *fun_name) {
+closure_t * closure_create_info(closure_t *closure) {
 	closure->args_size = 0;
 	closure->allocated_ancients = 0;
+	return closure;
+}
+
+closure_t * closure_create_graph(closure_t *closure, char *fun_name) {
 	closure->allocated_ancient_list = NULL;
 	closure->arg_name_list = NULL;
 	msg_t name = msg_new_from_str(fun_name);
@@ -27,10 +31,13 @@ closure_t * closure_create_info(closure_t *closure, char *fun_name) {
 	return closure;
 }
 
-void closure_destroy_info(closure_t *closure) {
+void closure_destroy_graph(closure_t *closure) {
 	free(closure->name);
 	msg_list_destroy(closure->arg_name_list);
 	msg_list_destroy(closure->allocated_ancient_list);
+}
+
+void closure_destroy_info(closure_t *closure) {
 }
 
 void closure_destroy(closure_t *closure) {
@@ -55,8 +62,10 @@ void closure_unlock(closure_t *cl) {
 }
 
 int closure_space(closure_t *closure) {
-	return sizeof(closure_t) + sizeof(char) * ((int)strlen(closure->name) + 1) +
-		closure->args_size;
+//	return sizeof(closure_t) + sizeof(char) * ((int)strlen(closure->name) + 1) +
+//		closure->args_size;
+	return sizeof(closure_t) + closure->args_size;
+
 }
 
 void closure_space_cb(void *ptr, void *acc_in, int index) {

@@ -8,13 +8,13 @@
 
 #include "seta_internal.h"
 
-#define NPROC 4
+int n_proc = 4;
 
 bool stop_computation = false;
-
-processor_t *processors[NPROC];
-
-bool info = false;
+processor_t **processors;
+bool seta_info = false;
+bool seta_graph = false;
+char *graph_filename = NULL;
 
 //TODO handle race condition on S1
 int S1 = 0;
@@ -22,16 +22,24 @@ pthread_mutex_t S1_list_mutex = PTHREAD_MUTEX_INITIALIZER;
 msg_list_t *S1_list = NULL;
 
 void seta_enable_info() {
-	info = true;
+	seta_info = true;
 }
 
+void seta_enable_graph(char *filename) {
+	seta_graph = true;
+	graph_filename = filename;
+}
 
 seta_arg_name_list_t seta_arg_name_list_new() {
 	return (void *)msg_list_create();
 }
 
-void seta_arg_name_list_add(seta_arg_name_list_t ptr, char *str) {	
+void seta_arg_name_list_add(seta_arg_name_list_t ptr, const char *format, ...) {	
 	msg_list_t *arg_name_list = (msg_list_t *)ptr;
+	va_list arglist;
+	va_start(arglist, format);
+	char str[200];
+	vsprintf(str, format, arglist);
 	msg_list_append(arg_name_list, str);
 }
 
@@ -57,18 +65,22 @@ seta_cont_t seta_cont_create(void *arg, seta_handle_spawn_next_t hsn) {
 
 void stack_depth_computation(processor_t *proc, closure_t *closure, seta_context_t *context) {
 	msg_list_t *allocated_ancient_list = (msg_list_t *)context->allocated_ancient_list;
-	closure->allocated_ancient_list = msg_list_copy(allocated_ancient_list);
+	if (seta_graph) {
+		closure->allocated_ancient_list = msg_list_copy(allocated_ancient_list);
+		msg_list_append_int(allocated_ancient_list, closure->id);
+	}
 	closure->allocated_ancients = context->allocated_ancients;
-	msg_list_append_int(allocated_ancient_list, closure->id);
 	int c1 = closure_space(closure);
 	int c2 = context->allocated_ancients;
 	int S1_candidate = c1 + c2;
 	if (S1_candidate > S1) {
 		S1 = S1_candidate;
-		pthread_mutex_lock(&S1_list_mutex);
-		msg_list_destroy(S1_list);
-		S1_list = msg_list_copy(allocated_ancient_list);
-		pthread_mutex_unlock(&S1_list_mutex);
+		if (seta_graph) {
+			pthread_mutex_lock(&S1_list_mutex);
+			msg_list_destroy(S1_list);
+			S1_list = msg_list_copy(allocated_ancient_list);
+			pthread_mutex_unlock(&S1_list_mutex);			
+		}
 	}
 	context->allocated_ancients += c1;
 }
@@ -85,21 +97,26 @@ void seta_free_args(seta_context_t *context) {
 seta_handle_spawn_next_t seta_prepare_spawn_next(void *fun, void *args, seta_context_t *context) {
 	seta_handle_spawn_next_t hsn;
 	closure_t *closure = closure_create();
-	if (info) {
-		closure_create_info(closure, context->spawned);
+	if (seta_graph) {
+		closure_create_graph(closure, context->spawned);
+	}
+	if (seta_info) {
+		closure_create_info(closure);
 	}
 	closure_set_fun(closure, fun);
 	closure_set_args(closure, args);
 	closure->level = context->level;
 	closure->is_last_thread = context->is_last_thread;
 	context->is_last_thread = false;
-	if (info) {
+	closure->proc = context->n_local_proc;
+	if (seta_info) {
 		closure->args_size = context->args_size;
-		closure->proc = context->n_local_proc;
-		closure->arg_name_list = (msg_list_t *)context->arg_name_list;
-		context->arg_name_list = NULL;
 		processor_t *local_proc = processors[context->n_local_proc];
 		stack_depth_computation(local_proc, closure, context);
+	}
+	if (seta_graph) {
+		closure->arg_name_list = (msg_list_t *)context->arg_name_list;
+		context->arg_name_list = NULL;
 		graph_spawn_next(context->closure_id, closure->id);
 	}
 	hsn.closure = (void *)closure;
@@ -107,33 +124,50 @@ seta_handle_spawn_next_t seta_prepare_spawn_next(void *fun, void *args, seta_con
 }
 
 void seta_spawn_next(seta_handle_spawn_next_t hsn) {
-	if (info) {
-		processor_t *local_proc = processors[((closure_t *)hsn.closure)->proc];
-		processor_lock_stalled(local_proc);
-		processor_add_to_stalled(local_proc, hsn.closure);
-		processor_unlock_stalled(local_proc);
-		
-		if (info) {
-			scheduler_computate_processor_space(local_proc);
+	closure_t *closure = (closure_t *)hsn.closure;
+	processor_t *local_proc = processors[closure->proc];
+	if (closure->join_counter == 0) {
+		processor_lock_ready_queue(local_proc);
+		ready_queue_post_closure_to_level(local_proc->rq, closure, closure->level);
+		processor_unlock_ready_queue(local_proc);
+		if (seta_graph) {
+			msg_t label = msg_new();
+			closure_str(&label, closure);
+			graph_enable(closure->id, label);
+			msg_destroy(label);
 		}
+	}
+	else {
+		if (seta_info) {
+			processor_lock_stalled(local_proc);
+			processor_add_to_stalled(local_proc, hsn.closure);
+			processor_unlock_stalled(local_proc);
+		}
+	}
+	if (seta_info) {
+		scheduler_computate_processor_space(local_proc);
 	}
 }
 
 void seta_spawn(void *fun, void *args, seta_context_t *context) {
 	processor_t *local_proc = processors[context->n_local_proc];
 	closure_t *closure = closure_create();
-	if (info) {
-		closure_create_info(closure, context->spawned);
+	if (seta_info) {
+		closure_create_info(closure);
+	}
+	if (seta_graph) {
+		closure_create_graph(closure, context->spawned);
 	}
 	closure_set_fun(closure, fun);
 	closure_set_args(closure, args);
 	closure->level = context->level + 1;
-	if (info) {
+	if (seta_info) {
 		closure->args_size = context->args_size;
-		closure->arg_name_list = (msg_list_t *)context->arg_name_list;
-		context->arg_name_list = NULL;
 		stack_depth_computation(local_proc, closure, context);
-		// for the graph
+	}
+	if (seta_graph) {
+		closure->arg_name_list = (msg_list_t *)context->arg_name_list;
+		context->arg_name_list = NULL;		
 		spawn_list_t *spawn_list = (spawn_list_t *)context->spawn_list;
 		msg_t label = msg_new();
 		closure_str(&label, closure);
@@ -145,7 +179,7 @@ void seta_spawn(void *fun, void *args, seta_context_t *context) {
 	processor_lock_ready_queue(local_proc);
 	ready_queue_post_closure_to_level(local_proc->rq, closure, closure->level);
 	processor_unlock_ready_queue(local_proc);
-	if (info) {
+	if (seta_info) {
 		scheduler_computate_processor_space(local_proc);
 	}
 }
@@ -165,40 +199,46 @@ void seta_send_argument(seta_cont_t cont, void *src, int size, seta_context_t *c
 	}
 	closure_unlock(closure);
 	
-    if (info) {
+    if (seta_graph) {
         graph_send_argument(closure, context);
     }
     
 	if (to_post) {
-		if (info) {
+		if (seta_info) {
 			processor_t *target_proc = processors[closure->proc];
 			processor_lock_stalled(target_proc);
 			processor_remove_from_stalled(target_proc, closure);
 			processor_unlock_stalled(target_proc);
-			
-			// for the graph
+		}
+		if (seta_graph) {
 			msg_t label = msg_new();
 			closure_str(&label, closure);
-			//msg_cat(&label, "\n[%d]", closure_space(closure)); //
-			graph_send_argument_enable(closure->id, label);
+			//msg_cat(&label, "\n[%d]", closure_space(closure));//
+			graph_enable(closure->id, label);
 			msg_destroy(label);
 		}
 		processor_lock_ready_queue(local_proc);
 		ready_queue_post_closure_to_level(local_proc->rq, closure, closure->level);
 		processor_unlock_ready_queue(local_proc);
-		if (info) {
+		if (seta_info) {
 			scheduler_computate_processor_space(local_proc);
 		}
 	}
 }
 
-void seta_send_arg_name(seta_cont_t cont, char *arg_name) {
-	closure_t *closure = cont.closure;
-	if (closure->arg_name_list == NULL) {
-		printf("error: arg sent to no existing arg_name_list");
-		return;
+void seta_send_arg_name(seta_cont_t cont, const char *format, ...) {
+	if (seta_graph) {
+		closure_t *closure = cont.closure;
+		if (closure->arg_name_list == NULL) {
+			printf("error: arg sent to no existing arg_name_list\n");
+			return;
+		}
+		va_list arglist;
+		va_start(arglist, format);
+		char arg_name[200];
+		vsprintf(arg_name, format, arglist);
+		msg_list_set(closure->arg_name_list, cont.n_arg, arg_name);
 	}
-	msg_list_set(closure->arg_name_list, cont.n_arg, arg_name);
 }
 
 void scheduler_execute_closure(processor_t *local_proc, closure_t *closure) {
@@ -209,29 +249,36 @@ void scheduler_execute_closure(processor_t *local_proc, closure_t *closure) {
 	context.closure_id = -1;
 	context.allocated_ancient_list = NULL;
 	context.spawn_list = NULL;
-	if (info) {
+	if (seta_graph) {
 		context.arg_name_list = NULL;
-		context.allocated_ancients = closure->allocated_ancients;
-		context.allocated_ancient_list = (void *)msg_list_copy(closure->allocated_ancient_list);
 		context.closure_id = closure->id;
 		context.spawn_list = (void *)spawn_list_create();
 		graph_set_color(closure->id, local_proc->id);
+	}
+	if (seta_info) {
+		context.allocated_ancients = closure->allocated_ancients;
+	}
+	if (seta_info && seta_graph) {
+		context.allocated_ancient_list = (void *)msg_list_copy(closure->allocated_ancient_list);
 	}
 	context.is_last_thread = false;
 	context.n_local_proc = local_proc->id;
 	context.level = closure->level;
 	void (*user_fun)(seta_context_t) = closure->fun;
 	context.args = closure->args;
-	if (info) {
+	if (seta_info) {
 		closure_destroy_info(closure);
+	}
+	if (seta_graph) {
+		closure_destroy_graph(closure);
 	}
 	closure_destroy(closure);
 	user_fun(context);
-	if (info) {
+	if (seta_graph) {
 		msg_list_destroy((msg_list_t *)context.allocated_ancient_list);
 		spawn_list_t *spawn_list = (spawn_list_t *)context.spawn_list;
 		graph_spawns(context.closure_id, spawn_list);
-		spawn_list_destroy(spawn_list);
+		spawn_list_destroy(spawn_list);		
 	}
 }
 
@@ -255,7 +302,7 @@ void *scheduler_scheduling_loop(void *ptr) {
 			}
 			int n_rand_proc = 0;
 			do {
-				n_rand_proc = rand() % NPROC;
+				n_rand_proc = rand() % n_proc;
 			} while (n_rand_proc == n_local_proc);
             
             processor_t *remote_proc = processors[n_rand_proc];
@@ -274,34 +321,43 @@ void *scheduler_scheduling_loop(void *ptr) {
 
 void scheduler_print_results() { 
 	int total_space = 0;
-	for (int i=0; i<NPROC; i++) {
+	for (int i=0; i<n_proc; i++) {
 		printf("processor %d memory usage: %dB\n", i, processors[i]->total_space);
 		total_space += processors[i]->total_space;
 	}
 	printf("\nS1: %dB\n\n", S1);
 	printf("all processors memory usage (SP): %dB\n\n", total_space);
-	printf("%d(SP) <= %d(S1 * P)\n\n", total_space, S1 * NPROC);
+	printf("%d(SP) <= %d(S1 * P)\n\n", total_space, S1 * n_proc);
 }
 
-void seta_start(void *fun)
-{
+int seta_start(void *fun, int n) {
+	n_proc = n;
 	time_t t;
 	srand((unsigned)time(&t));
 	
-	if (info) {
-		graph_start();
+	if (seta_graph) {
+		graph_start(graph_filename);
 	}
 	
-	for (int i=0; i<NPROC; i++) {
+	if (!(n_proc > 0)) {
+		printf("the number of processors must be greater than 0\n");
+		return -1;
+	}
+	processors = (processor_t **)malloc(sizeof(processor_t *) * n_proc);
+	
+	for (int i=0; i<n_proc; i++) {
 		processors[i] = processor_create(i);
-		if (info) {
+		if (seta_info) {
 			processor_create_info(processors[i]);
 		}
 	}
 	
 	closure_t *closure = closure_create();
-	if (info) {
-		closure_create_info(closure, "entry");
+	if (seta_info) {
+		closure_create_info(closure);
+	}
+	if (seta_graph) {
+		closure_create_graph(closure, "entry");
 		closure->allocated_ancient_list = msg_list_create();
 	}
 	closure_set_fun(closure, fun);
@@ -310,31 +366,37 @@ void seta_start(void *fun)
 	ready_queue_post_closure_to_level(processors[0]->rq, closure, 0);
 	processor_unlock_ready_queue(processors[0]);
 	
-	if (info) {
+	if (seta_info) {
 		scheduler_computate_processor_space(processors[0]);
 	}
 	
-	for (int i=0; i<NPROC; i++) {
+	for (int i=0; i<n_proc; i++) {
 		processor_start(processors[i]);
 	}
-	for (int i=0; i<NPROC; i++) {
+	for (int i=0; i<n_proc; i++) {
 		processor_wait_4_me(processors[i]);
 	}
 	
-	if (info) {
+	if (seta_info) {
 		scheduler_print_results();
 	}
 	
-	for (int i=0; i<NPROC; i++) {
-		if (info) {
+	for (int i=0; i<n_proc; i++) {
+		if (seta_info) {
 			processor_destroy_info(processors[i]);
 		}		
 		processor_destroy(processors[i]);
 	}
 	
-	if (info) {
+	free(processors);
+	
+	if (seta_graph && seta_info) {
 		msg_list_foreach(&graph_color_S1_element, S1_list);
 		msg_list_destroy(S1_list);
+	}
+	if (seta_graph) {
 		graph_finish();
 	}
+	
+	return 0;
 }

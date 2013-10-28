@@ -40,7 +40,7 @@ typedef struct _seta_context_t {
 typedef void *seta_arg_name_list_t;
 
 
-void seta_start(void *);
+int seta_start(void *, int);
 
 void * seta_alloc_args(long);
 
@@ -56,8 +56,10 @@ void seta_send_argument(seta_cont_t, void *, int, seta_context_t *);
 
 void seta_enable_info();
 
+void seta_enable_graph(char *);
+
 seta_arg_name_list_t seta_arg_name_list_new();
 
-void seta_arg_name_list_add(seta_arg_name_list_t, char *);
+void seta_arg_name_list_add(seta_arg_name_list_t, const char *, ...);
 
-void seta_send_arg_name(seta_cont_t, char *);
+void seta_send_arg_name(seta_cont_t, const char *, ...);

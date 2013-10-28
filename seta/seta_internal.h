@@ -53,19 +53,21 @@ typedef struct _closure {
 	void *args;
 	bool is_last_thread;
 	pthread_mutex_t mutex;
+	int proc;
 	// info
 	char *name;
 	int args_size;
 	msg_list_t *arg_name_list;
 	int allocated_ancients;
 	msg_list_t *allocated_ancient_list;
-	int proc;
 	int id;
 } closure_t;
 closure_t * closure_create();
-void closure_destroy(closure_t *);
-closure_t * closure_create_info(closure_t *, char *);
+closure_t * closure_create_info(closure_t *);
+closure_t * closure_create_graph(closure_t *, char *);
+void closure_destroy_graph(closure_t *);
 void closure_destroy_info(closure_t *);
+void closure_destroy(closure_t *);
 void closure_set_fun(closure_t *, void *);
 void closure_set_args(closure_t *, void *);
 void closure_lock(closure_t *);
@@ -119,13 +121,13 @@ void logger_destroy(logger_t);
 void logger_write(logger_t logger, const char *format, ...);
 
 
-void graph_start();
+void graph_start(char *);
 void graph_finish();
 void graph_set_color(int, int);
 void graph_spawn_next(int, int);
 void graph_spawns(int, spawn_list_t *);
 void graph_send_argument(closure_t *, seta_context_t *);
-void graph_send_argument_enable(int, char *);
+void graph_enable(int, char *);
 void graph_color_S1_element(void *, int);
 
 

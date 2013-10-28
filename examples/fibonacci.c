@@ -1,7 +1,15 @@
+/*
+ *  fibonacci.c
+ *  seta
+ *
+ *  Created by Fabio Pricoco on 28/10/2013.
+ *  Copyright 2013 Erlang Solution Ltd. All rights reserved.
+ *
+ */
+
+
 #include "seta.h"
 #include <stdio.h>
-
-#define INFO true
 
 typedef struct _args_sum {
 	seta_cont_t k;
@@ -16,11 +24,6 @@ void sum(seta_context_t context) {
 	//---
 	//------ send_argument ------
 	int res = x + y;
-	if (INFO) {
-		char str[10] = "";
-		sprintf(str, "%d", res);
-		seta_send_arg_name(cont, str);
-	}
 	seta_send_argument(cont, &res, sizeof(res), &context);
 }
 
@@ -37,57 +40,24 @@ void fib(seta_context_t context) {
 	if (n <= 2) { 
 		//------ send_argument ------
 		int res = 1;
-		if (INFO) {
-			seta_send_arg_name(cont, "1");
-		}
 		seta_send_argument(cont, &res, sizeof(res), &context);
 	}
 	else {
 		//------ spawn_next_sum ------
         args_sum_t *args_sum = (args_sum_t *)seta_alloc_args(sizeof(args_sum_t));
 		args_sum->k = cont;
-		if (INFO) {
-			context.spawned = "sum";
-			context.args_size = sizeof(args_sum_t);
-			seta_arg_name_list_t *arg_name_list = seta_arg_name_list_new();
-			seta_arg_name_list_add(arg_name_list, "?");
-			seta_arg_name_list_add(arg_name_list, "?");
-			context.arg_name_list = arg_name_list;
-		}
 		seta_handle_spawn_next_t hsn = seta_prepare_spawn_next(&sum, args_sum, &context);
 		seta_cont_t cont_l = seta_cont_create(&args_sum->x, hsn);
 		seta_cont_t cont_r = seta_cont_create(&args_sum->y, hsn);
-		if (INFO) {
-			cont_l.n_arg = 0;
-			cont_r.n_arg = 1;
-		}
 		seta_spawn_next(hsn);
-				
+		
 		//------ spawn_fib ------
-		if (INFO) {
-			context.spawned = "fib_r";
-			context.args_size = sizeof(args_fib_t);
-			seta_arg_name_list_t *arg_name_list = seta_arg_name_list_new();
-			char str[20] = "";
-			sprintf(str, "%d", n - 1);
-			seta_arg_name_list_add(arg_name_list, str);
-			context.arg_name_list = arg_name_list;
-		}
 		args_fib_t *args_fib_r = (args_fib_t *)seta_alloc_args(sizeof(args_fib_t));
 		args_fib_r->k = cont_r;
 		args_fib_r->n = n - 1;
 		seta_spawn(&fib, args_fib_r, &context);
 		
 		//------ spawn_fib ------
-		if (INFO) {
-			context.spawned = "fib_l";
-			context.args_size = sizeof(args_fib_t);
-			seta_arg_name_list_t *arg_name_list = seta_arg_name_list_new();
-			char str[20] = "";
-			sprintf(str, "%d", n - 2);
-			seta_arg_name_list_add(arg_name_list, str);
-			context.arg_name_list = arg_name_list;
-		}
 		args_fib_t *args_fib_l = (args_fib_t *)seta_alloc_args(sizeof(args_fib_t));
 		args_fib_l->k = cont_l;
 		args_fib_l->n = n - 2;
@@ -111,28 +81,11 @@ void entry(seta_context_t context) {
 	//------ spawn_next_print ------
 	context.is_last_thread = true;
 	args_print_t *args_print = (args_print_t *)seta_alloc_args(sizeof(args_print_t));
-	if (INFO) {
-		context.spawned = "print";
-		context.args_size = sizeof(args_print_t);
-		seta_arg_name_list_t *arg_name_list = seta_arg_name_list_new();
-		seta_arg_name_list_add(arg_name_list, "?");
-		context.arg_name_list = arg_name_list;
-	}
 	seta_handle_spawn_next_t hsn = seta_prepare_spawn_next(&print, args_print, &context);
 	seta_cont_t cont = seta_cont_create(&args_print->n, hsn);
-	if (INFO) {
-		cont.n_arg = 0;
-	}
 	seta_spawn_next(hsn);
 	
 	//------ spawn_fib ------
-	if (INFO) {
-		context.spawned = "fib";
-		context.args_size = sizeof(args_fib_t);
-		seta_arg_name_list_t *arg_name_list = seta_arg_name_list_new();
-		seta_arg_name_list_add(arg_name_list, "10");
-		context.arg_name_list = arg_name_list;		
-	}
 	args_fib_t *args_fib = (args_fib_t *)seta_alloc_args(sizeof(args_fib_t));
 	args_fib->k = cont;
 	args_fib->n = 10;
@@ -143,10 +96,5 @@ void entry(seta_context_t context) {
 
 
 int main (int argc, const char * argv[]) {
-	if (INFO) {
-		seta_enable_info();
-	}
-	seta_start(&entry);
-    
-	return 0;
+	return seta_start(&entry, 4);
 }
