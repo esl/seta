@@ -1,22 +1,29 @@
-Seta is
+Seta is a runtime system for multithreaded parallel programming. It provides an interface
+to the user letting him to explicit the parallelism of a computation.
+The user need to split the code of the computation in a number of seta functions, then the
+scheduler will decide at any time which of the seta functions have to be computated and by which
+processor. A seta function during its execution can do a spawn next or a spawn of a new thread.
+Spawn and spawn next are used whenever the user wants that a part of computation is broken up and 
+let more processors to execute them at the same time. Thus, a function can do one or more spawn
+of new threads in charge of take on each one a part of the sub-computation and a spawn next 
+suppose to compute the continuing part of the computation. The spawned next thread can not start
+to execute immediately but will need to wait the results of the computation carry on by the two
+spawned thread. The spawned threads will pass the results of their computations through the
+continuations.
 
-principi teorici di base
--come succede dietro le quinte
--bound sulla memoria rispettati da cilk
+The scheduler provides guarantees about the maximum total memory allocation of all the processors,
+indeed, it will be bounded by T1*N, where T1 is the minimum allocation space needed in an
+execution of the program on a 1-core processor and N is the number of processors.
 
 
-interaccia di seta
-
-contraints dell'interaccia di programmazione:
-- un thread puo' fare al massimo una spawn_next
-- prima di fare qualunque spawn e spawn_next, deallocare lo spazio dei parametri con 
- seta_free_args per garantire i vincoli teorici
-
-info e grafico
-
+some constraints are imposed on the using of the library. They are needed for make the teory
+behind seta working.
+- only one spawn next can appear in seta thread.
+- in each thread the user needs to deallocate (using the library function seta_free_args) 
+the space of parameters allocated for the thread before doing any spawn or spawn next. This
+is necessary for ensuring that the theoric constraints about memory allocation are met.
 
 
 
-//- la spawn_next se c'e' deve essere la prima spawn
-- il programma finisce quando uno dei processori finisce di eseguire l'ultimo
-	thread della procedura root del dag e ogni altro processore non ha lavoro
+The program ends up as soon as one of the processor complete to execute the last seta thread of
+the root procedure of the dag and any other processors does not have more work to do.

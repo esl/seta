@@ -62,5 +62,4 @@ int main (int argc, const char * argv[]) {
 		printf("execute: ./basic n_threads\n");
 		return -1;
 	}
-
 }

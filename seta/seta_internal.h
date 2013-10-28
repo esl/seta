@@ -51,6 +51,7 @@ typedef struct _closure {
 	int join_counter;
 	void *fun;
 	void *args;
+	bool is_first_thread;
 	bool is_last_thread;
 	pthread_mutex_t mutex;
 	int proc;

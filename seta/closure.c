@@ -11,6 +11,7 @@ closure_t * closure_create() {
 	closure->level = 0;
 	closure->join_counter = 0;
 	closure->args = NULL;
+	closure->is_first_thread = false;
 	closure->is_last_thread = false;
 	pthread_mutex_init(&closure->mutex, NULL);
 	return closure;

@@ -90,11 +90,24 @@ void * seta_alloc_args(long size) {
 }
 
 void seta_free_args(seta_context_t *context) {
-	//context->step_free_args = true;
+	context->free_args_done = true;
     free(context->args);
 }
 
 seta_handle_spawn_next_t seta_prepare_spawn_next(void *fun, void *args, seta_context_t *context) {
+	if (!context->free_args_done) {
+		printf("error: you tried to spawn a seta thread before to free the arguments\n");
+		exit(-1);
+	}
+	if (context->spawn_next_done) {
+		printf("error: you tried doing a second spawn next\n");
+		exit(-1);
+	}
+	else {
+		context->spawn_next_done = true;
+	}
+
+
 	seta_handle_spawn_next_t hsn;
 	closure_t *closure = closure_create();
 	if (seta_graph) {
@@ -150,6 +163,10 @@ void seta_spawn_next(seta_handle_spawn_next_t hsn) {
 }
 
 void seta_spawn(void *fun, void *args, seta_context_t *context) {
+	if (!context->free_args_done) {
+		printf("error: you tried to spawn a seta thread before to free the arguments\n");
+		exit(-1);
+	}
 	processor_t *local_proc = processors[context->n_local_proc];
 	closure_t *closure = closure_create();
 	if (seta_info) {
@@ -246,6 +263,13 @@ void scheduler_execute_closure(processor_t *local_proc, closure_t *closure) {
 		stop_computation = true;
 	}
 	seta_context_t context;
+	if (closure->is_first_thread) {
+		context.free_args_done = true;
+	}
+	else {
+		context.free_args_done = false;
+	}
+	context.spawn_next_done = false;
 	context.closure_id = -1;
 	context.allocated_ancient_list = NULL;
 	context.spawn_list = NULL;
@@ -361,6 +385,7 @@ int seta_start(void *fun, int n) {
 		closure->allocated_ancient_list = msg_list_create();
 	}
 	closure_set_fun(closure, fun);
+	closure->is_first_thread = true;
 	
 	processor_lock_ready_queue(processors[0]);
 	ready_queue_post_closure_to_level(processors[0]->rq, closure, 0);

@@ -26,6 +26,8 @@ typedef struct _seta_context_t {
 	int level;
 	int n_local_proc;
 	bool is_last_thread;
+	bool spawn_next_done;
+	bool free_args_done;
 	// info
 	char *spawned;
 	int args_size;
