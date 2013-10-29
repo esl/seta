@@ -17,7 +17,7 @@ typedef struct _args_child {
 	int n;
 } args_child_t;
 void child(seta_context_t context) {
-	args_child_t *local_args = (args_child_t *)context.args;
+	args_child_t *local_args = (args_child_t *)seta_get_args(&context);
 	seta_cont_t cont = local_args->k;
 	int n = local_args->n;
 	seta_free_args(&context);
@@ -29,7 +29,7 @@ typedef struct _args_print {
 	int n;
 } args_print_t;
 void print(seta_context_t context) {
-	args_print_t *local_args = (args_print_t *)context.args;
+	args_print_t *local_args = (args_print_t *)seta_get_args(&context);
 	int res = local_args->n;
 	seta_free_args(&context);
 	//---
@@ -41,7 +41,7 @@ void entry(seta_context_t context) {
 	context.is_last_thread = true;
 	args_print_t *args_print = (args_print_t *)seta_alloc_args(sizeof(args_print_t));
 	seta_handle_spawn_next_t hsn = seta_prepare_spawn_next(&print, args_print, &context);
-	seta_cont_t cont = seta_cont_create(&args_print->n, hsn);
+	seta_cont_t cont = seta_create_cont(&args_print->n, hsn);
 	seta_spawn_next(hsn);
 	
 	//------ spawn_child ------

@@ -1,0 +1,7 @@
+/*!
+\page using Using Seta
+
+This section describes the user interface provided by Seta which let the user to create multi-threaded parallels programs runnable on the implemented runtime system. In particular it lists and explains the library functions available to the user, and moreover indicates some constraints on what is acceptable for the user to do in order to let the scheduler work properly and meet the theory which is based on. 
+
+
+*/

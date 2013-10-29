@@ -8,7 +8,7 @@ typedef struct _args_sum {
 	int x, y;
 } args_sum_t;
 void sum(seta_context_t context) {
-	args_sum_t *local_args = (args_sum_t *)context.args;
+	args_sum_t *local_args = (args_sum_t *)seta_get_args(&context);
 	seta_cont_t cont = local_args->k;
 	int x = local_args->x;
 	int y = local_args->y;
@@ -27,7 +27,7 @@ typedef struct _args_fib {
 	int n;
 } args_fib_t;
 void fib(seta_context_t context) {
-	args_fib_t *local_args = (args_fib_t *)context.args;
+	args_fib_t *local_args = (args_fib_t *)seta_get_args(&context);
 	seta_cont_t cont = local_args->k;
 	int n = local_args->n;
 	seta_free_args(&context);
@@ -53,8 +53,8 @@ void fib(seta_context_t context) {
 			context.arg_name_list = arg_name_list;
 		}
 		seta_handle_spawn_next_t hsn = seta_prepare_spawn_next(&sum, args_sum, &context);
-		seta_cont_t cont_l = seta_cont_create(&args_sum->x, hsn);
-		seta_cont_t cont_r = seta_cont_create(&args_sum->y, hsn);
+		seta_cont_t cont_l = seta_create_cont(&args_sum->x, hsn);
+		seta_cont_t cont_r = seta_create_cont(&args_sum->y, hsn);
 		if (INFO_GRAPH) {
 			cont_l.n_arg = 0;
 			cont_r.n_arg = 1;
@@ -94,7 +94,7 @@ typedef struct _args_print {
 	int n;
 } args_print_t;
 void print(seta_context_t context) {
-	args_print_t *local_args = (args_print_t *)context.args;
+	args_print_t *local_args = (args_print_t *)seta_get_args(&context);
 	int res = local_args->n;
 	seta_free_args(&context);
 	//---
@@ -113,7 +113,7 @@ void entry(seta_context_t context) {
 		context.arg_name_list = arg_name_list;
 	}
 	seta_handle_spawn_next_t hsn = seta_prepare_spawn_next(&print, args_print, &context);
-	seta_cont_t cont = seta_cont_create(&args_print->n, hsn);
+	seta_cont_t cont = seta_create_cont(&args_print->n, hsn);
 	if (INFO_GRAPH) {
 		cont.n_arg = 0;
 	}

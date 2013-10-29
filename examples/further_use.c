@@ -18,7 +18,7 @@ typedef struct _args_print {
 	int val;
 } args_print_t;
 void print(seta_context_t context) {
-	args_print_t *local_args = (args_print_t *)context.args;
+	args_print_t *local_args = (args_print_t *)seta_get_args(&context);
 	int val = local_args->val;
 	seta_free_args(&context);
 	//---
@@ -30,7 +30,7 @@ typedef struct _args_continuing {
 	int n;
 } args_continuing_t;
 void continuing(seta_context_t context) {
-	args_continuing_t *local_args = (args_continuing_t *)context.args;
+	args_continuing_t *local_args = (args_continuing_t *)seta_get_args(&context);
 	int init_n = local_args->init_n;
 	int n = local_args->n;
 	seta_free_args(&context);
