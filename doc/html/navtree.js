@@ -1,12 +1,15 @@
 var NAVTREE =
 [
   [ "Seta", "index.html", [
-    [ "Seta documentation", "index.html", null ],
+    [ "Main Page", "index.html", [
+      [ "What is Seta", "index.html#what", null ],
+      [ "Why Seta is interesting", "index.html#why", null ]
+    ] ],
     [ "Theory on Seta", "theory.html", [
       [ "A model of multithreaded computation", "theory.html#model", null ],
       [ "How Seta work", "theory.html#howwork", null ]
     ] ],
-    [ "Using Seta", "using.html", null ],
+    [ "How to use it", "using.html", null ],
     [ "Data Structures", null, [
       [ "Data Structures", "annotated.html", "annotated" ],
       [ "Data Structure Index", "classes.html", null ],
@@ -30,7 +33,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"seta__internal_8h.html#a87653faa155525e36b58539a759d291e"
+"seta__internal_8h.html#a85a1c56d77bf5f7f947119e26c65fa81"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -114,13 +114,14 @@ A model of multithreaded computation</h1>
 <p>The total execution time of a multithreaded computation on a parallel computer with P processors is constrained by two parameters of the computations: the work and the critical path. The work, denoted $T_1$, is the time used by a one-processor execution of the computation, which corresponds to the sum of the execution times of all the threads. The critical path length, denoted $T_$, is the total amount of time required by an ininite-processor execution, which corresponds to the largest sum of thread execution times along any path in the dag. Consequently the associated path will be a path from the first to the last thread of the dag's root.</p>
 <h1><a class="anchor" id="howwork"></a>
 How Seta work</h1>
-<p>Each alive thread (executing, ready or stalled) has an associated closure allocated in the heap of a processor. A closure consists of a pointer to the C function that is the thread, a set of arguments as a pointer to a piece of memory of any size allocated and freed by the user at the time of a spawn request, and a join counter indicating the number of missing arguments that need to be supplied before the thread is ready to run. A closure is ready if it has obtained all of its arguments, and it is waiting if some arguments are missing. To run a ready closure, the Sedano scheduler invokes the thread as a procedure using the set of arguments and a context as its arguments. The closure is allocated from a simple runtime heap when it is created, and it is returned to the heap when the thread teminates. The Sedano library supports a data type called continuation which is </p>
+<p>Each alive thread (executing, ready or stalled) has an associated closure allocated in the heap of a processor. A closure consists of a pointer to the C function that is the thread, a set of arguments as a pointer to a piece of memory of any size allocated and freed by the user at the time of a spawn request, and a join counter indicating the number of missing arguments that need to be supplied before the thread is ready to run. A closure is ready if it has obtained all of its arguments, and it is waiting if some arguments are missing. To run a ready closure, the Seta scheduler invokes the thread as a procedure using the set of arguments and a context as its arguments. The closure is allocated from a simple runtime heap when it is created, and it is returned to the heap when the thread teminates. The Seta library supports a data type called continuation which is</p>
+<p>The program ends up as soon as one of the processor complete to execute the last seta thread of the root procedure of the dag and any other processors does not have more work to do. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Oct 29 2013 19:38:06 for Seta by
+    <li class="footer">Generated on Wed Oct 30 2013 18:25:38 for Seta by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.5"/>
-<title>Seta: Using Seta</title>
+<title>Seta: How to use it</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,16 +96,38 @@ $(document).ready(function(){initNavTree('using.html','');});
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Using Seta </div>  </div>
+<div class="title">How to use it </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This section describes the user interface provided by Seta which let the user to create multi-threaded parallels programs runnable on the implemented runtime system. In particular it lists and explains the library functions available to the user, and moreover indicates some constraints on what is acceptable for the user to do in order to let the scheduler work properly and meet the theory which is based on. Each alive thread (executing, ready or stalled) has an associated closure allocated in the heap of a processor. A closure consists of a pointer to the C function that is the thread, a set of arguments as a pointer to a piece of memory of any size allocated and freed by the user at the time of a spawn request, and a join counter indicating the number of missing arguments that need to be supplied before the thread is ready to run. A closure is ready if it has obtained all of its arguments, and it is waiting if some arguments are missing. To run a ready closure, the Sedano scheduler invokes the thread as a procedure using the set of arguments and a context as its arguments. The closure is allocated from a simple runtime heap when it is created, and it is returned to the heap when the thread teminates. The Sedano library supports a data type called continuation which is </p>
+<div class="textblock"><p>This section describes the user interface provided by Seta which let the user to create multi-threaded parallels programs runnable on the implemented runtime system. It lists and explains the library functions available to the user, and then indicates some constraints on what is acceptable for the user to do in order to let the scheduler work properly and meet the theory which is based on.<br/>
+A user who wants to submit a computation to the Seta's scheduler needs to explicit the parallelism of the computation itself, which means that he needs to identify pieces of subcomputations executable independently and in parallel on more than one processor. Each of them will coincide with a distinct C function. The scheduler will decide at any time which of them have to be executed and by which processor according to the constraints imposed by the user. Every time a function is called it means that an instance of that subcomputation is executing on one of the processors. Define this instance a Seta thread. The user needs further to define the relations and the data exchanged between the Seta threads. The relations are defined by calling to the library interface. About the data exchanged the user have to declare a C structure for each function so that each thread that need to send data to another thread does allocate an instance of the structure, fill it and use again the functions provided by the Seta user interface to send it.<br/>
+The basic library functions available to the user to create a Seta program working on the scheduler are the following: </p>
+<ul>
+<li>seta_alloc_args </li>
+<li>seta_get_args </li>
+<li>seta_free_args </li>
+<li>seta_prepare_spawn_next </li>
+<li>seta_create_cont </li>
+<li>seta_spawn_next </li>
+<li>seta_spawn </li>
+<li>seta_send_argument</li>
+</ul>
+<p>some constraints are imposed on the using of the library. They are needed for make the teory behind seta working. </p>
+<ul>
+<li>only one spawn next can appear in seta thread. </li>
+<li>in each thread the user needs to deallocate (using the library function seta_free_args) the space of parameters allocated for the thread before doing any spawn or spawn next. This is necessary for ensuring that the theoric constraints about memory allocation are met.</li>
+</ul>
+<p>The program ends up as soon as one of the processor complete to execute the last seta thread of the root procedure of the dag and any other processors does not have more work to do.</p>
+<p>graph</p>
+<p>info</p>
+<p>Seta, if desired, evaluates the total usage on memory on all the processors and the value of S1 of the computation, so as to verify the guarantee on memory bound.</p>
+<p>Furthermore, if enabled, Seta generates a graph depicting the spawn tree of the computation and optionally highlighting the sequence of nodes in the graph which have led to the evaluation of S1. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue Oct 29 2013 19:38:06 for Seta by
+    <li class="footer">Generated on Wed Oct 30 2013 18:25:38 for Seta by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

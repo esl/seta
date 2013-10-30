@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['seta_20documentation',['Seta documentation',['../index.html',1,'']]],
   ['s1',['S1',['../scheduler_8c.html#a221a8165d63062901375ab4827d32cfc',1,'scheduler.c']]],
   ['s1_5flist',['S1_list',['../scheduler_8c.html#a6a7bb92453359b1ea38d1dab59f0eb6c',1,'scheduler.c']]],
   ['s1_5flist_5fmutex',['S1_list_mutex',['../scheduler_8c.html#ae3ea2c055acd8e06d34a06d44e7d52f6',1,'scheduler.c']]],

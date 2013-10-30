@@ -1,7 +1,35 @@
 /*!
-\page using Using Seta
 
-This section describes the user interface provided by Seta which let the user to create multi-threaded parallels programs runnable on the implemented runtime system. In particular it lists and explains the library functions available to the user, and moreover indicates some constraints on what is acceptable for the user to do in order to let the scheduler work properly and meet the theory which is based on. 
+\page using How to use it
+This section describes the user interface provided by Seta which let the user to create multi-threaded parallels programs runnable on the implemented runtime system. It lists and explains the library functions available to the user, and then indicates some constraints on what is acceptable for the user to do in order to let the scheduler work properly and meet the theory which is based on.\n
+A user who wants to submit a computation to the Seta's scheduler needs to explicit the parallelism of the computation itself, which means that he needs to identify pieces of subcomputations executable independently and in parallel on more than one processor. Each of them will coincide with a distinct C function. The scheduler will decide at any time which of them have to be executed and by which processor according to the constraints imposed by the user. Every time a function is called it means that an instance of that subcomputation is executing on one of the processors. Define this instance a Seta thread. The user needs further to define the relations and the data exchanged between the Seta threads. The relations are defined by calling to the library interface. About the data exchanged the user have to declare a C structure for each function so that each thread that need to send data to another thread does allocate an instance of the structure, fill it and use again the functions provided by the Seta user interface to send it.\n
+The basic library functions available to the user to create a Seta program working on the scheduler are the following:
+\li seta_alloc_args
+\li seta_get_args
+\li seta_free_args
+\li seta_prepare_spawn_next
+\li seta_create_cont
+\li seta_spawn_next
+\li seta_spawn
+\li seta_send_argument
 
+
+
+
+some constraints are imposed on the using of the library. They are needed for make the teory behind seta working.
+\li only one spawn next can appear in seta thread.
+\li in each thread the user needs to deallocate (using the library function seta_free_args) the space of parameters allocated for the thread before doing any spawn or spawn next. This is necessary for ensuring that the theoric constraints about memory allocation are met.
+
+
+The program ends up as soon as one of the processor complete to execute the last seta thread of the root procedure of the dag and any other processors does not have more work to do.
+
+graph
+
+info
+
+
+Seta, if desired, evaluates the total usage on memory on all the processors and the value of S1 of the computation, so as to verify the guarantee on memory bound.
+
+Furthermore, if enabled, Seta generates a graph depicting the spawn tree of the computation and optionally highlighting the sequence of nodes in the graph which have led to the evaluation of S1.
 
 */

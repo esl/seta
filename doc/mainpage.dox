@@ -1,29 +1,18 @@
 /*!
 
-\mainpage Seta documentation
+\mainpage Main Page
 
-Seta is mainly an efficient runtime system for multithreaded parallel programming that achieves space, time and communication bounds all within a constant factor of optimal. Regarding the space bound, the theory which Seta is based on provably states that using such a scheduler the maximum memory allocation on N processors executing a "fully strict" computation is guaranteed to be bounded by T1*N, where T1 is the minimum allocation space needed in an 1-thread execution of the computation.
+\section what What is Seta
+Seta is a work-stealing scheduler for multithreaded parallel programming that achieves space, time and communication bounds all within a constant factor of optimal.
+Seta is also a programming environment, which is a set of library functions available to the user plus a set of rules imposing how the user needs to structure his program in order to make it runnable by the scheduler.\n
+Finally Seta is an evaluator for the scheduler. It is able to measure the memory allocated at any step by the scheduler so as to prove the constraints imposed by the theory which Seta is based on, and can further produces a nice graph representing the execution of the computation and an important property of the computation itself.\n
 
-Seta provides a programming environment, which is a set of library functions available to the user and a way of structuring the user program that the user needs to comply with. Such a programming environment lets the the user to explicit the parallelism of a computation. The user have to split the computation in a number of functions, then the scheduler will decide at any time which of the seta functions have to be computed and by which processor. A function during its execution can do a spawn next or a spawn of a new thread. Spawn and spawn next are used whenever the user wants that a part of computation is broken up and let more processors to execute them at the same time. Thus, a function can do one or more spawn of new threads in charge of take on each one a part of the sub-computation and a spawn next suppose to compute the continuing part of the computation. The spawned next thread can not start
-to execute immediately but will need to wait the results of the computation carry on by the two
-spawned thread. The spawned threads will pass the results of their computations through the
-continuations.
-
-The scheduler provides guarantees about the maximum total memory allocation of all the processors,
-indeed, it will be bounded by T1*N, where T1 is the minimum allocation space needed in an
-execution of the program on a 1-core processor and N is the number of processors.
-
-
-some constraints are imposed on the using of the library. They are needed for make the teory
-behind seta working.
-- only one spawn next can appear in seta thread.
-- in each thread the user needs to deallocate (using the library function seta_free_args) 
-the space of parameters allocated for the thread before doing any spawn or spawn next. This
-is necessary for ensuring that the theoric constraints about memory allocation are met.
+\section why Why Seta is interesting
+Nowadays an increasingly number of concurrent and parallel applications requires to be executed on multithreaded systems. While most of the schedulers of this multithreaded systems seems to perform well in practice, none provide users with a guarantee about performance. Diversely the presented scheduler is provably efficient also in theory. Regarding the memory allocation, the theory which Seta is based on[1] provably states that the Seta's scheduler guarantees the following upper bound: the maximum total memory allocated on N processors executing a "fully strict" computation is guaranteed to be bounded by T1*N, where T1 is the minimum allocation space needed in an 1-thread execution of the computation.
 
 
 
-The program ends up as soon as one of the processor complete to execute the last seta thread of
-the root procedure of the dag and any other processors does not have more work to do.
 
+\n\n\n\n
+[1] Robert D. Blumofe, Christopher F.Joerg, Brandley C. Kuszmaul, Charles E. Leiserson, Keith H.Randall, Yuli Zhou. Cilk: an efficient multithreaded runtime system.
 */

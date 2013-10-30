@@ -75,8 +75,8 @@ var NAVTREEINDEX0 =
 "globals_0x70.html":[4,1,0,6],
 "globals_0x72.html":[4,1,0,7],
 "globals_0x73.html":[4,1,0,8],
-"globals_func.html":[4,1,1,0],
 "globals_func.html":[4,1,1],
+"globals_func.html":[4,1,1,0],
 "globals_func_0x64.html":[4,1,1,1],
 "globals_func_0x67.html":[4,1,1,2],
 "globals_func_0x6c.html":[4,1,1,3],
@@ -100,6 +100,8 @@ var NAVTREEINDEX0 =
 "graph__dot_8c_source.html":[4,0,3],
 "index.html":[],
 "index.html":[0],
+"index.html#what":[0,0],
+"index.html#why":[0,1],
 "lists_8c.html":[4,0,4],
 "lists_8c.html#a0076998d7000d8be06c1060a8244002b":[4,0,4,0],
 "lists_8c.html#a0d91801f9841e36475e231add7f6024a":[4,0,4,8],
@@ -247,7 +249,5 @@ var NAVTREEINDEX0 =
 "seta__internal_8h.html#a81619cadba2ae79258ea38fca97a3980":[4,0,11,70],
 "seta__internal_8h.html#a817db925121c4a0992fb91b6ec6399b1":[4,0,11,30],
 "seta__internal_8h.html#a81dbd327b3e21a98d74fb012cdcbc8d0":[4,0,11,45],
-"seta__internal_8h.html#a84db0bac556321ab9ee417477962bf7f":[4,0,11,18],
-"seta__internal_8h.html#a85a1c56d77bf5f7f947119e26c65fa81":[4,0,11,8],
-"seta__internal_8h.html#a871c570afe83093829faa87b18ec91e9":[4,0,11,11]
+"seta__internal_8h.html#a84db0bac556321ab9ee417477962bf7f":[4,0,11,18]
 };
