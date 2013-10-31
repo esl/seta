@@ -262,6 +262,10 @@ void seta_send_arg_name(seta_cont_t cont, const char *format, ...) {
 	}
 }
 
+void seta_last_thread(seta_context_t *context) {
+	context->is_last_thread = true;
+}
+
 void scheduler_execute_closure(processor_t *local_proc, closure_t *closure) {
 	if (closure->is_last_thread) {
 		stop_computation = true;
@@ -319,10 +323,6 @@ void *scheduler_scheduling_loop(void *ptr) {
 		processor_unlock_ready_queue(local_proc);
 		if (cl != NULL) {
 			scheduler_execute_closure(local_proc, cl);
-			
-			if (stop_computation) {
-				break;
-			}
 		}
 		else {
 			if (stop_computation) {

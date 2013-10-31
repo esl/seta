@@ -157,6 +157,9 @@ Functions</h2></td></tr>
 <tr class="memitem:afd60830ce08cee42c3ec2eaf8aad1706"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="scheduler_8c.html#afd60830ce08cee42c3ec2eaf8aad1706">seta_send_arg_name</a> (<a class="el" href="structseta__cont__t.html">seta_cont_t</a> cont, const char *format,...)</td></tr>
 <tr class="memdesc:afd60830ce08cee42c3ec2eaf8aad1706"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends an argument name to the thread pointed by the continuation. It is the analogous of send_message, but only needed for the creation of the graph.  <a href="#afd60830ce08cee42c3ec2eaf8aad1706">More...</a><br/></td></tr>
 <tr class="separator:afd60830ce08cee42c3ec2eaf8aad1706"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a124adb5f6efdde2e749ee58bf14c95b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="scheduler_8c.html#a124adb5f6efdde2e749ee58bf14c95b6">seta_last_thread</a> (<a class="el" href="structseta__context__t.html">seta_context_t</a> *context)</td></tr>
+<tr class="memdesc:a124adb5f6efdde2e749ee58bf14c95b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the next spawned thread to be the last to be executed from the scheduler.  <a href="#a124adb5f6efdde2e749ee58bf14c95b6">More...</a><br/></td></tr>
+<tr class="separator:a124adb5f6efdde2e749ee58bf14c95b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abf660e08c10e0a3bf53a5d8ceb7a4e17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="scheduler_8c.html#abf660e08c10e0a3bf53a5d8ceb7a4e17">scheduler_execute_closure</a> (<a class="el" href="structprocessor__t.html">processor_t</a> *local_proc, <a class="el" href="structclosure__t.html">closure_t</a> *closure)</td></tr>
 <tr class="separator:abf660e08c10e0a3bf53a5d8ceb7a4e17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aecb3a8227c861571cd2f3f326a5ad15b"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="scheduler_8c.html#aecb3a8227c861571cd2f3f326a5ad15b">scheduler_scheduling_loop</a> (void *ptr)</td></tr>
@@ -231,7 +234,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="scheduler_8c_source.html#l00265">265</a> of file <a class="el" href="scheduler_8c_source.html">scheduler.c</a>.</p>
+<p>Definition at line <a class="el" href="scheduler_8c_source.html#l00269">269</a> of file <a class="el" href="scheduler_8c_source.html">scheduler.c</a>.</p>
 
 </div>
 </div>
@@ -266,7 +269,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Definition at line <a class="el" href="scheduler_8c_source.html#l00313">313</a> of file <a class="el" href="scheduler_8c_source.html">scheduler.c</a>.</p>
+<p>Definition at line <a class="el" href="scheduler_8c_source.html#l00317">317</a> of file <a class="el" href="scheduler_8c_source.html">scheduler.c</a>.</p>
 
 </div>
 </div>
@@ -494,6 +497,32 @@ Variables</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>Pointer to the argument space for the current thread. </dd></dl>
 
 <p>Definition at line <a class="el" href="scheduler_8c_source.html#l00092">92</a> of file <a class="el" href="scheduler_8c_source.html">scheduler.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a124adb5f6efdde2e749ee58bf14c95b6"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void seta_last_thread </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structseta__context__t.html">seta_context_t</a> *&#160;</td>
+          <td class="paramname"><em>context</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the next spawned thread to be the last to be executed from the scheduler. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td>Context of the current thread. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="scheduler_8c_source.html#l00265">265</a> of file <a class="el" href="scheduler_8c_source.html">scheduler.c</a>.</p>
 
 </div>
 </div>
@@ -735,7 +764,7 @@ Variables</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fun</td><td>the entry thread. </td></tr>
-    <tr><td class="paramname">n</td><td>the multiplicity of the scheduler. </td></tr>
+    <tr><td class="paramname">n</td><td>the number of processors to start. </td></tr>
   </table>
   </dd>
 </dl>
@@ -912,7 +941,7 @@ Variables</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="scheduler_8c.html">scheduler.c</a></li>
-    <li class="footer">Generated on Wed Oct 30 2013 18:25:38 for Seta by
+    <li class="footer">Generated on Thu Oct 31 2013 15:51:59 for Seta by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>

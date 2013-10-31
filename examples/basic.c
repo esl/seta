@@ -38,8 +38,8 @@ void print(seta_context_t context) {
 
 void entry(seta_context_t context) {
 	//------ spawn_next_print ------
-	context.is_last_thread = true;
 	args_print_t *args_print = (args_print_t *)seta_alloc_args(sizeof(args_print_t));
+	seta_last_thread(&context);
 	seta_handle_spawn_next_t hsn = seta_prepare_spawn_next(&print, args_print, &context);
 	seta_cont_t cont = seta_create_cont(&args_print->n, hsn);
 	seta_spawn_next(hsn);

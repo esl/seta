@@ -59,7 +59,7 @@ void continuing(seta_context_t context) {
 			context.arg_name_list = arg_name_list;
 		}	
 		//------ spawn_next_print ------
-		context.is_last_thread = true;
+		seta_last_thread(&context);
 		args_print_t *args_print = (args_print_t *)seta_alloc_args(sizeof(args_print_t));
 		args_print->val = init_n;
 		seta_handle_spawn_next_t hsn = seta_prepare_spawn_next(&print, args_print, &context);

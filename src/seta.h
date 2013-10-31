@@ -61,7 +61,7 @@ seta_cont_t seta_create_cont(void *, seta_handle_spawn_next_t);
 /*! \fn int seta_start(void *fun, int n)
 	\brief Starts the scheduler.
 	\param fun the entry thread.
-	\param n the multiplicity of the scheduler.
+	\param n the number of processors to start.
 	\return 0 if the scheduler is correctly started, -1 if some error occurred.
 */
 int seta_start(void *, int);
@@ -164,3 +164,8 @@ void seta_send_arg_name(seta_cont_t, const char *, ...);
 */
 void * seta_get_args(seta_context_t *);
 
+/*! \fn void seta_last_thread(seta_context_t *context)
+	\brief Set the next spawned thread to be the last to be executed from the scheduler.
+	\param context Context of the current thread.
+ */
+void seta_last_thread(seta_context_t *);

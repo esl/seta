@@ -12,6 +12,7 @@ var scheduler_8c =
     [ "seta_enable_info", "scheduler_8c.html#af011c1245c40bf916beac3a882b06eba", null ],
     [ "seta_free_args", "scheduler_8c.html#aae9829351dcaa50a1d4ed164b17769e1", null ],
     [ "seta_get_args", "scheduler_8c.html#ab66f1fba98822c93ed973a72d87be6ae", null ],
+    [ "seta_last_thread", "scheduler_8c.html#a124adb5f6efdde2e749ee58bf14c95b6", null ],
     [ "seta_prepare_spawn_next", "scheduler_8c.html#a44b7720e89e2048d587f3004baa89a68", null ],
     [ "seta_send_arg_name", "scheduler_8c.html#afd60830ce08cee42c3ec2eaf8aad1706", null ],
     [ "seta_send_argument", "scheduler_8c.html#a3018c6f6ea351059ae8b2b573692fde0", null ],

@@ -12,6 +12,7 @@ var seta_8h =
     [ "seta_enable_info", "seta_8h.html#af011c1245c40bf916beac3a882b06eba", null ],
     [ "seta_free_args", "seta_8h.html#a15f12fbb93fedb49a027c05eb84c5c34", null ],
     [ "seta_get_args", "seta_8h.html#ac81161f011178c59077007e63db87224", null ],
+    [ "seta_last_thread", "seta_8h.html#a4440f0d9039c475bd0caf50663b31050", null ],
     [ "seta_prepare_spawn_next", "seta_8h.html#ae0b01e66ed20bda064af26d3d97cee7d", null ],
     [ "seta_send_arg_name", "seta_8h.html#a3129ce33cd64156c3d68d54635ba293f", null ],
     [ "seta_send_argument", "seta_8h.html#a5c66ecdcb62087af1e48680254258af9", null ],

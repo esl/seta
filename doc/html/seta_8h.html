@@ -175,6 +175,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ac81161f011178c59077007e63db87224"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="seta_8h.html#ac81161f011178c59077007e63db87224">seta_get_args</a> (<a class="el" href="structseta__context__t.html">seta_context_t</a> *)</td></tr>
 <tr class="memdesc:ac81161f011178c59077007e63db87224"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the arguments for the current thread, which are the arguments provided by the thread's parent during the spawn plus the arguments sent by other threads subsequently filling any argument that was unknown at the time of the spawn.  <a href="#ac81161f011178c59077007e63db87224">More...</a><br/></td></tr>
 <tr class="separator:ac81161f011178c59077007e63db87224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4440f0d9039c475bd0caf50663b31050"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="seta_8h.html#a4440f0d9039c475bd0caf50663b31050">seta_last_thread</a> (<a class="el" href="structseta__context__t.html">seta_context_t</a> *)</td></tr>
+<tr class="memdesc:a4440f0d9039c475bd0caf50663b31050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the next spawned thread to be the last to be executed from the scheduler.  <a href="#a4440f0d9039c475bd0caf50663b31050">More...</a><br/></td></tr>
+<tr class="separator:a4440f0d9039c475bd0caf50663b31050"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a class="anchor" id="ab7dc820a232767ec91c27342ec4af415"></a>
@@ -421,6 +424,32 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a4440f0d9039c475bd0caf50663b31050"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void seta_last_thread </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structseta__context__t.html">seta_context_t</a> *&#160;</td>
+          <td class="paramname"><em>context</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the next spawned thread to be the last to be executed from the scheduler. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">context</td><td>Context of the current thread. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="scheduler_8c_source.html#l00265">265</a> of file <a class="el" href="scheduler_8c_source.html">scheduler.c</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ae0b01e66ed20bda064af26d3d97cee7d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -659,7 +688,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">fun</td><td>the entry thread. </td></tr>
-    <tr><td class="paramname">n</td><td>the multiplicity of the scheduler. </td></tr>
+    <tr><td class="paramname">n</td><td>the number of processors to start. </td></tr>
   </table>
   </dd>
 </dl>
@@ -675,7 +704,7 @@ Functions</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="seta_8h.html">seta.h</a></li>
-    <li class="footer">Generated on Wed Oct 30 2013 18:25:38 for Seta by
+    <li class="footer">Generated on Thu Oct 31 2013 15:51:59 for Seta by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.5 </li>
   </ul>
