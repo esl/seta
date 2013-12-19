@@ -10,21 +10,21 @@
 #include <stdlib.h>
 
 typedef struct {
-	void *closure;
-	void *arg;
+    void *closure;
+    void *arg;
 } seta_cont_t;
 
 typedef struct {
-	void *args;
-	int level;
-	//bool is_first_thread;
-	//bool free_args_done;
-	//bool spawn_next_done;
+    void *args;
+    int level;
+    //bool is_first_thread;
+    //bool free_args_done;
+    //bool spawn_next_done;
 
 } seta_context_t;
 
 typedef struct {
-	void *closure;
+    void *closure;
 } seta_handle_spawn_next_t;
 
 
