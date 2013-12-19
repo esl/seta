@@ -20,8 +20,8 @@ typedef struct {
 	//bool is_first_thread;
 	//bool free_args_done;
 	//bool spawn_next_done;
-	
-} seta_context_t; 
+
+} seta_context_t;
 
 typedef struct {
 	void *closure;

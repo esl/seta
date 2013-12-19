@@ -38,7 +38,7 @@ void seta_free_args(seta_context_t *context) {
     dfree(context->args);
 }
 
-seta_handle_spawn_next_t seta_prepare_spawn_next(void *fun, void *args, seta_context_t *context) {	
+seta_handle_spawn_next_t seta_prepare_spawn_next(void *fun, void *args, seta_context_t *context) {
 	seta_handle_spawn_next_t hsn;
 	closure_t *closure = closure_create();
 	closure_set_fun(closure, fun);
@@ -70,10 +70,10 @@ void seta_send_argument(seta_cont_t *cont, void *src, int size, seta_context_t *
 		return;
 	}
 	closure_t *closure = (closure_t *)cont->closure;
-	
+
 	void *dst = cont->arg;
 	memcpy(dst, src, size);
-	
+
     bool to_post = false;
 	closure_lock(closure);
 	closure->join_counter -= 1;
@@ -81,7 +81,7 @@ void seta_send_argument(seta_cont_t *cont, void *src, int size, seta_context_t *
 		to_post = true;
 	}
 	closure_unlock(closure);
-	    
+
 	if (to_post) {
 		processor_lock_ready_queue(closure->core);
 		ready_queue_post_closure_to_level(local_proc->rq, closure, closure->level);
@@ -105,7 +105,7 @@ typedef struct _args_fib {
 void scheduler_scheduling_loop() {
 	closure_t *closure, *rclosure;
     rowcol_t rowcol;
-	
+
 	while (1) {
 		//debug(".0x%x", local_proc->rq);
 		processor_lock_ready_queue(device_rowcol);
@@ -115,7 +115,7 @@ void scheduler_scheduling_loop() {
 			//debug("0x%x", closure);
 			scheduler_execute_closure(closure);
 		}
-		else {            
+		else {
 		    //if (device_is_stopped()) {
 		    //    break;
 		    //}
@@ -128,13 +128,13 @@ void scheduler_scheduling_loop() {
 			//if (rowcol.r != 1 && rowcol.c != 1) {
 			    //debug("%d, %d", rowcol.r, rowcol.c);
 		    //}
-			
+
 		    processor_t *remote_proc = *(processor_t **)
 										(e_get_global_address(rowcol.r, rowcol.c, &local_proc));
 			processor_lock_ready_queue(rowcol);
             rclosure = ready_queue_extract_tail_from_shallowest_level(remote_proc->rq);
 			processor_unlock_ready_queue(rowcol);
-				
+
 			if (rclosure != NULL) {
 			    scheduler_execute_closure(rclosure);
 			}
@@ -145,22 +145,22 @@ void scheduler_scheduling_loop() {
 void scheduler_start() {
     //creates the local processor
 	local_proc = processor_create();
-	
+
 	if (device_rowcol.r == 0 && device_rowcol.c == 0) {
 		//insert the initial closure in the processor 0
         closure_t *closure = closure_create();
-        
+
         void *args = seta_alloc_args(4);
         memcpy(args, &device_in, 4);
         closure_set_args(closure, args);
-        
+
         closure_set_fun(closure, &entry);
 		ready_queue_post_closure_to_level(local_proc->rq, closure, 0);
 	}
 
 	//waits for the other processors from being created
     device_sync();
-	
+
     if (device_rowcol.r == 0 && device_rowcol.c == 1) {
      	    while(1) {}
     }
@@ -170,7 +170,7 @@ void scheduler_start() {
 	 if (device_rowcol.r == 0 && device_rowcol.c == 0) {
 	     while(1) {}
 	}
-	
+
 	scheduler_scheduling_loop();
 	//device_sync();
 	processor_destroy(local_proc);

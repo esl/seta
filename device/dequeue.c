@@ -73,7 +73,7 @@ int dequeue_add_tail(dequeue_t *l, void *val) {
 void * dequeue_extract_head(dequeue_t *l) {
 	void *res;
 	element_t *aux;
-	
+
 	if (l->head == NULL) {
 		return NULL;
 	}
@@ -99,7 +99,7 @@ void * dequeue_extract_tail(dequeue_t *l) {
 	element_t *prev = l->head;
 	element_t *aux = l->head;
 	void *res;
-	
+
 	if (l->head == NULL) {
 		return NULL;
 	}

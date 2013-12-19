@@ -30,8 +30,8 @@ int seta_run(int x, int y, int nx, int ny, void *in, int in_size, void *fun, int
 
 	e_init(NULL);
 	e_reset_system();
-    
-    e_alloc(&emem, BUFOFFSET, sizeof(shared_t));	
+
+    e_alloc(&emem, BUFOFFSET, sizeof(shared_t));
 	e_open(&dev, x, y, nx, ny);
 	// Reset the workgroup
     for (row=0; row<nx; row++) {
@@ -43,25 +43,25 @@ int seta_run(int x, int y, int nx, int ny, void *in, int in_size, void *fun, int
 	printf("\n");
 	printf("running \"e_seta\" on workgroup (%d, %d, %d, %d)\n", x, y, nx, ny);
 	e_load_group("e_seta.srec", &dev, x, y, nx, ny, E_FALSE);
-	
+
 	//init
 	e_write(&emem, 0, 0, (off_t)offsetof(shared_t, in_size), &in_size, sizeof(int));
 	e_write(&emem, 0, 0, (off_t)offsetof(shared_t, in), in, in_size);
-    
+
     e_start_group(&dev);
-	
+
 	ready = false;
-	
+
 	result = malloc(out_size);
-	
+
 	do {
 		e_read(&emem, 0, 0, (off_t)offsetof(shared_t, ready), &ready, sizeof(bool));
 	} while(!ready);
 	e_read(&emem, 0, 0, (off_t)offsetof(shared_t, out), result, out_size);
-    
+
 	void (*cb)(void *) = fun;
 	cb(result);
-	
+
 	e_close(&dev);
 
 	e_free(&emem);
@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
     input = f;
 
 	seta_run(0, 0, 2, 2, &f, sizeof(int), &fun, 4);
-	
+
 	//seta_run(0, 0, 2, 2, &f, sizeof(int), &fun, 200);
 	return 0;
 }

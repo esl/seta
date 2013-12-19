@@ -48,7 +48,7 @@ void ready_queue_post_closure_to_level(ready_queue_t *rq, closure_t *cl, int lev
 	int i;
     dequeue_t *ready_queue = (dequeue_t *)rq;
 	int missing_levels = level - dequeue_size(ready_queue) + 1;
-		
+
 	if (missing_levels > 0) {
 		for (i=0; i<missing_levels; i++) {
 			dequeue_add_tail(ready_queue, (void *)dequeue_create());

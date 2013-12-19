@@ -21,7 +21,7 @@ void sum(seta_context_t context) {
 	int x = local_args->x;
 	int y = local_args->y;
 	seta_free_args(&context);
-	
+
 	//------ send_argument ------
 	int res = x + y;
 	seta_send_argument(&cont, &res, sizeof(res), &context);
@@ -37,7 +37,7 @@ void fib(seta_context_t context) {
 	int n = local_args->n;
 	seta_free_args(&context);
 	//---
-	if (n <= 2) { 
+	if (n <= 2) {
 		//------ send_argument ------
 		int res = 1;
 		seta_send_argument(&cont, &res, sizeof(res), &context);
@@ -50,18 +50,18 @@ void fib(seta_context_t context) {
 		seta_cont_t cont_l = seta_create_cont(&args_sum->x, hsn);
 		seta_cont_t cont_r = seta_create_cont(&args_sum->y, hsn);
 		seta_spawn_next(hsn);
-		
+
 		//------ spawn_fib ------
 		args_fib_t *args_fib_r = (args_fib_t *)seta_alloc_args(sizeof(args_fib_t));
 		args_fib_r->k = cont_r;
 		args_fib_r->n = n - 1;
 		seta_spawn(&fib, args_fib_r, &context);
-		
+
 		//------ spawn_fib ------
 		args_fib_t *args_fib_l = (args_fib_t *)seta_alloc_args(sizeof(args_fib_t));
 		args_fib_l->k = cont_l;
 		args_fib_l->n = n - 2;
-		seta_spawn(&fib, args_fib_l, &context);		
+		seta_spawn(&fib, args_fib_l, &context);
 	}
 }
 
@@ -86,7 +86,7 @@ void entry(seta_context_t context) {
 	seta_handle_spawn_next_t hsn = seta_prepare_spawn_next(&print, args_print, &context);
 	seta_cont_t cont = seta_create_cont(&args_print->n, hsn);
 	seta_spawn_next(hsn);
-	
+
 	//------ spawn_fib ------
 	args_fib_t *args_fib = (args_fib_t *)seta_alloc_args(sizeof(args_fib_t));
 	args_fib->k = cont;
@@ -127,7 +127,7 @@ void entry(seta_context_t context) {
 	seta_handle_spawn_next_t hsn = seta_prepare_spawn_next(&print, args_print, &context);
 	seta_cont_t cont = seta_create_cont(&args_print->n, hsn);
 	seta_spawn_next(hsn);
-	
+
 	//------ spawn_child ------
 	args_child_t *args_child = (args_child_t *)seta_alloc_args(sizeof(args_child_t));
 	args_child->k = cont;

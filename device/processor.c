@@ -13,7 +13,7 @@ extern rowcol_t device_rowcol;
 
 processor_t * processor_create() {
 	processor_t *proc = (processor_t *)dmalloc(sizeof(processor_t));
-	proc->rq = ready_queue_create(); 
+	proc->rq = ready_queue_create();
 	return proc;
 }
 

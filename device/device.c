@@ -85,7 +85,7 @@ void device_stop_and_send_result(void *src, int size) {
 
 //bool device_is_stopped() {
     // seems not working
-//	return readybuf;  
+//	return readybuf;
 //}
 
 void device_sync() {
@@ -112,20 +112,20 @@ void device_mutex_unlock(rowcol_t rowcol, int mutex) {
 
 int main(void) {
     int row, col, i;
-    
+
     //in_size = shared.in_size;
     //in = shared.in;
-    
+
     memcpy(&device_in, shared.in, shared.in_size);
 
     //device_stop_and_send_result(&in, shared.in_size);
     //return;
-    
+
     row = e_group_config.core_row;
     col = e_group_config.core_col;
     device_rowcol.r = row;
     device_rowcol.c = col;
-    
+
 	e_barrier_init(bar_array, tgt_bar_array);
 	if (row == 0 && col == 0) {
 	    srand(5);
@@ -134,9 +134,9 @@ int main(void) {
 	}
 	e_mutex_init(row, col, &mutex_rq, MUTEXATTR_DEFAULT);
 	e_mutex_init(row, col, &mutex_closure, MUTEXATTR_DEFAULT);
-    
+
 	scheduler_start();
-	
+
 	return EXIT_SUCCESS;
 }
 
