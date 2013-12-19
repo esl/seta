@@ -17,9 +17,9 @@ typedef struct _element {
 } element_t;
 
 typedef struct {
-	element_t *head;
-	element_t *tail;
-	int size;
+    element_t *head;
+    element_t *tail;
+    int size;
 } dequeue_t;
 
 dequeue_t * dequeue_create();

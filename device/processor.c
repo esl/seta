@@ -12,14 +12,14 @@
 extern rowcol_t device_rowcol;
 
 processor_t * processor_create() {
-	processor_t *proc = (processor_t *)dmalloc(sizeof(processor_t));
-	proc->rq = ready_queue_create(); 
-	return proc;
+    processor_t *proc = (processor_t *)dmalloc(sizeof(processor_t));
+    proc->rq = ready_queue_create();
+    return proc;
 }
 
 void processor_destroy(processor_t *proc) {
-	ready_queue_destroy(proc->rq);
-	dfree(proc);
+    ready_queue_destroy(proc->rq);
+    dfree(proc);
 }
 
 void processor_lock_ready_queue(rowcol_t rowcol) {

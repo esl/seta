@@ -15,16 +15,16 @@
 #define MUTEX_CLOSURE 1
 
 typedef struct {
-	int r;
-	int c;
+    int r;
+    int c;
 } rowcol_t;
 
 typedef struct {
-	int level;
-	int join_counter;
-	void *fun;
-	void *args;
-	//bool is_first_thread;
+    int level;
+    int join_counter;
+    void *fun;
+    void *args;
+    //bool is_first_thread;
     rowcol_t core;
 } closure_t;
 closure_t * closure_create();
@@ -43,7 +43,7 @@ closure_t * ready_queue_extract_tail_from_shallowest_level(ready_queue_t *);
 void ready_queue_post_closure_to_level(ready_queue_t *, closure_t *, int);
 
 typedef struct {
-	ready_queue_t *rq;
+    ready_queue_t *rq;
 } processor_t;
 processor_t * processor_create();
 void processor_destroy(processor_t *);
