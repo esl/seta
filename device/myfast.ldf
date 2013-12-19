@@ -1,4 +1,7 @@
 /*
+  File based on /opt/adapteva/esdk.5.13.07.10/bsps/zed_E16G3_512mb/fast.ldf
+*/
+/*
   fast.ldf
 
   Copyright (C) 2012 Adapteva, Inc.
@@ -354,15 +357,11 @@ SECTIONS
   .stack __stack_start_ : { ___stack = .; *(.stack) }
 
   /*PROVIDE (___heap_start = ORIGIN(EXTERNAL_DRAM_1) + __HEAP_SIZE_FOR_CORE_ * __CORE_NUM_);*/
+  PROVIDE (___heap_start = ORIGIN(INTERNAL_RAM) + 0x3500);
   /*.heap_start __heap_start_ :  { _heap_start_ = .; *(.heap_start) } */
   /*PROVIDE (___heap_end   = ORIGIN(EXTERNAL_DRAM_1) + __HEAP_SIZE_FOR_CORE_ * __CORE_NUM_ + __HEAP_SIZE_FOR_CORE_ - 4);*/
-  /* .heap_end __heap_end_ : { _heap_end_ = .; *(.heap_end) } */
-
-  /*PROVIDE (___heap_start = ORIGIN(EXTERNAL_DRAM_1) + __HEAP_SIZE_FOR_CORE_ * __CORE_NUM_);*/
-  /*PROVIDE (___heap_end   = ORIGIN(EXTERNAL_DRAM_1) + __HEAP_SIZE_FOR_CORE_ * __CORE_NUM_ + __HEAP_SIZE_FOR_CORE_ - 4);*/
-
-  PROVIDE (___heap_start = ORIGIN(INTERNAL_RAM) + 0x3500);
   PROVIDE (___heap_end   = ORIGIN(INTERNAL_RAM) + 0x6FFF);
+  /* .heap_end __heap_end_ : { _heap_end_ = .; *(.heap_end) } */
 
   /DISCARD/ : { *(.note.GNU-stack) *(.gnu_debuglink) *(.gnu.lto_*) }
 }
