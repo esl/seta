@@ -96,8 +96,8 @@ void * dequeue_extract_head(dequeue_t *l) {
 }
 
 void * dequeue_extract_tail(dequeue_t *l) {
-    element_t *prev = l->head;
-    element_t *aux = l->head;
+    element_t *prev;
+    element_t *aux;
     void *res;
 
     if (l->head == NULL) {
@@ -112,11 +112,11 @@ void * dequeue_extract_tail(dequeue_t *l) {
             l->size = 0;
         }
         else {
-            aux = aux->next;
-            while (aux->next != NULL) {
+            aux = l->head;
+            do {
                 prev = aux;
                 aux = aux->next;
-            }
+            } while (aux->next != NULL);
             prev->next = NULL;
             dfree(aux);
             l->tail = prev;
