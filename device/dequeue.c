@@ -32,10 +32,9 @@ void dequeue_destroy(dequeue_t *l) {
 void dequeue_foreach(void *fun, dequeue_t *d) {
     int i = 0;
     void (*callback)(void *, int) = fun;
-    element_t *ele = d->head;
-    while(ele != NULL) {
+    element_t *ele;
+    for (ele = d->head; ele != NULL; ele = ele->next) {
         callback(ele->val, i++);
-        ele = ele->next;
     }
 }
 
@@ -150,25 +149,23 @@ int dequeue_size(dequeue_t *l) {
 
 void * dequeue_get_first_matching_fun(void *fun, dequeue_t *d) {
     bool (*callback)(void *) = fun;
-    element_t *ele = d->head;
-    while (ele != NULL) {
+    element_t *ele;
+    for (ele = d->head; ele != NULL; ele = ele->next) {
         if (callback(ele->val)) {
             return ele->val;
         }
-        ele = ele->next;
     }
     return NULL;
 }
 
 void * dequeue_get_last_matching_fun(void *fun, dequeue_t *d) {
     bool (*callback)(void *) = fun;
-    element_t *ele = d->head;
     void *found = NULL;
-    while (ele != NULL) {
+    element_t *ele;
+    for (ele = d->head; ele != NULL; ele = ele->next) {
         if (callback(ele->val)) {
             found = ele->val;
         }
-        ele = ele->next;
     }
     return found;
 }
