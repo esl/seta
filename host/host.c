@@ -82,6 +82,5 @@ int main(int argc, char *argv[]) {
 
     seta_run(0, 0, 2, 2, &f, sizeof(int), &fun, 4);
 
-    //seta_run(0, 0, 2, 2, &f, sizeof(int), &fun, 200);
     return 0;
 }
