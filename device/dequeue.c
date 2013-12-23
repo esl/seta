@@ -106,7 +106,7 @@ void * dequeue_extract_tail(dequeue_t *l) {
     else {
         res = l->tail->val;
         if (l->head == l->tail) {
-            free(l->head);
+            dfree(l->head);
             l->head = NULL;
             l->tail = NULL;
             l->size = 0;
@@ -118,7 +118,7 @@ void * dequeue_extract_tail(dequeue_t *l) {
                 aux = aux->next;
             }
             prev->next = NULL;
-            free(aux);
+            dfree(aux);
             l->tail = prev;
             l->size--;
         }
