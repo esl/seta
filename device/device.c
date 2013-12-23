@@ -9,7 +9,6 @@
 #include "e_lib.h"
 
 //heap [bool ready, int in_size, byte in[], void *result]
-
 typedef struct __attribute__((__packed__)) {
     bool ready;
     int in_size;
@@ -84,7 +83,7 @@ void device_stop_and_send_result(void *src, int size) {
 }
 
 //bool device_is_stopped() {
-    // seems not working
+//    // seems not working
 //    return readybuf;
 //}
 

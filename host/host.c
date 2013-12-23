@@ -36,7 +36,7 @@ int seta_run(int x, int y, int nx, int ny, void *in, int in_size, void *fun, int
     // Reset the workgroup
     for (row=0; row<nx; row++) {
         for(col=0; col<ny; col++) {
-        printf("reset core:(%d,%d)  ", row, col);
+            printf("reset core:(%d,%d)  ", row, col);
             e_reset_core(&dev, row, col);
         }
     }

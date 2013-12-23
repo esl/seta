@@ -126,11 +126,12 @@ void scheduler_scheduling_loop() {
             } while(rowcol.r == device_rowcol.r && rowcol.c == device_rowcol.c);
             //debug("%d, %d", rowcol.r, rowcol.c);
             //if (rowcol.r != 1 && rowcol.c != 1) {
-                //debug("%d, %d", rowcol.r, rowcol.c);
+            //    debug("%d, %d", rowcol.r, rowcol.c);
             //}
 
-            processor_t *remote_proc = *(processor_t **)
-                                        (e_get_global_address(rowcol.r, rowcol.c, &local_proc));
+            processor_t *remote_proc =
+                *(processor_t **)
+                (e_get_global_address(rowcol.r, rowcol.c, &local_proc));
             processor_lock_ready_queue(rowcol);
             rclosure = ready_queue_extract_tail_from_shallowest_level(remote_proc->rq);
             processor_unlock_ready_queue(rowcol);
@@ -162,13 +163,13 @@ void scheduler_start() {
     device_sync();
 
     if (device_rowcol.r == 0 && device_rowcol.c == 1) {
-             while(1) {}
+        while(1) {}
     }
     if (device_rowcol.r == 1 && device_rowcol.c == 0) {
-         while(1) {}
+        while(1) {}
     }
-     if (device_rowcol.r == 0 && device_rowcol.c == 0) {
-         while(1) {}
+    if (device_rowcol.r == 0 && device_rowcol.c == 0) {
+        while(1) {}
     }
 
     scheduler_scheduling_loop();
