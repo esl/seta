@@ -61,6 +61,7 @@ int seta_run(int x, int y, int nx, int ny, void *in, int in_size, void *fun, int
 
     void (*cb)(void *) = fun;
     cb(result);
+    free(result);
 
     e_close(&dev);
 
@@ -73,7 +74,6 @@ int seta_run(int x, int y, int nx, int ny, void *in, int in_size, void *fun, int
 void fun(void *result) {
     printf("fibonacci(%d): \"%d\"\n", input, *(int *)result);
     //printf("debug: \"%s\"\n", (char *)result);
-    free(result);
 }
 
 int main(int argc, char *argv[]) {
