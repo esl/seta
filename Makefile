@@ -12,10 +12,10 @@ host: build_p/seta.elf
 device: build_p/e_seta.srec
 
 build_p/seta.elf: host/host.c
-	gcc host/host.c -o build_p/seta.elf -I ${EINCS} -L ${ELIBS} -le-hal -g
+	gcc host/host.c -o build_p/seta.elf -I ${EINCS} -I common -L ${ELIBS} -le-hal -g
 
 build_p/e_seta.elf: $(wildcard device/*.c) $(wildcard device/*.h)
-	e-gcc -T ${ELDF} device/*.c -o build_p/e_seta.elf -le-lib -g
+	e-gcc -I common -T ${ELDF} device/*.c -o build_p/e_seta.elf -le-lib -g
 
 build_p/e_seta.srec: build_p/e_seta.elf
 	e-objcopy --srec-forceS3 --output-target srec build_p/e_seta.elf build_p/e_seta.srec

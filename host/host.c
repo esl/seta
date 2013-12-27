@@ -9,15 +9,9 @@
 
 #include <e-hal.h>
 
-#define BUFOFFSET (0x01000000)
+#include "shared.h"
 
-//heap [bool ready, int in_size, byte in[], byte result[]]
-typedef struct __attribute__((__packed__)) {
-    bool ready;
-    int in_size;
-    char in[500];
-    char out[500];
-} shared_t;
+#define BUFOFFSET (0x01000000)
 
 int input;
 

@@ -7,15 +7,8 @@
 
 #include <e_lib.h>
 
+#include "shared.h"
 #include "seta_internal.h"
-
-//heap [bool ready, int in_size, byte in[], void *result]
-typedef struct __attribute__((__packed__)) {
-    bool ready;
-    int in_size;
-    char in[500];
-    char out[500];
-} shared_t;
 
 shared_t shared SECTION("shared_dram");
 
