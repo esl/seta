@@ -34,8 +34,8 @@ int seta_run(int x, int y, int nx, int ny, void *in, int in_size, void *fun, int
     e_alloc(&emem, BUFOFFSET, sizeof(shared_t));
     e_open(&dev, x, y, nx, ny);
     // Reset the workgroup
-    for (row=0; row<nx; row++) {
-        for(col=0; col<ny; col++) {
+    for (row=x; row<nx; row++) {
+        for(col=y; col<ny; col++) {
             printf("reset core:(%d,%d)  ", row, col);
             e_reset_core(&dev, row, col);
         }
