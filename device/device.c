@@ -66,6 +66,7 @@ void debug(const char *format, ...) {
     e_mutex_lock(0, 0, &mutex_w);
     va_start(arglist, format);
     vsprintf(shared.out, format, arglist);
+    va_end(arglist);
     shared.ready = true;
     for(i=0; i<1000000; i++) {}
     e_mutex_unlock(0, 0, &mutex_w);
