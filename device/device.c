@@ -4,9 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdarg.h>
-#include "seta_internal.h"
 
-#include "e_lib.h"
+#include <e_lib.h>
+
+#include "seta_internal.h"
 
 //heap [bool ready, int in_size, byte in[], void *result]
 typedef struct __attribute__((__packed__)) {
