@@ -19,8 +19,8 @@ int seta_run(int x, int y, int nx, int ny, void *in, int in_size, void *fun, int
     unsigned row, col, coreid, i;
     e_epiphany_t dev;
     e_mem_t emem;
-    bool ready;
-    void *result;
+    bool out_ready = false;
+    void *out;
 
     e_init(NULL);
     e_reset_system();
@@ -41,21 +41,20 @@ int seta_run(int x, int y, int nx, int ny, void *in, int in_size, void *fun, int
     //init
     e_write(&emem, 0, 0, (off_t)offsetof(shared_t, in_size), &in_size, sizeof(int));
     e_write(&emem, 0, 0, (off_t)offsetof(shared_t, in), in, in_size);
+    e_write(&emem, 0, 0, (off_t)offsetof(shared_t, out_ready), &out_ready, sizeof(bool));
 
     e_start_group(&dev);
 
-    ready = false;
-
-    result = malloc(out_size);
+    out = malloc(out_size);
 
     do {
-        e_read(&emem, 0, 0, (off_t)offsetof(shared_t, ready), &ready, sizeof(bool));
-    } while(!ready);
-    e_read(&emem, 0, 0, (off_t)offsetof(shared_t, out), result, out_size);
+        e_read(&emem, 0, 0, (off_t)offsetof(shared_t, out_ready), &out_ready, sizeof(bool));
+    } while(!out_ready);
+    e_read(&emem, 0, 0, (off_t)offsetof(shared_t, out), out, out_size);
 
     void (*cb)(void *) = fun;
-    cb(result);
-    free(result);
+    cb(out);
+    free(out);
 
     e_close(&dev);
 

@@ -61,7 +61,7 @@ void debug(const char *format, ...) {
     va_start(arglist, format);
     vsprintf(shared.out, format, arglist);
     va_end(arglist);
-    shared.ready = true;
+    shared.out_ready = true;
     for(i=0; i<1000000; i++) {}
     e_mutex_unlock(0, 0, &mutex_w);
 }
@@ -70,7 +70,7 @@ void device_stop_and_send_result(void *src, int size) {
     int i;
     e_mutex_lock(0, 0, &mutex_w);
     memcpy(shared.out, src, size);
-    shared.ready = true;
+    shared.out_ready = true;
     // prevents any other processor from writing on "resultbuf" before
     // the host has readed and saved the value.
     for(i=0; i<1000000; i++) {}
