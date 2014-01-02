@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
     input = f;
 
     // Assumption: int is 4 bytes on both device (Epiphany) and host (ARM)
-    seta_run(0, 0, 2, 2, &f, sizeof(int), &fun, 4);
+    seta_run(0, 0, 1, 4, &f, sizeof(int), &fun, 4);
 
     return 0;
 }

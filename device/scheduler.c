@@ -162,13 +162,13 @@ void scheduler_start() {
     //waits for the other processors from being created
     device_sync();
 
-    if (device_rowcol.r == 0 && device_rowcol.c == 1) {
-        while(1) {}
-    }
-    if (device_rowcol.r == 1 && device_rowcol.c == 0) {
-        while(1) {}
-    }
     if (device_rowcol.r == 0 && device_rowcol.c == 0) {
+        while(1) {}
+    }
+    if (device_rowcol.r == 0 && device_rowcol.c == 2) {
+        while(1) {}
+    }
+    if (device_rowcol.r == 0 && device_rowcol.c == 3) {
         while(1) {}
     }
 
